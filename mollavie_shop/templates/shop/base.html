@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Mollavie{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9;">
+
+    <!-- Header with Logo -->
+    <header style="display: flex; align-items: center; gap: 10px;">
+        <img src="https://via.placeholder.com/40" alt="Mollavie Logo">
+        <h1 style="margin: 0;">Mollavie</h1>
+    </header>
+
+    <!-- Navigation -->
+    <nav style="margin-top: 10px;">
+        <a href="/" style="margin-right: 10px;">Home</a>
+        <a href="/signup/" style="margin-right: 10px;">Sign Up</a>
+        <a href="/admin/">Admin</a>
+    </nav>
+
+    <hr>
+
+    <!-- Content Block -->
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>
