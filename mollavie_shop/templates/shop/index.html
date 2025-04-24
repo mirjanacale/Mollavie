@@ -9,7 +9,7 @@
 
 {% block content %}
     <div style="text-align: center; padding: 40px 20px;">
-        <h2>Welcome to Mollavie 🎨</h2>
+        <h2>Welcome to Mollavie </h2>
         <p style="max-width: 600px; margin: auto;">
             Discover unique hand-painted artworks and personalised designs.
             Whether you're decorating your space or looking for a one-of-a-kind gift,
@@ -17,9 +17,9 @@
         </p>
         
         <div style="margin-top: 30px;">
-            <a href="/signup/" style="padding: 10px 20px; background-color: #d43d3d; color: white; text-decoration: none; border-radius: 5px;">
-                Sign Up Now
-            </a>
+            <a href="{% url 'signup' %}"
+                Sign Up Now>
+        </a>
         </div>
     </div>
 {% endblock %}

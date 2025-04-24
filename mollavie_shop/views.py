@@ -1,7 +1,7 @@
 import stripe
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Artwork
+from .models import Product
 
 from django.shortcuts import render, redirect
 from .forms import SignUpForm
@@ -28,12 +28,12 @@ def signup_view(request):
 
 
 def gallery_view(request):
-    artworks = Artwork.objects.all()
+    artworks = Product.objects.all()
     return render(request, 'shop/gallery.html', {'artworks': artworks})
 
 
 def artwork_detail_view(request, artwork_id):
-    artwork = get_object_or_404(Artwork, id=artwork_id)
+    artwork = get_object_or_404(Product, id=artwork_id)
     return render(request, 'shop/artwork_detail.html', {'artwork': artwork})
 
 
@@ -41,7 +41,7 @@ from django.http import JsonResponse
 
 
 def create_checkout_session(request, artwork_id):
-    artwork = get_object_or_404(Artwork, id=artwork_id)
+    artwork = get_object_or_404(Product, id=artwork_id)
 
     if request.method == "POST":
         checkout_session = stripe.checkout.Session.create(

@@ -7,8 +7,13 @@
     <title>{% block title %}Mollavie{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <!-- BOOTSTRAP CSS CDN -->
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
 </head>
+
 <body style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9;">
+<div class="container mt-4">
 
     <!-- Header with Logo -->
     <header style="display: flex; align-items: center; gap: 10px;">
@@ -17,17 +22,20 @@
     </header>
 
     <!-- Navigation -->
-    <nav style="margin-top: 10px;">
-        <a href="/" style="margin-right: 10px;">Home</a>
-        <a href="/signup/" style="margin-right: 10px;">Sign Up</a>
-        <a href="/admin/">Admin</a>
+    <nav class="navbar">
+        <div class="navbar-links">
+            <a href="{% url 'gallery' %}">Gallery</a>
+            <a href="{% url 'signup' %}">Sign Up</a>
+            <a href="/admin/">Admin</a>
+        </div>
     </nav>
+
 
     <hr>
 
     <!-- Content Block -->
     {% block content %}
     {% endblock %}
-
+</div>
 </body>
 </html>
