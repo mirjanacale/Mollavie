@@ -28,7 +28,7 @@ def signup_view(request):
 
 
 def gallery_view(request):
-    artworks = Product.objects.all()
+    artworks = Product.objects.all().order_by('-created_at')
     return render(request, 'shop/gallery.html', {'artworks': artworks})
 
 
