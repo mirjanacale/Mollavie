@@ -26,4 +26,7 @@ urlpatterns = [
     path('signup/', views.signup_view, name='signup'),
     path('login/', auth_views.LoginView.as_view(template_name='shop/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('', views.gallery_view, name='gallery'),
+    path('artwork/<int:artwork_id>/', views.artwork_detail_view, name='artwork_detail'),
+    path('buy/<int:artwork_id>/', views.create_checkout_session, name='create_checkout_session'),
 ]

@@ -1,0 +1,25 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}Gallery - Mollavie{% endblock %}
+
+{% block content %}
+<h1>Gallery</h1>
+
+<div class="artwork-grid">
+    {% for artwork in artworks %}
+    <div class="artwork-card">
+        <a href="{% url 'artwork_detail' artwork.id %}">
+            <img src="{{ artwork.image.url }}" alt="{{ artwork.title }}">
+        </a>
+        <h3>{{ artwork.title }}</h3>
+        <p>£{{ artwork.price }}</p>
+        {% if artwork.is_available %}
+            <a href="{% url 'artwork_detail' artwork.id %}" class="button">View</a>
+        {% else %}
+            <span style="color: grey;">Sold Out</span>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}{{ artwork.title }} - Mollavie{% endblock %}
+
+{% block content %}
+<div class="artwork-card" style="max-width: 600px; margin: auto;">
+    <img src="{{ artwork.image.url }}" alt="{{ artwork.title }}">
+    <h2>{{ artwork.title }}</h2>
+    <p>{{ artwork.description }}</p>
+    <p><strong>£{{ artwork.price }}</strong></p>
+
+    {% if artwork.is_available %}
+    <form action="{% url 'create_checkout_session' artwork.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Buy Now</button>
+    </form>
+    {% else %}
+    <p style="color: grey;">This piece has been sold.</p>
+    {% endif %}
+</div>
+{% endblock %}
