@@ -8,7 +8,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #fafafa;
-    color: #333;
+    color: #895332f2;
     line-height: 1.6;
     font-size: 16px;
 }
@@ -24,7 +24,7 @@ a:hover {
 
 /* Header & Navigation */
 header {
-    background-color: #a24747;
+    background-color: #18a085;
     padding: 1rem 2rem;
     color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -75,6 +75,10 @@ h1, h2 {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
 }
+.card {
+    height: 100%;
+}
+
 
 .artwork-card {
     background-color: white;
@@ -124,6 +128,27 @@ h1, h2 {
     padding: 8px;
     background: #f9f9f9;
     border-radius: 10px;
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    display: block;
+    border-radius: 8px;
+}
+
+.product-image:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+    
+}
+
+
+.product-image:hover {
+    transform: scale(1.05);
+    cursor: pointer;
 }
 
 
