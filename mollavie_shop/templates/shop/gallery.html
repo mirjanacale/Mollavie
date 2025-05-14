@@ -4,21 +4,26 @@
 {% block title %}Gallery - Mollavie{% endblock %}
 
 {% block content %}
-<h1>Gallery</h1>
+<h1 class="mb-4">Gallery</h1>
 
-<div class="artwork-grid">
+<div class="row">
     {% for artwork in artworks %}
-    <div class="artwork-card">
-        <a href="{% url 'artwork_detail' artwork.id %}">
-            <img src="{{ artwork.image.url }}" alt="{{ artwork.title }}">
-        </a>
-        <h3>{{ artwork.title }}</h3>
-        <p>£{{ artwork.price }}</p>
-        {% if artwork.is_available %}
-            <a href="{% url 'artwork_detail' artwork.id %}" class="button">View</a>
-        {% else %}
-            <span style="color: grey;">Sold Out</span>
-        {% endif %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <a href="{% url 'artwork_detail' artwork.id %}">
+                <img src="{{ artwork.image.url }}" class="card-img-top" alt="{{ artwork.name }}">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">{{ artwork.name }}</h5>
+                <p class="card-text">£{{ artwork.price }}</p>
+                {% if artwork.is_available %}
+                    <a href="{% url 'artwork_detail' artwork.id %}" class="btn btn-outline-primary">View</a>
+                    <a href="{% url 'add_to_cart' artwork.id %}" class="btn btn-outline-secondary ml-2">Add to Cart</a>
+                {% else %}
+                    <span class="text-muted">Sold Out</span>
+                {% endif %}
+            </div>
+        </div>
     </div>
     {% endfor %}
 </div>

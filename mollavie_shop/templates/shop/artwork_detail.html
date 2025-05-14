@@ -1,22 +1,25 @@
 {% extends "shop/base.html" %}
 {% load static %}
 
-{% block title %}{{ artwork.title }} - Mollavie{% endblock %}
+{% block title %}{{ artwork.name }} - Mollavie{% endblock %}
 
 {% block content %}
-<div class="artwork-card" style="max-width: 600px; margin: auto;">
-    <img src="{{ artwork.image.url }}" alt="{{ artwork.title }}">
-    <h2>{{ artwork.title }}</h2>
-    <p>{{ artwork.description }}</p>
-    <p><strong>£{{ artwork.price }}</strong></p>
+<div class="card mx-auto" style="max-width: 600px;">
+    <img src="{{ artwork.image.url }}" alt="{{ artwork.name }}" class="card-img-top img-fluid">
+    
+    <div class="card-body">
+        <h2 class="card-title">{{ artwork.name }}</h2>
+        <p class="card-text">{{ artwork.description }}</p>
+        <p class="card-text"><strong>£{{ artwork.price }}</strong></p>
 
-    {% if artwork.is_available %}
-    <form action="{% url 'create_checkout_session' artwork.id %}" method="POST">
-        {% csrf_token %}
-        <button type="submit">Buy Now</button>
-    </form>
-    {% else %}
-    <p style="color: grey;">This piece has been sold.</p>
-    {% endif %}
+        {% if artwork.is_available %}
+            <form action="{% url 'create_checkout_session' artwork.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">Buy Now</button>
+            </form>
+        {% else %}
+            <p class="text-muted">This piece has been sold.</p>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

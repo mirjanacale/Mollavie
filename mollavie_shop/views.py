@@ -2,19 +2,18 @@ import stripe
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product
-
-from django.shortcuts import render, redirect
+from django.contrib import messages
 from .forms import SignUpForm
 from django.contrib.auth import login, authenticate
 
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
+# stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def home(request):
     return render(request, 'shop/index.html')
 
-
+     
 def signup_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -51,7 +50,7 @@ def create_checkout_session(request, artwork_id):
                     'currency': 'gbp',
                     'unit_amount': int(artwork.price * 100),  # Stripe uses pence
                     'product_data': {
-                        'name': artwork.title,
+                        'name': artwork.name,
                     },
                 },
                 'quantity': 1,
@@ -61,4 +60,34 @@ def create_checkout_session(request, artwork_id):
             cancel_url=request.build_absolute_uri('/') + '?cancel=true',
         )
         return redirect(checkout_session.url)
+
+
+    # Add to cart
+def add_to_cart(request, artwork_id):
+    cart = request.session.get('cart', [])
+    if artwork_id not in cart:
+        cart.append(artwork_id)
+        request.session['cart'] = cart
+        messages.success(request, "Artwork added to cart!")
+    else:
+        messages.info(request, "Artwork already in cart.")
+    return redirect('gallery')
+
+#  View cart
+def view_cart(request):
+    cart = request.session.get('cart', [])
+    artworks = Product.objects.filter(id__in=cart)
+    return render(request, 'shop/cart.html', {'artworks': artworks})
+
+#  Remove from cart
+def remove_from_cart(request, artwork_id):
+    cart = request.session.get('cart', [])
+    if artwork_id in cart:
+        cart.remove(artwork_id)
+        request.session['cart'] = cart
+        messages.success(request, "Removed from cart.")
+    return redirect('view_cart')
+
+    
+
 

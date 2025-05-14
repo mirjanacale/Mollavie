@@ -1,3 +1,5 @@
-.env
+env.py
 __pycache__/
 *.pyc
+# Ignore uploaded media (no longer used)
+mollavie_shop/products/

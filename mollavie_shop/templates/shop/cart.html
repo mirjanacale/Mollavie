@@ -1,0 +1,26 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Your Cart - Mollavie{% endblock %}
+
+{% block content %}
+<h2>Your Cart</h2>
+
+{% if artworks %}
+    <ul class="list-group">
+        {% for artwork in artworks %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ artwork.name }} - £{{ artwork.price }}
+                <a href="{% url 'remove_from_cart' artwork.id %}" class="btn btn-sm btn-danger">Remove</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="mt-3">
+        <a href="{% url 'gallery' %}" class="btn btn-secondary">Continue Shopping</a>
+        <!-- Optional: Add "Checkout All" logic later -->
+    </div>
+{% else %}
+    <p>Your cart is empty.</p>
+    <a href="{% url 'gallery' %}" class="btn btn-primary">Browse Gallery</a>
+{% endif %}
+{% endblock %}
