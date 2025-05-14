@@ -1,0 +1,11 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Payment Success - Mollavie{% endblock %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h2> Thank you for your purchase!</h2>
+    <p>Your payment was successful. We’ll prepare your artwork for delivery.</p>
+    <a href="{% url 'gallery' %}" class="btn btn-outline-primary mt-3">Back to Gallery</a>
+</div>
+{% endblock %}

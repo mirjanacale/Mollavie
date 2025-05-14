@@ -1,5 +1,8 @@
 import os
+if os.path.exists("env.py"):
+    import env
 from pathlib import Path
+import dj_database_url
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -39,10 +42,9 @@ CLOUDINARY_STORAGE = {
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-
-
-# 💳 Stripe config
-# STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY") 
+# Stripe config
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 
 # 🔧 Middleware
 MIDDLEWARE = [
@@ -85,6 +87,16 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgres://localhost',  # fallback for local dev
+        conn_max_age=600,
+        ssl_require=False  # change to True for production
+    )
+}
+
+CSRF_TRUSTED_ORIGINS = ["https://*.codeinstitute-ide.net/", "https://*.herokuapp.com"]
 
 
 # 🔐 Password validation

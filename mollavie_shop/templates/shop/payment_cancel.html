@@ -1,0 +1,11 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Payment Cancelled - Mollavie{% endblock %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h2> Payment Cancelled</h2>
+    <p>No worries. You can return to your cart or continue browsing.</p>
+    <a href="{% url 'view_cart' %}" class="btn btn-outline-secondary mt-3">Back to Cart</a>
+</div>
+{% endblock %}
