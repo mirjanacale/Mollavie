@@ -1,22 +1,25 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv()
 
-# Load environment variables from env.py
-env_path = os.path.join(Path(__file__).resolve().parent.parent, 'env.py')
+
+#  Base directory
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+env_path = os.path.join(BASE_DIR, 'env.py')
 if os.path.exists(env_path):
-    exec(open(env_path, encoding='utf-8').read())
+    exec(open(env_path).read())
 
-    
 
-# 🔐 Secret Key
+#  Secret Key
 SECRET_KEY = os.environ.get('SECRET_KEY') or 'temporary-insecure-key'
 DEBUG = os.environ.get('DEBUG') == 'True'
 ALLOWED_HOSTS = ["*", "localhost", "127.0.0.1", ".herokuapp.com"]
 
-# 📁 Base directory
-BASE_DIR = Path(__file__).resolve().parent.parent
 
-# 🧩 Installed apps
+
+#  Installed apps
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -29,12 +32,14 @@ INSTALLED_APPS = [
     'mollavie_shop',
 ]
 
-# ☁️ Cloudinary media config
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+#  Cloudinary media config
+
 CLOUDINARY_STORAGE = {
      "CLOUDINARY_URL": os.environ.get("CLOUDINARY_URL") or "cloudinary://dummy:dummy@dummy"
-   
 }
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
 
 # 💳 Stripe config
 # STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY") 
@@ -90,13 +95,13 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# 🌍 Localization
+#  Localization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# 📦 Static files
+#  Static files
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -106,9 +111,5 @@ STATICFILES_DIRS = [
 # 🆔 Primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-if os.path.exists(env_path):
-    exec(open(env_path).read())
-    print("✅ env.py loaded")
-else:
-    print("❌ env.py missing")
+LOGOUT_REDIRECT_URL = '/'
 

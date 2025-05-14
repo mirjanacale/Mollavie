@@ -11,7 +11,10 @@
     <div class="col-md-4 mb-4">
         <div class="card h-100 shadow-sm">
             <a href="{% url 'artwork_detail' artwork.id %}">
+                <div class="image-wrapper">
                 <img src="{{ artwork.image.url }}" class="card-img-top" alt="{{ artwork.name }}">
+                <p style="font-size: small;">{{ artwork.image.url }}</p>
+            </div>
             </a>
             <div class="card-body">
                 <h5 class="card-title">{{ artwork.name }}</h5>
