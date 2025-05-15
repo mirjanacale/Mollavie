@@ -1,1 +1,1 @@
-web: gunicorn mollavie.wsgi:application
+web: gunicorn mollavie.wsgi
