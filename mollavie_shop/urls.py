@@ -33,6 +33,7 @@ urlpatterns = [
      path('cart/remove/<int:artwork_id>/', views.remove_from_cart, name='remove_from_cart'),
      path('success/', views.payment_success, name='payment_success'),
      path('cancel/', views.payment_cancel, name='payment_cancel'),
+     path('my-orders/', views.my_orders_view, name='my_orders'),
 
 
 ]

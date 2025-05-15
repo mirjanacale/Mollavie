@@ -6,6 +6,7 @@ from .models import Product
 from django.contrib import messages
 from .forms import SignUpForm
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -69,8 +70,10 @@ def create_checkout_session(request, artwork_id):
         return redirect('artwork_detail', artwork_id=artwork_id)
 
 
+# Payment success and cancel views
 def payment_success(request):
     product_id = request.session.get('last_product')
+    order = None
 
     if product_id:
         product = get_object_or_404(Product, id=product_id)
@@ -92,15 +95,14 @@ def payment_success(request):
         product.is_available = False
         product.save()
 
-        # Clear session
         del request.session['last_product']
-
         messages.success(request, f"Thank you, {request.user.username}! Your order has been placed.")
 
     else:
         messages.warning(request, "No product was recorded in session. Order not saved.")
 
-    return render(request, 'shop/payment_success.html')
+    return render(request, 'shop/payment_success.html', {'order': order})
+
 
     
 def payment_cancel(request):
@@ -135,6 +137,10 @@ def remove_from_cart(request, artwork_id):
         messages.success(request, "Removed from cart.")
     return redirect('view_cart')
 
-    
+
+@login_required
+def my_orders_view(request):
+    orders = Order.objects.filter(customer=request.user).order_by('-created_at')
+    return render(request, 'shop/my_orders.html', {'orders': orders})
 
 

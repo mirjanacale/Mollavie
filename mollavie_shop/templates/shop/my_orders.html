@@ -1,0 +1,23 @@
+{% extends "shop/base.html" %}
+{% block title %}My Orders - Mollavie{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2> My Orders</h2>
+    {% if orders %}
+        <ul class="list-group mt-4">
+            {% for order in orders %}
+                <li class="list-group-item">
+                    <strong>Order #{{ order.id }}</strong> — {{ order.ordered_at|date:"F j, Y H:i" }}<br>
+                    {% for item in order.items.all %}
+                        {{ item.quantity }} x {{ item.product.name }} (£{{ item.product.price }})<br>
+                    {% endfor %}
+                    <span class="badge badge-success mt-1">Paid</span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="mt-4">You haven't placed any orders yet.</p>
+    {% endif %}
+</div>
+{% endblock %}
