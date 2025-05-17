@@ -55,6 +55,11 @@ nav a:hover {
     background-color: #555;
 }
 
+.navbar .nav-link[style*="pointer-events: none"] {
+  background-color: transparent !important;
+  color: white !important;
+}
+
 /* Main Layout */
 main {
     padding: 2rem;
@@ -186,6 +191,25 @@ form button {
 form button:hover {
     background-color: #003f8a;
 }
+/* Force logout <button> to act like other nav links in collapsed menu */
+.navbar-nav li form.d-inline .nav-link {
+   display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: left;
+  text-decoration: none;
+}
+
+/* Add hover style to match others */
+.navbar-nav li form.d-inline .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
 
 /* Footer */
 footer {

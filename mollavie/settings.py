@@ -5,6 +5,7 @@ from pathlib import Path
 import dj_database_url
 from dotenv import load_dotenv
 load_dotenv()
+from django.urls import reverse_lazy
 
 
 #  Base directory
@@ -126,6 +127,8 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = reverse_lazy('gallery')
+
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 

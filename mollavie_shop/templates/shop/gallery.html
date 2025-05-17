@@ -19,7 +19,11 @@
                 <p class="card-text">£{{ artwork.price }}</p>
                 {% if artwork.is_available %}
                     <a href="{% url 'artwork_detail' artwork.id %}" class="btn btn-outline-primary btn-sm">View</a>
-                    <a href="{% url 'add_to_cart' artwork.id %}" class="btn btn-outline-secondary btn-sm ml-2">Add to Cart</a>
+                    <form method="post" action="{% url 'add_to_cart' artwork.id %}" class="d-inline">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-outline-secondary btn-sm">Add to Cart</button>
+</form>
+
                 {% else %}
                     <span class="text-muted">Sold Out</span>
                 {% endif %}
