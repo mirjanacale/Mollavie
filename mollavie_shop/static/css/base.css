@@ -195,55 +195,50 @@ h1, h2 {
 
 
 /* Forms */
+/* === Form Styling === */
 form {
-    max-width: 500px;
-    margin: 2rem auto;
-    padding: 1.5rem;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 form input[type="text"],
 form input[type="email"],
+form input[type="password"],
+form input[type="number"],
 form textarea,
 form select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
 }
 
 form button {
-    padding: 10px 20px;
-    background-color: #0056b3;
-    border: none;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #0056b3;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
 }
 
 form button:hover {
-    background-color: #003f8a;
-}
-/* Force logout <button> to act like other nav links in collapsed menu */
-.navbar-nav li form.d-inline .nav-link {
-   display: block;
-  width: 100%;
-  padding: 0.5rem 1rem;
-  color: rgba(255, 255, 255, 0.55);
-  font-weight: 400;
-  font-size: 1rem;
-  line-height: 1.5;
-  text-align: left;
-  text-decoration: none;
+  background-color: #003f8a;
 }
 
-/* Add hover style to match others */
-.navbar-nav li form.d-inline .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+/* === Remove no longer needed (logout .d-inline override) === */
+/* You can safely delete this: */
+.navbar-nav li form.d-inline .nav-link {
+  display: none;
 }
 
 

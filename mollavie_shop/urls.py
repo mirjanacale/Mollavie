@@ -28,4 +28,6 @@ urlpatterns = [
 
     # Orders
     path('my-orders/', views.my_orders_view, name='my_orders'),
-]
+    # Profile
+    path('profile/', views.profile_view, name='profile'),
+  ]

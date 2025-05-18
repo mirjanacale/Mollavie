@@ -18,6 +18,7 @@ from .forms import SignUpForm
 from .models import Product
 from .models.order import Order, OrderItem
 from . import views
+from .models import CustomerProfile
 
 # ───────────────────────────────────────────────────────────
 #  General pages
@@ -47,7 +48,10 @@ def artwork_detail_view(request, artwork_id):
 # ───────────────────────────────────────────────────────────
 #  Stripe Checkout integration
 # ───────────────────────────────────────────────────────────
+
+
 stripe.api_key = settings.STRIPE_SECRET_KEY
+
 
 def create_checkout_session(request, artwork_id):
     artwork = get_object_or_404(Product, id=artwork_id)
@@ -234,5 +238,14 @@ def my_orders_view(request):
     return render(request, "shop/my_orders.html", {"orders": orders})
 
 # ───────────────────────────────────────────────────────────
-#  
+#  profile
 # ───────────────────────────────────────────────────────────
+
+@login_required
+def profile_view(request):
+    profile = CustomerProfile.objects.filter(user=request.user).first()
+    orders = Order.objects.filter(customer__user=request.user)
+    return render(request, 'shop/profile.html', {
+        'orders': orders,
+        'profile': profile,
+    })
