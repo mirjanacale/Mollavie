@@ -11,6 +11,8 @@ body {
     color: #895332f2;
     line-height: 1.6;
     font-size: 16px;
+    position: relative;
+    overflow-x: hidden;
 }
 
 a {
@@ -30,35 +32,70 @@ header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    background-color: #333;
-    padding: 1rem;
-    border-radius: 6px;
-    margin: 20px auto;
-    max-width: 1000px;
+/* === Navbar Styling for Mollavie === */
+
+/* Make navbar sticky and on top */
+.navbar.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
 }
 
-nav a {
-    color: rgb(238, 226, 226);
-    font-weight: bold;
-    text-transform: uppercase;
-    padding: 6px 12px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease; 
+/* Style hamburger menu */
+.navbar-toggler {
+  border: none;
+  box-shadow: none !important;
+  outline: none;
 }
 
-nav a:hover {
-    background-color: #555;
+.navbar-toggler:focus {
+  box-shadow: none;
+  outline: none;
 }
 
-.navbar .nav-link[style*="pointer-events: none"] {
-  background-color: transparent !important;
+/* Collapse behavior & layout fix */
+.navbar-collapse {
+  flex-grow: 1;
+  justify-content: flex-end;
+  background: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* Main navbar link styles */
+.navbar-nav .nav-link {
   color: white !important;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s ease;
 }
+
+.navbar-nav .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  text-decoration: underline;
+}
+
+/* Logout button inside form styled like a nav link */
+.navbar-nav li form .nav-link {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+}
+
+.navbar-nav li form .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  text-decoration: underline;
+}
+
+
 
 /* Main Layout */
 main {

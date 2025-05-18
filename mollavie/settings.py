@@ -47,7 +47,7 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 
-# 🔧 Middleware
+#  Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -60,10 +60,10 @@ MIDDLEWARE = [
 
 ]
 
-# 🔗 URLs
+#  URLs
 ROOT_URLCONF = 'mollavie.urls'
 
-# 🎨 Templates
+#  Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -80,10 +80,10 @@ TEMPLATES = [
     },
 ]
 
-# 🔥 WSGI
+#  WSGI
 WSGI_APPLICATION = 'mollavie.wsgi.application'
 
-# 🛢️ Database
+#  Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -102,7 +102,7 @@ DATABASES = {
 CSRF_TRUSTED_ORIGINS = ["https://*.codeinstitute-ide.net/", "https://*.herokuapp.com"]
 
 
-# 🔐 Password validation
+#  Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -123,11 +123,12 @@ STATICFILES_DIRS = [
     BASE_DIR / 'mollavie_shop' / 'static',
 ]
 
-# 🆔 Primary key field type
+#  Primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = reverse_lazy('gallery')
+LOGIN_URL = '/login/'
 
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
