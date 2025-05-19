@@ -12,7 +12,7 @@
         <p><strong>Email:</strong> {{ user.email }}</p>
         <p><strong>Phone:</strong> {{ profile.phone }}</p>
         <p><strong>Address:</strong> {{ profile.address }}</p>
-       <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary mb-3">Edit Profile</a>  
+       <a href="{% url 'shop:edit_profile' %}" class="btn btn-outline-primary mb-3">Edit Profile</a>  
         
         <!-- Order History Section -->
         {% if orders %}

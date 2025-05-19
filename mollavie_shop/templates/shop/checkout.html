@@ -1,0 +1,49 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Checkout – Mollavie{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="mb-4 text-center">Checkout</h2>
+
+  {% if cart_items %}
+  <table class="table table-hover align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart_items %}
+      <tr>
+        <td>
+          <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" width="50" class="me-2 rounded">
+          {{ item.product.name }}
+        </td>
+        <td>{{ item.quantity }}</td>
+        <td>£{{ item.product.price }}</td>
+        <td>£{{ item.subtotal }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    <h4>Total: £{{ total }}</h4>
+    <form method="post" action="{% url 'shop:checkout' %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-success">Proceed to Payment</button>
+    </form>
+  </div>
+
+  {% else %}
+  <div class="text-center">
+    <p>Your cart is empty.</p>
+    <a href="{% url shop:gallery %}" class="btn btn-outline-primary">Return to Gallery</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

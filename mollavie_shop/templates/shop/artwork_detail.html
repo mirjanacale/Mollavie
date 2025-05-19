@@ -13,7 +13,7 @@
         <p class="card-text"><strong>£{{ artwork.price }}</strong></p>
 
         {% if artwork.is_available %}
-            <form action="{% url 'create_checkout_session' artwork.id %}" method="POST">
+            <form action="{% url 'shop:create_checkout_session' artwork.id %}" method="POST">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-success">Buy Now</button>
             </form>

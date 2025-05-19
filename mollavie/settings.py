@@ -22,7 +22,6 @@ DEBUG = os.environ.get('DEBUG') == 'True'
 ALLOWED_HOSTS = ["*", "localhost", "127.0.0.1", ".herokuapp.com"]
 
 
-
 #  Installed apps
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -34,6 +33,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'cloudinary_storage',
     'mollavie_shop',
+    'django.contrib.sitemaps'
 ]
 
 #  Cloudinary media config
@@ -126,10 +126,9 @@ STATICFILES_DIRS = [
 #  Primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGOUT_REDIRECT_URL = '/'
-LOGIN_REDIRECT_URL = reverse_lazy('gallery')
-LOGIN_URL = '/login/'
-
+LOGIN_REDIRECT_URL = reverse_lazy('shop:gallery')
+LOGOUT_REDIRECT_URL = reverse_lazy('shop:home')
+LOGIN_URL = reverse_lazy('shop:login')
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 

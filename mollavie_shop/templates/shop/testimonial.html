@@ -1,0 +1,30 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Testimonials – Mollavie{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="mb-4 text-center">What Our Customers Say</h2>
+
+  {% if testimonials %}
+    <div class="row">
+      {% for t in testimonials %}
+        <div class="col-md-6 mb-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <p class="card-text">“{{ t.message }}”</p>
+              <p class="fw-bold mb-0">— {{ t.author_name }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-center">No testimonials yet. Be the first to share your feedback!</p>
+  {% endif %}
+
+  <div class="text-center mt-4">
+    <a href="{% url 'shop:gallery' %}" class="btn btn-outline-primary">Back to Gallery</a>
+  </div>
+</div>
+{% endblock %}

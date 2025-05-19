@@ -26,7 +26,7 @@
           {{ item.product.name }}
         </td>
         <td>
-          <form method="post" action="{% url 'update_cart' item.product.id %}" class="d-flex gap-2 align-items-center">
+          <form method="post" action="{% url 'shop:update_cart' item.product.id %}" class="d-flex gap-2 align-items-center">
             {% csrf_token %}
             <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control form-control-sm" style="width: 80px;">
             <button class="btn btn-sm btn-outline-success" type="submit">Update</button>
@@ -35,7 +35,7 @@
         <td>£{{ item.product.price }}</td>
         <td>£{{ item.subtotal }}</td>
         <td>
-          <a href="{% url 'remove_from_cart' item.product.id %}" class="btn btn-sm btn-danger">Remove</a>
+          <a href="{% url 'shop:remove_from_cart' item.product.id %}" class="btn btn-sm btn-danger">Remove</a>
         </td>
       </tr>
       {% endfor %}
@@ -45,15 +45,15 @@
   <div class="d-flex justify-content-between align-items-center mt-4">
     <h4>Total: £{{ total }}</h4>
     <div>
-      <a href="{% url 'clear_cart' %}" class="btn btn-outline-secondary me-2">Clear Cart</a>
-      <a href="{% url 'checkout' %}" class="btn btn-success">Checkout with Stripe</a>
+      <a href="{% url 'shop:clear_cart' %}" class="btn btn-outline-secondary me-2">Clear Cart</a>
+      <a href="{% url 'shop:checkout' %}" class="btn btn-success">Checkout with Stripe</a>
     </div>
   </div>
 
   {% else %}
   <div class="text-center">
     <p>Your cart is empty.</p>
-    <a href="{% url 'gallery' %}" class="btn btn-outline-primary">Back to Gallery</a>
+    <a href="{% url 'shop:gallery' %}" class="btn btn-outline-primary">Back to Gallery</a>
   </div>
   {% endif %}
 </div>
