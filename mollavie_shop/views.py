@@ -19,12 +19,16 @@ from .models import Product
 from .models.order import Order, OrderItem
 from . import views
 from .models import CustomerProfile
+from .forms import UserUpdateForm, CustomerProfileForm
 
 # ───────────────────────────────────────────────────────────
 #  General pages
 # ───────────────────────────────────────────────────────────
+
+
 def home(request):
     return render(request, "shop/index.html")
+
 
 def signup_view(request):
     if request.method == "POST":
@@ -37,9 +41,11 @@ def signup_view(request):
         form = SignUpForm()
     return render(request, "shop/signup.html", {"form": form})
 
+
 def gallery_view(request):
     artworks = Product.objects.all().order_by("-created_at")
     return render(request, "shop/gallery.html", {"artworks": artworks})
+
 
 def artwork_detail_view(request, artwork_id):
     artwork = get_object_or_404(Product, id=artwork_id)
@@ -92,6 +98,8 @@ def create_checkout_session(request, artwork_id):
 # ───────────────────────────────────────────────────────────
 #  Payment success & cancel
 # ───────────────────────────────────────────────────────────
+
+
 def payment_success(request):
     product_id = request.session.get("last_product")
     order = None
@@ -120,16 +128,19 @@ def payment_success(request):
 
     return render(request, "shop/payment_success.html", {"order": order})
 
+
 def payment_cancel(request):
     return render(request, "shop/payment_cancel.html")
 
 # ───────────────────────────────────────────────────────────
 #  Cart (session-based with quantities)
 # ───────────────────────────────────────────────────────────
+
+
 def add_to_cart(request, artwork_id):
     cart = request.session.get("cart", {})
     artwork_id = str(artwork_id)
-    print("🛒 CART:", request.session.get("cart"))
+    print(" CART:", request.session.get("cart"))
 
     if artwork_id in cart:
         cart[artwork_id] += 1
@@ -140,6 +151,7 @@ def add_to_cart(request, artwork_id):
 
     request.session["cart"] = cart
     return redirect("gallery")
+
 
 def view_cart(request):
     cart = request.session.get("cart", {})
@@ -166,6 +178,7 @@ def view_cart(request):
 
     })
 
+
 @require_POST
 def update_cart(request, artwork_id):
     cart = request.session.get("cart", {})
@@ -182,6 +195,7 @@ def update_cart(request, artwork_id):
     request.session["cart"] = cart
     return redirect("view_cart")
 
+
 def remove_from_cart(request, artwork_id):
     cart = request.session.get("cart", {})
     artwork_id = str(artwork_id)
@@ -191,10 +205,12 @@ def remove_from_cart(request, artwork_id):
         messages.success(request, "Removed from cart.")
     return redirect("view_cart")
 
+
 def clear_cart(request):
     request.session["cart"] = {}
     messages.success(request, "Cart cleared.")
     return redirect("view_cart")
+
 
 @login_required  # optional — you can allow guests too
 def checkout_cart_view(request):
@@ -232,20 +248,56 @@ def checkout_cart_view(request):
 # ───────────────────────────────────────────────────────────
 #  Order history
 # ───────────────────────────────────────────────────────────
+
 @login_required
 def my_orders_view(request):
-    orders = Order.objects.filter(customer=request.user).order_by("-created_at")
-    return render(request, "shop/my_orders.html", {"orders": orders})
+    user = request.user                                  # User instance
 
+    # make sure profile exists and bind it to “profile”
+    profile, _ = CustomerProfile.objects.get_or_create(user=user)
+
+    orders = Order.objects.filter(customer=user).order_by("-created_at")
+
+    return render(
+        request,
+        "shop/my_orders.html",
+        {"profile": profile, "orders": orders},
+    )
 # ───────────────────────────────────────────────────────────
 #  profile
 # ───────────────────────────────────────────────────────────
 
+
 @login_required
 def profile_view(request):
-    profile = CustomerProfile.objects.filter(user=request.user).first()
-    orders = Order.objects.filter(customer__user=request.user)
+    user = request.user
+    profile, created = CustomerProfile.objects.get_or_create(user=user)
+    orders = Order.objects.filter(customer=user)
+
     return render(request, 'shop/profile.html', {
-        'orders': orders,
         'profile': profile,
+        'orders': orders
+
+    })
+
+
+@login_required
+def edit_profile(request):
+    user = request.user
+    profile = user.customerprofile  # assumes signal already created it
+
+    if request.method == 'POST':
+        user_form = UserUpdateForm(request.POST, instance=user)
+        profile_form = CustomerProfileForm(request.POST, instance=profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect('profile')
+    else:
+        user_form = UserUpdateForm(instance=user)
+        profile_form = CustomerProfileForm(instance=profile)
+
+    return render(request, 'shop/edit_profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form,
     })
