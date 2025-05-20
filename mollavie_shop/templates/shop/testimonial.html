@@ -3,8 +3,8 @@
 {% block title %}Testimonials – Mollavie{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-  <h2 class="mb-4 text-center">What Our Customers Say</h2>
+<main class="container py-5" aria-label="Testimonials">
+  <h1 class="mb-4 text-center">What Our Customers Say</h1>
 
   {% if testimonials %}
     <div class="row">
@@ -26,5 +26,5 @@
   <div class="text-center mt-4">
     <a href="{% url 'shop:gallery' %}" class="btn btn-outline-primary">Back to Gallery</a>
   </div>
-</div>
+</main>
 {% endblock %}

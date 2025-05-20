@@ -5,13 +5,11 @@
 
 {% block content %}
 <div class="card mx-auto" style="max-width: 600px;">
-    <img src="{{ artwork.image.url }}" alt="{{ artwork.name }}" class="card-img-top img-fluid">
-    
+    <img src="{{ artwork.image.url }}" alt="{{ artwork.name }}" class="card-img-top img-fluid" loading="lazy">
     <div class="card-body">
-        <h2 class="card-title">{{ artwork.name }}</h2>
+        <h1 class="card-title">{{ artwork.name }}</h1>
         <p class="card-text">{{ artwork.description }}</p>
         <p class="card-text"><strong>£{{ artwork.price }}</strong></p>
-
         {% if artwork.is_available %}
             <form action="{% url 'shop:create_checkout_session' artwork.id %}" method="POST">
                 {% csrf_token %}

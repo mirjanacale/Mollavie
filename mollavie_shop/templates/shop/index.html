@@ -7,26 +7,22 @@
 
 {% block title %}Welcome to Mollavie{% endblock %}
 
-
 {% block content %}
-        <h1>Welcome to Mollavie </h1>
+    <h1 class="mb-4">Welcome to Mollavie</h1>
     <div style="text-align: center; padding: 40px 20px;">
-    
         <img src="https://res.cloudinary.com/demo/image/upload/v1690000000/sample.jpg" alt="Featured Artwork" class="index-hero-img">
         <p style="max-width: 600px; margin: auto;">
             Discover unique hand-painted artworks and personalised designs.
             Whether you're decorating your space or looking for a one-of-a-kind gift,
             Mollavie brings creativity to life on canvas.
         </p>
-<div style="margin-top: 30px;">
-    <a href="{% url 'shop:signup' %}" class="btn btn-danger">
-        Sign Up Now
-    </a>
-</div>
-
-
-        
+        <div style="margin-top: 30px;">
+            <a href="{% url 'shop:signup' %}" class="btn btn-danger">
+                Sign Up Now
+            </a>
+        </div>
     </div>
+
     <h2 class="mt-5 mb-4 text-center">Featured Artworks</h2>
     <div class="row justify-content-center">
         {% for product in featured_products %}

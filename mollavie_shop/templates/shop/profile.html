@@ -3,20 +3,20 @@
 {% block title %}My Profile | Mollavie{% endblock %}
 
 {% block content %}
-<div class="container py-5">
+<main class="container py-5" aria-label="My Profile">
   <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6">
       <div class="bg-white shadow rounded p-4">
-        <h2 class="mb-4 text-center">My Profile</h2>
+        <h1 class="mb-4 text-center">My Profile</h1>
         <p><strong>Full Name:</strong> {{ user.get_full_name }}</p>
         <p><strong>Email:</strong> {{ user.email }}</p>
         <p><strong>Phone:</strong> {{ profile.phone }}</p>
         <p><strong>Address:</strong> {{ profile.address }}</p>
-       <a href="{% url 'shop:edit_profile' %}" class="btn btn-outline-primary mb-3">Edit Profile</a>  
-        
+        <a href="{% url 'shop:edit_profile' %}" class="btn btn-outline-primary mb-3">Edit Profile</a>
+
         <!-- Order History Section -->
         {% if orders %}
-          <h4 class="mt-4">Order History</h4>
+          <h2 class="mt-4">Order History</h2>
           <ul class="list-group">
             {% for order in orders %}
               <li class="list-group-item">
@@ -30,5 +30,5 @@
       </div>
     </div>
   </div>
-</div>
+</main>
 {% endblock %}

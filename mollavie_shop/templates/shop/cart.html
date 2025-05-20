@@ -12,7 +12,6 @@
     <thead class="table-light">
       <tr>
         <th scope="col">Product</th>
-        <th scope="col">Quantity</th>
         <th scope="col">Price</th>
         <th scope="col">Subtotal</th>
         <th></th>
@@ -24,13 +23,6 @@
         <td>
           <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" width="60" class="me-2 rounded">
           {{ item.product.name }}
-        </td>
-        <td>
-          <form method="post" action="{% url 'shop:update_cart' item.product.id %}" class="d-flex gap-2 align-items-center">
-            {% csrf_token %}
-            <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control form-control-sm" style="width: 80px;">
-            <button class="btn btn-sm btn-outline-success" type="submit">Update</button>
-          </form>
         </td>
         <td>£{{ item.product.price }}</td>
         <td>£{{ item.subtotal }}</td>
