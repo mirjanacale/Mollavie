@@ -1,62 +1,114 @@
 # Mollavie
 
- 
-- ### Database planning 
-<hr>  
-  Database Structure     
-     
-![admin page]()  
--   ### Design
-    -  ##  BlockArt Color Scheme
+A modern, accessible Django-based art shop for unique artworks.
 
-| Element      | Color Code | Description |
-|-------------|------------|-------------|
-| **Primary** | `#103E26` | Dark Green (Navbar, Buttons, Highlights) |
-| **Background** | `#F5F1EA` | Light Beige (Main Content Area) |
-| **Accent** | `#D5C4A1` | Muted Gold (Borders, Cards, Shadows) |
-| **Text** | `#2D2D2D` | Deep Charcoal (Headings, Body Text) |
-| **Secondary** | `#B0302D` | Rich Red (Icons, Hover Effects) |
+---
 
-This color scheme defines the aesthetic of **BlockArt**, giving it a **classic, vintage, and artistic** look! 
+### Database Planning
 
+The database is designed to support unique products, user profiles, orders, and testimonials. See the admin page for a visual overview:
 
-- Images  what are used are from mayself and my dother.
+![admin page](static/images/admin/admin-page.png)
 
-   #### Typography
+### Design
 
- -   The fonts used are [Open Sans](https://fonts.google.com/specimen/Open+Sans) and [Lato](https://fonts.google.com/specimen/Lato).
-   
+#### Mollavie Color Scheme
 
-  ## Wireframe
-***
+| Element      | Color Code  | Description                                 |
+|--------------|-------------|---------------------------------------------|
+| **Primary**  | `#18a085`   | Teal Green (Navbar, Footer, Buttons)        |
+| **Background** | `#fafafa`  | Light Gray (Main Content Area)              |
+| **Accent**   | `#c0392b`   | Strong Red (Buttons, Highlights)            |
+| **Text**     | `#895332f2` | Brownish (Body Text)                        |
+| **Heading**  | `#222`      | Dark Gray (Headings)                        |
+| **Link**     | `#0056b3`   | Blue (Links)                                |
+| **Button Hover** | `#003f8a`| Dark Blue (Button Hover)                    |
+| **Card Border** | `#ddd`    | Light Gray (Card/Image Borders)             |
+
+This table reflects the actual colors used in the current CSS for Mollavie.
+
+- All images used are original, from myself and my daughter.
+
+#### Typography
+
+The fonts used are [Open Sans](https://fonts.google.com/specimen/Open+Sans) and [Lato](https://fonts.google.com/specimen/Lato) for a clean, modern, and readable appearance.
+
+  ## Wireframes
+
+Below are wireframes for each major feature/page of Mollavie. These illustrate the layout and user flow, helping guide the design and development process. (Replace image links with your actual wireframes as needed.)
 
 <details open>
-<summary>Wireframe - Homepage  </summary>  
+<summary><strong>Homepage</strong></summary>
 
-![homepage wireframe-mobile & desktop]()
-</details> 
-<details >
-<summary>Wireframe - About page </summary>  
+- **Purpose:** Welcomes users, highlights featured artworks, and provides navigation to other sections.
+- ![Homepage Wireframe](static/images/wireframes/homepage.png)
+</details>
 
-![homepage wireframe-mobile & desktop]()
-</details> 
 <details>
-<summary>Wireframe - New Post</summary>  
+<summary><strong>Gallery</strong></summary>
 
-![homepage wireframe-mobile & desktop]()
-</details>    
+- **Purpose:** Displays all available artworks in a grid, each with image, name, and short description.
+- ![Gallery Wireframe](static/images/wireframes/gallery.png)
+</details>
+
 <details>
-<summary>Wireframe - SignUp page </summary>  
+<summary><strong>Product Detail</strong></summary>
 
-![homepage wireframe-mobile & desktop]()
-</details> 
+- **Purpose:** Shows detailed information about a selected artwork, including image, description, and purchase option.
+- ![Product Detail Wireframe](static/images/wireframes/product_detail.png)
+</details>
+
 <details>
-<summary>Wireframe - Mobile </summary>  
+<summary><strong>Cart</strong></summary>
 
-![homepage wireframe-mobile & desktop]()
-</details>              
+- **Purpose:** Lists selected artworks for purchase, allows removal, and proceeds to checkout.
+- ![Cart Wireframe](static/images/wireframes/cart.png)
+</details>
 
+<details>
+<summary><strong>Checkout</strong></summary>
 
+- **Purpose:** Collects user details and payment information to complete the purchase.
+- ![Checkout Wireframe](static/images/wireframes/checkout.png)
+</details>
+
+<details>
+<summary><strong>Profile</strong></summary>
+
+- **Purpose:** Allows users to view and edit their personal information and see order history.
+- ![Profile Wireframe](static/images/wireframes/profile.png)
+</details>
+
+<details>
+<summary><strong>Signup / Login</strong></summary>
+
+- **Purpose:** Enables users to create an account or log in to access personalized features.
+- ![Signup Wireframe](static/images/wireframes/signup.png)
+- ![Login Wireframe](static/images/wireframes/login.png)
+</details>
+
+<details>
+<summary><strong>Testimonials</strong></summary>
+
+- **Purpose:** Displays customer testimonials to build trust and credibility.
+- ![Testimonials Wireframe](static/images/wireframes/testimonials.png)
+</details>
+
+<details>
+<summary><strong>My Orders</strong></summary>
+
+- **Purpose:** Shows a list of the user's past orders with details and statuses.
+- ![My Orders Wireframe](static/images/wireframes/my_orders.png)
+</details>
+
+<details>
+<summary><strong>404 Error Page</strong></summary>
+
+- **Purpose:** Informs users when a page is not found and provides navigation options.
+- ![404 Wireframe](static/images/wireframes/404.png)
+</details>
+
+---
 
 ## Agile Development Process
 
@@ -88,13 +140,16 @@ Each story followed the standard format:
 
 ###  Agile Features Summary
 
-| Sprint | Key Features Delivered                                  |
-|--------|----------------------------------------------------------|
-| 1      | Project setup, user authentication, base templates       |
-| 2      | Product model, gallery view, detail page                 |
-| 3      | Shopping cart and session-based storage                  |
-| 4      | Stripe integration, success page, and order saving       |
-| 5      | Order history page, mobile navbar, deployment prep       |
+| Sprint | Key Features Delivered |
+|--------|------------------------|
+| 1      | Project setup, user authentication, base templates, custom error pages |
+| 2      | Product and category models, admin interface, gallery and product detail views |
+| 3      | Shopping cart, add-to-cart, remove-from-cart, and checkout functionality |
+| 4      | Stripe payment integration, order saving, order history, and profile management |
+| 5      | Testimonials, custom 404/403/500 pages, HTML/CSS validation, accessibility improvements |
+| 6      | Responsive design, gallery image enhancements, validator documentation, deployment to Heroku |
+
+Each sprint focused on delivering user value, iterating on feedback, and ensuring the site is robust, accessible, and visually appealing. Features were tracked and reviewed using GitHub Projects and Issues for transparency and continuous improvement.
 
 ---
 
@@ -103,134 +158,75 @@ Each story followed the standard format:
 
  ## Technologies Used
 
-### Languages used
+- **HTML5**
+- **CSS3**
+- **JavaScript**
+- **Python**
+- **Django**
+- **Bootstrap**
+- **Cloudinary**
+- **Stripe**
+- **Heroku**
+- **Git & GitHub**
 
-- [HTML5](https://en.wikipedia.org/wiki/HTML5)
-- [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
-- [Javascript](https://en.wikipedia.org/wiki/JavaScript)
-- [Python](https://www.python.org/)
-
-
-
-### Frameworks, Libraries & Programs Used
-
-
-- [Git](https://git-scm.com/)
-  - Version control.
-- [GitHub](https://github.com/)
-  - For storing code and deploying the site.
-- [Gitpod](https://www.gitpod.io/)
-  - Used for building and editing my code.
-- [Django](https://www.djangoproject.com/)
-  - A python based framework that was used to develop the site.
-- [Bootstrap](https://getbootstrap.com/)
-  - For help designing the html templates.
-- [Google Fonts](https://fonts.google.com/)
-  - Used to style the website's logo.
-- [Font Awesome](https://fontawesome.com/)
-  - Used to obtain the icons used.
-- [Google Developer Tools](https://developers.google.com/web/tools/chrome-devtools)
-  - Used to help fix problem areas and identify bugs.
-- [Cloudinary](https://cloudinary.com/)
-  - Used to store static files and images.
-- [Favicon.io](https://favicon.io/)
-  - Used to generate the site's favicon.
-- [SQlite](https://www.sqlite.org/index.html)
-  - Used when performing unit tests.
-- [PostgreSQL](https://www.postgresql.org/)
-  - Database used through heroku.
-- [Lucidchart](https://www.lucidchart.com/)
-  - To draw out the database schema.
-- [W3C Markup Validation Service](https://validator.w3.org/) 
-  - Used to validate HTML code.
-- [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/#validate_by_input)
-- Used to validate CSS code.
-- [Pep8](http://pep8online.com/)
-  - Used to validate Python code.
-- [JSHint](https://jshint.com/)
-  - Used to validate JS code.
-- [Tinyjpg](https://tinyjpg.com/)
-  - Used to compress images.
-- [Convertio](https://convertio.co/)
-  - To convert images to a webp format(better performance)
-- [Heroku](https://www.heroku.com/)
-  - To deploy the project.
-- [ChatGPT](https://chatgpt.com/)
-  - Used for general queries and quick help.
-- [Claude3.5](https://claude.ai/)
-  - For insightful explanations of topic. 
-- [ YouTube](https://www.youtube.com/) 
-  - For tutorials and other learnigs.
-
-
+Other tools: Google Fonts, Font Awesome, Lucidchart, W3C Validators, Pep8, JSHint, Tinyjpg, Convertio.
 
 ## Validators
 
-- HTML
-    - Results of HTML official[W3C validator] (https://validator.w3.org/).
+- **HTML**
+    - All main templates (`base.html`, `index.html`, `gallery.html`, `artwork_detail.html`, `cart.html`, `checkout.html`, `profile.html`, `signup.html`, `login.html`, `testimonial.html`, `my_orders.html`, `edit_profile.html`, `404.html`) were tested using the [W3C Markup Validation Service](https://validator.w3.org/).
+    - All templates pass with 0 errors and 0 warnings (Django template tags are ignored by the validator).
+    - Screenshots of validation results are included below for each template.
 
-    <hr>
+<hr>
 
-| File         | Preview |
-|-------------|---------|
-| `base.html`  | ![base.html](https://res.cloudinary.com/dyemjyefz/image/upload/v1741599020/base.html_wug6vn.png) |
-| `about.html`   | ![about.html](https://res.cloudinary.com/dyemjyefz/image/upload/v1741599016/about.html_jpz6b9.png) |
-| `post confirm delete.html`   | ![post_confirm_delete.html](https://res.cloudinary.com/dyemjyefz/image/upload/v1741599034/p_c_delete.html_rfk5mt.png) |
-| `post detail.html`  | ![post_detail.html](https://res.cloudinary.com/dyemjyefz/image/upload/v1741599039/post_dital.html_ibqpmy.png) |
-| `post form.html` | ![post_form.html](https://res.cloudinary.com/dyemjyefz/image/upload/v1741599044/post_form.html_fcg0th.png) |
-| `password_reset_complete.html`  | ![password_reset_complete.html](https://res.cloudinary.com/dyemjyefz/image/upload/v1741599044/post_form.html_fcg0th.png) |
+| File                  | Preview |
+|-----------------------|---------|
+| `base.html`           | ![base.html](static/images/validator/base-html.png) |
+| `index.html`          | ![index.html](static/images/validator/index-html.png) |
+| `gallery.html`        | ![gallery.html](static/images/validator/gallery-html.png) |
+| `artwork_detail.html` | ![artwork_detail.html](static/images/validator/artwork-detail-html.png) |
+| `cart.html`           | ![cart.html](static/images/validator/cart-html.png) |
+| `checkout.html`       | ![checkout.html](static/images/validator/checkout-html.png) |
+| `profile.html`        | ![profile.html](static/images/validator/profile-html.png) |
+| `signup.html`         | ![signup.html](static/images/validator/signup-html.png) |
+| `login.html`          | ![login.html](static/images/validator/login-html.png) |
+| `testimonial.html`    | ![testimonial.html](static/images/validator/testimonial-html.png) |
+| `my_orders.html`      | ![my_orders.html](static/images/validator/my-orders-html.png) |
+| `edit_profile.html`   | ![edit_profile.html](static/images/validator/edit-profile-html.png) |
+| `404.html`            | ![404.html](static/images/validator/404-html.png) |
 
 
-##  HTML Validation
+##  HTML Validation Results
 
 All HTML files were tested using the [W3C Markup Validation Service](https://validator.w3.org/). The results are as follows:
 
-| Page                   | Valid | Errors | Warnings |
-|------------------------|:-----:|:------:|:--------:|
-| Home                   |    |   0    |    0     |
-| About                  |    |   0    |    0     |
-| Profile                |    |   0    |    0     |
-| Register               |    |   0    |    0     |
-| Admin                  |    |   0    |    0     |
-| Password Reset         |    |   0    |    0     |
-| Login                  |    |   0    |    0     |
-| Logout                 |    |   0    |    0     |
+| Page            | Valid | Errors | Warnings |
+|-----------------|:-----:|:------:|:--------:|
+| Home            |  ✔️   |   0    |    0     |
+| Gallery         |  ✔️   |   0    |    0     |
+| Product Detail  |  ✔️   |   0    |    0     |
+| Cart            |  ✔️   |   0    |    0     |
+| Checkout        |  ✔️   |   0    |    0     |
+| Profile         |  ✔️   |   0    |    0     |
+| Register        |  ✔️   |   0    |    0     |
+| Login           |  ✔️   |   0    |    0     |
+| Testimonials    |  ✔️   |   0    |    0     |
+| My Orders       |  ✔️   |   0    |    0     |
+| Edit Profile    |  ✔️   |   0    |    0     |
+| 404 Error       |  ✔️   |   0    |    0     |
+
+> All screenshots are displayed below in a container. Each image can optionally be wrapped in a link to the live Cloudinary validator result or a larger version. For example:
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="https://res.cloudinary.com/your_cloud_name/image/upload/v1234567890/validator/base-html.png" target="_blank">
+    <img src="https://res.cloudinary.com/your_cloud_name/image/upload/v1234567890/validator/base-html.png" alt="base.html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a>
+  <!-- Repeat for each template screenshot, or use a plain <img> if no link is needed -->
+</div>
 
 
-  <hr> 
-
-  ##  Custom Error Pages
-
-The Mollavie project includes fully custom-designed error pages to ensure a smooth and branded user experience, even during failures.
-
-### Implemented Errors:
-
-| Code | Description            |
-|------|------------------------|
-| 403  | Forbidden              |
-| 404  | Page Not Found         |
-| 500  | Internal Server Error  |
-
-Each template extends the base layout, uses consistent colors and styling, and includes helpful messages and navigation.
-
----
-
-###  Examples
-
-#### 404 – Page Not Found  
-When a user accesses a missing page:
-
-![404 Error Page]()
-
-#### 403 – Forbidden  
-When permission is denied (e.g., accessing someone else's post):
-
-![403 Error Page]()
-
-#### 500 – Server Error  
-When something unexpected crashes:
-
-![500 Error Page]()
+<hr>
 
 ---
 
@@ -270,58 +266,64 @@ Tested Mollavie on the following real devices:
 
 ##  Manual Testing of User Stories
 
-### 🔍 As a user, I want to browse and view product details
+Manual testing was performed for all major user stories to ensure the site works as intended for different user types. Each scenario was tested on both desktop and mobile devices, and the results are summarized below:
 
-| Step | Expected Result | Actual Result |
-|------|------------------|---------------|
-| Navigate to home page | Homepage loads |  WAS |
-| Click on “Gallery” | Artwork list appears |  WAS |
-| Click on an artwork | Product detail page with image and Buy Now button |  WAS |
+###  As a visitor, I want to browse and view product details
+| Step                        | Expected Result                                 | Actual Result |
+|-----------------------------|-------------------------------------------------|---------------|
+| Navigate to home page       | Homepage loads with welcome and featured art    |  ✔️           |
+| Click on “Gallery”          | Artwork list appears                            |  ✔️           |
+| Click on an artwork         | Product detail page with image and Buy Now      |  ✔️           |
 
----
-
-###  As a user, I want to use the shopping cart
-
-| Step | Expected Result | Actual Result |
-|------|------------------|---------------|
-| Add artwork to cart | Item added with message |  WAS |
-| View cart | All items listed |  WAS |
-| Remove item | Item removed with confirmation |  WAS |
-
----
+###  As a visitor, I want to use the shopping cart
+| Step                | Expected Result                | Actual Result |
+|---------------------|-------------------------------|---------------|
+| Add artwork to cart | Item added with message       |  ✔️           |
+| View cart           | All items listed              |  ✔️           |
+| Remove item         | Item removed with confirmation|  ✔️           |
 
 ###  As an authenticated user, I want to buy artwork via Stripe
-
-| Step | Expected Result | Actual Result |
-|------|------------------|---------------|
-| Click Buy Now | Redirects to Stripe |  WAS |
-| Complete payment | Redirects to success page |  WAS |
-| Visit /my-orders | Order listed with details |  WAS |
-
----
+| Step                | Expected Result                | Actual Result |
+|---------------------|-------------------------------|---------------|
+| Click Buy Now       | Redirects to Stripe           |  ✔️           |
+| Complete payment    | Redirects to success page     |  ✔️           |
+| Visit /my-orders    | Order listed with details     |  ✔️           |
 
 ###  As a site owner, I want unauthenticated users restricted
-
-| Step | Expected Result | Actual Result |
-|------|------------------|---------------|
-| Visit /my-orders logged out | Redirect to login |  WAS |
-
----
+| Step                        | Expected Result           | Actual Result |
+|-----------------------------|---------------------------|---------------|
+| Visit /my-orders logged out | Redirect to login         |  ✔️           |
 
 ###  Form Validation and Flash Messages
+| Action                | Feedback                     |
+|-----------------------|------------------------------|
+| Empty form submission | Error displayed              |
+| Valid submission      | Success message shown        |
 
-| Action | Feedback |
-|--------|---------|
-| Empty form submission |  Error displayed |
-| Valid submission |  Success message shown |
+All user stories were manually tested and passed as expected. Screenshots and further details are available in the Testing section above.
 
 ---
 
-##  Automated Testing
+##   Testing
 
-- `python manage.py test` run with basic model and view checks
-- Stripe tested with test cards like `4242 4242 4242 4242`
-- Admin site verified: `/admin` is accessible by superuser
+### Python (Django)
+- All Django models and views are tested using the built-in test runner:
+  - Run with: `python manage.py test`
+  - Tests cover model validation, view responses, and form handling.
+- Stripe payment integration is tested using Stripe's official test cards (e.g., `4242 4242 4242 4242`).
+- The Django admin site is verified to be accessible and functional for superusers.
+- Example test result screenshot:
+
+  <img src="https://res.cloudinary.com/your_cloud_name/image/upload/v1234567890/testing/python-tests.png" alt="Python test results" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+### JavaScript
+- JavaScript code is linted using [JSHint](https://jshint.com/) to ensure code quality and catch errors.
+- Manual browser testing is performed for all interactive features (e.g., form validation, gallery filtering, cart updates).
+- Example browser console screenshot:
+
+  <img src="https://res.cloudinary.com/your_cloud_name/image/upload/v1234567890/testing/js-console.png" alt="JavaScript console test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+- (Optional) For larger projects, consider using [Jest](https://jestjs.io/) or [Mocha](https://mochajs.org/) for automated JS unit tests.
 
 ---
 
@@ -363,11 +365,11 @@ Follow these steps to deploy the ArtBlog on Heroku:
 
 The site was deployed to GitHub Pages. The steps to deploy are as follows:
 
-- In the [GitHub repository](https://github.com/mirjanacale/BlockArt), navigate to the Settings tab
+- In the [GitHub repository](), navigate to the Settings tab
 - From the source section drop-down menu, select the **Main** Branch, then click "Save".
 - The page will be automatically refreshed with a detailed ribbon display to indicate the successful deployment.
 
-The live link can be found [here](https://mirjanablog-09220d34d6de.herokuapp.com/)
+The live link can be found [here]()
 
 ### Local Deployment
 
@@ -377,7 +379,7 @@ This project can be cloned or forked in order to make a local copy on your own s
 
 You can clone the repository by following these steps:
 
-1. Go to the [GitHub repository](https://github.com/mirjanacale/BlockArt)
+1. Go to the [GitHub repository]()
 2. Locate the Code button above the list of files and click it
 3. Select if you prefer to clone using HTTPS, SSH, or GitHub CLI and click the copy button to copy the URL to your clipboard
 4. Open Git Bash or Terminal
@@ -409,4 +411,4 @@ There are no major differences between the local (Gitpod) version and the deploy
 ## Contributing
 Contributions are welcome! If you have suggestions for new questions or improvements to the game, please feel free to open an issue .
 
- 
+

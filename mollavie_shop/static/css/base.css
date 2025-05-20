@@ -13,7 +13,14 @@ body {
     font-size: 16px;
     position: relative;
     overflow-x: hidden;
+    background-image: url(''); /* Update path if needed */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
 }
+
+
 
 a {
     text-decoration: none;
@@ -26,7 +33,7 @@ a:hover {
 
 /* Header & Navigation */
 header {
-    background-color: #18a085;
+    background-color: #0e493d;
     padding: 1rem 2rem;
     color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -169,12 +176,16 @@ h1, h2 {
     display: inline-block;
     margin-top: 10px;
     padding: 8px 16px;
-    background-color: #c0392b;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
+    background-color: #18a085;
+    color: #fff;
+    border: none;
+    transition: background 0.2s, color 0.2s;
 }
 
+.artwork-card .button:hover {
+    background-color: #117964;
+    color: #fff;
+}
 
 .artwork-card img:hover {
     transform: scale(1.03);
@@ -264,6 +275,12 @@ footer a {
 
 footer a:hover {
   color: #dc3545; /* Mollavie red tone */
+}
+
+main, header, footer, .artwork-card, form {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(0.5px);
+    border-radius: 10px;
 }
 
 

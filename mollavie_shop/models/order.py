@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from .product import Product
- 
+
 
 class Order(models.Model):
     customer = models.ForeignKey(
@@ -19,8 +19,6 @@ class Order(models.Model):
     def __str__(self):
         username = self.customer.username if self.customer else "Guest"
         return f"Order {self.id} by {username}"
-
-        
 
 
 class OrderItem(models.Model):

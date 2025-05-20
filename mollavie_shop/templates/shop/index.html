@@ -10,7 +10,7 @@
 {% block content %}
     <h1 class="mb-4">Welcome to Mollavie</h1>
     <div style="text-align: center; padding: 40px 20px;">
-        <img src="https://res.cloudinary.com/demo/image/upload/v1690000000/sample.jpg" alt="Featured Artwork" class="index-hero-img">
+        <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1747743136/6231dd09dcf626bc2f758aa7_Untitled2029_qnugwk.jpg" alt="Featured Artwork" class="index-hero-img">
         <p style="max-width: 600px; margin: auto;">
             Discover unique hand-painted artworks and personalised designs.
             Whether you're decorating your space or looking for a one-of-a-kind gift,
@@ -35,7 +35,7 @@
                         <h5 class="card-title">{{ product.name }}</h5>
                         <p class="card-text">£{{ product.price }}</p>
                         {% if product.is_available %}
-                            <a href="{% url 'shop:artwork_detail' product.id %}" class="btn btn-secondary w-100 mt-auto">View</a>
+                            <a href="{% url 'shop:artwork_detail' product.id %}" class="btn" style="background-color: #18a085; color: #fff; border: none; width: 100%; margin-top: auto;">View</a>
                         {% else %}
                             <span class="badge bg-secondary mt-auto">Sold</span>
                         {% endif %}
