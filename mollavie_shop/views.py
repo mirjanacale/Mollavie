@@ -17,7 +17,8 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def home(request):
-    return render(request, "shop/index.html")
+    featured_products = Product.objects.filter(is_available=True).order_by('-created_at')[:4]
+    return render(request, "shop/index.html", {"featured_products": featured_products})
 
 
 def signup_view(request):

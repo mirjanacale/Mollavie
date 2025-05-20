@@ -9,12 +9,10 @@
 
 
 {% block content %}
+        <h1>Welcome to Mollavie </h1>
     <div style="text-align: center; padding: 40px 20px;">
-        <h2>Welcome to Mollavie </h2>
-        <img src="https://res.cloudinary.com/your-cloud-name/image/upload/v1234567890/sample.jpg"
-             alt="Mollavie Artwork"
-             style="max-width: 100%; height: auto; margin: 20px auto; display: block; border-radius: 12px;">
-             
+    
+        <img src="https://res.cloudinary.com/demo/image/upload/v1690000000/sample.jpg" alt="Featured Artwork" class="index-hero-img">
         <p style="max-width: 600px; margin: auto;">
             Discover unique hand-painted artworks and personalised designs.
             Whether you're decorating your space or looking for a one-of-a-kind gift,
@@ -28,5 +26,28 @@
 
 
         
+    </div>
+    <h2 class="mt-5 mb-4 text-center">Featured Artworks</h2>
+    <div class="row justify-content-center">
+        {% for product in featured_products %}
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <a href="{% url 'shop:artwork_detail' product.id %}">
+                        <img src="{{ product.image.url }}" class="card-img-top product-image" alt="{{ product.name }}">
+                    </a>
+                    <div class="card-body text-center d-flex flex-column">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">£{{ product.price }}</p>
+                        {% if product.is_available %}
+                            <a href="{% url 'shop:artwork_detail' product.id %}" class="btn btn-secondary w-100 mt-auto">View</a>
+                        {% else %}
+                            <span class="badge bg-secondary mt-auto">Sold</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-center">No featured products at the moment. Please check back soon!</p>
+        {% endfor %}
     </div>
 {% endblock %}
