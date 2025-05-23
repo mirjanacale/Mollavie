@@ -361,14 +361,39 @@ All user stories were manually tested and passed as expected. Screenshots and fu
 - The Django admin site is verified to be accessible and functional for superusers.
 - Example test result screenshot:
 
-  <img src="https://res.cloudinary.com/your_cloud_name/image/upload/v1234567890/testing/python-tests.png" alt="Python test results" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-### JavaScript
-- JavaScript code is linted using [JSHint](https://jshint.com/) to ensure code quality and catch errors.
-- Manual browser testing is performed for all interactive features (e.g., form validation, gallery filtering, cart updates).
-- Example browser console screenshot:
 
-  <img src="https://res.cloudinary.com/your_cloud_name/image/upload/v1234567890/testing/js-console.png" alt="JavaScript console test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748033932/admin.py_verob5.png" alt="admin.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748033936/apps.py_circjo.png" alt="apps.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748033941/category.py_s4j26f.png" alt="category.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748033948/customer.py_mbg10e.png" alt="customer.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748033952/forms.py_xdlg2n.png" alt="forms.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748033959/manage.py_jxaedo.png" alt="manage.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748033967/order.py_fof3o9.png" alt="order.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748033971/product.py_yep4nx.png" alt="product.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748033998/view.py_efgum4.png" alt="view.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034004/sitemaps.py_h8mbfv.png" alt="sitemaps.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034008/urla.pyshop_dqmceh.png" alt="urls.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034008/urla.pyshop_dqmceh.png" alt="settings.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034036/signals.py_bbrfcj.png" alt="signals.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034041/urls.pymollavie_jg4jis.png" alt="urls.pymollavie" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034045/urla.pyshop_ejw8uj.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 - (Optional) For larger projects, consider using [Jest](https://jestjs.io/) or [Mocha](https://mochajs.org/) for automated JS unit tests.
 
