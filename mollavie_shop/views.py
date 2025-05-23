@@ -17,8 +17,15 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def home(request):
-    featured_products = Product.objects.filter(is_available=True).order_by('-created_at')[:4]
-    return render(request, "shop/index.html", {"featured_products": featured_products})
+    featured_products = (
+        Product.objects.filter(is_available=True)
+        .order_by('-created_at')[:4]
+    )
+    return render(
+        request,
+        "shop/index.html",
+        {"featured_products": featured_products}
+    )
 
 
 def signup_view(request):
@@ -60,9 +67,11 @@ def create_checkout_session(request, artwork_id):
                     "quantity": 1,
                 }],
                 success_url=request.build_absolute_uri(
-                    reverse_lazy("shop:payment_success") + "?session_id={CHECKOUT_SESSION_ID}"
+                    reverse_lazy("shop:payment_success") +
+                    "?session_id={CHECKOUT_SESSION_ID}"
                 ),
-                cancel_url=request.build_absolute_uri(reverse_lazy("shop:payment_cancel")),
+                cancel_url=request.build_absolute_uri(
+                    reverse_lazy("shop:payment_cancel")),
             )
             return redirect(checkout_session.url, code=303)
         except Exception as e:
@@ -90,9 +99,11 @@ def payment_success(request):
     else:
         messages.warning(
             request,
-            "No product recorded in session — order not saved. If you were charged, please contact support."
+            "No product recorded in session — order not saved. "
+            "If you were charged, please contact support."
         )
     return render(request, "shop/payment_success.html", {"order": order})
+
 
 def payment_cancel(request):
     return render(request, "shop/payment_cancel.html")
@@ -117,11 +128,18 @@ def view_cart(request):
     for pid, qty in cart.items():
         try:
             p = Product.objects.get(id=pid)
-            cart_items.append({"product": p, "quantity": qty, "subtotal": p.price * qty})
+            cart_items.append({
+                "product": p,
+                "quantity": qty,
+                "subtotal": p.price * qty
+            })
         except Product.DoesNotExist:
             continue
     total = sum(item["subtotal"] for item in cart_items)
-    return render(request, "shop/cart.html", {"cart_items": cart_items, "total": total})
+    return render(
+        request, "shop/cart.html",
+        {"cart_items": cart_items, "total": total}
+    )
 
 
 @require_POST
@@ -163,7 +181,11 @@ def checkout_cart_view(request):
         try:
             p = Product.objects.get(id=pid)
             items.append({
-                "price_data": {"currency": "gbp", "unit_amount": int(p.price * 100), "product_data": {"name": p.name}},
+                "price_data": {
+                    "currency": "gbp",
+                    "unit_amount": int(p.price * 100),
+                    "product_data": {"name": p.name}
+                },
                 "quantity": qty,
             })
         except Product.DoesNotExist:
@@ -172,8 +194,10 @@ def checkout_cart_view(request):
         payment_method_types=["card"],
         line_items=items,
         mode="payment",
-        success_url=request.build_absolute_uri(reverse_lazy("shop:payment_success")),
-        cancel_url=request.build_absolute_uri(reverse_lazy("shop:payment_cancel")),
+        success_url=request.build_absolute_uri(
+            reverse_lazy("shop:payment_success")),
+        cancel_url=request.build_absolute_uri(
+            reverse_lazy("shop:payment_cancel")),
     )
     return redirect(session.url, code=303)
 
@@ -181,15 +205,18 @@ def checkout_cart_view(request):
 @login_required
 def my_orders_view(request):
     profile, _ = CustomerProfile.objects.get_or_create(user=request.user)
-    orders = Order.objects.filter(customer=request.user).order_by("-created_at")
-    return render(request, "shop/my_orders.html", {"profile": profile, "orders": orders})
+    orders = Order.objects.filter(
+        customer=request.user).order_by("-created_at")
+    return render(request, "shop/my_orders.html",
+                  {"profile": profile, "orders": orders})
 
 
 @login_required
 def profile_view(request):
     profile, _ = CustomerProfile.objects.get_or_create(user=request.user)
     orders = Order.objects.filter(customer=request.user)
-    return render(request, "shop/profile.html", {"profile": profile, "orders": orders})
+    return render(request, "shop/profile.html",
+                  {"profile": profile, "orders": orders})
 
 
 @login_required
@@ -206,4 +233,6 @@ def edit_profile(request):
     else:
         uf = UserUpdateForm(instance=user)
         pf = CustomerProfileForm(instance=profile)
-    return render(request, "shop/edit_profile.html", {"user_form": uf, "profile_form": pf})
+    return render(request, "shop/edit_profile.html",
+                  {"user_form": uf, "profile_form": pf})
+

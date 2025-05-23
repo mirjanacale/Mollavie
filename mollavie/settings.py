@@ -1,11 +1,14 @@
 import os
-if os.path.exists("env.py"):
-    import env
 from pathlib import Path
 import dj_database_url
 from dotenv import load_dotenv
-load_dotenv()
 from django.urls import reverse_lazy
+
+load_dotenv()
+
+
+if os.path.exists("env.py"):
+    exec(open("env.py").read())
 
 
 #  Base directory
@@ -39,7 +42,8 @@ INSTALLED_APPS = [
 #  Cloudinary media config
 
 CLOUDINARY_STORAGE = {
-     "CLOUDINARY_URL": os.environ.get("CLOUDINARY_URL") or "cloudinary://dummy:dummy@dummy"
+     "CLOUDINARY_URL": os.environ.get("CLOUDINARY_URL") or
+     "cloudinary://dummy:dummy@dummy"
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
@@ -93,21 +97,29 @@ DATABASES = {
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://localhost',  # fallback for local dev
+        default='postgres://localhost',
         conn_max_age=600,
-        ssl_require=False  # change to True for production
+        ssl_require=False
     )
 }
 
-CSRF_TRUSTED_ORIGINS = ["https://*.codeinstitute-ide.net/", "https://*.herokuapp.com"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.codeinstitute-ide.net/",
+    "https://*.herokuapp.com",
+]
 
 
 #  Password validation
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+    {'NAME':
+     'django.contrib.auth.password_validation.'
+     'UserAttributeSimilarityValidator'},
+    {'NAME':
+     'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME':
+     'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME':
+     'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 #  Localization
@@ -131,5 +143,3 @@ LOGOUT_REDIRECT_URL = reverse_lazy('shop:home')
 LOGIN_URL = reverse_lazy('shop:login')
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-

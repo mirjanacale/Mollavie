@@ -171,30 +171,8 @@ Each sprint focused on delivering user value, iterating on feedback, and ensurin
 
 Other tools: Google Fonts, Font Awesome, Lucidchart, W3C Validators, Pep8, JSHint, Tinyjpg, Convertio.
 
-## Validators
-
-- **HTML**
-    - All main templates (`base.html`, `index.html`, `gallery.html`, `artwork_detail.html`, `cart.html`, `checkout.html`, `profile.html`, `signup.html`, `login.html`, `testimonial.html`, `my_orders.html`, `edit_profile.html`, `404.html`) were tested using the [W3C Markup Validation Service](https://validator.w3.org/).
-    - All templates pass with 0 errors and 0 warnings (Django template tags are ignored by the validator).
-    - Screenshots of validation results are included below for each template.
-
+##
 <hr>
-
-| File                  | Preview |
-|-----------------------|---------|
-| `base.html`           | ![base.html](static/images/validator/base-html.png) |
-| `index.html`          | ![index.html](static/images/validator/index-html.png) |
-| `gallery.html`        | ![gallery.html](static/images/validator/gallery-html.png) |
-| `artwork_detail.html` | ![artwork_detail.html](static/images/validator/artwork-detail-html.png) |
-| `cart.html`           | ![cart.html](static/images/validator/cart-html.png) |
-| `checkout.html`       | ![checkout.html](static/images/validator/checkout-html.png) |
-| `profile.html`        | ![profile.html](static/images/validator/profile-html.png) |
-| `signup.html`         | ![signup.html](static/images/validator/signup-html.png) |
-| `login.html`          | ![login.html](static/images/validator/login-html.png) |
-| `testimonial.html`    | ![testimonial.html](static/images/validator/testimonial-html.png) |
-| `my_orders.html`      | ![my_orders.html](static/images/validator/my-orders-html.png) |
-| `edit_profile.html`   | ![edit_profile.html](static/images/validator/edit-profile-html.png) |
-| `404.html`            | ![404.html](static/images/validator/404-html.png) |
 
 
 ##  HTML Validation Results
@@ -216,15 +194,84 @@ All HTML files were tested using the [W3C Markup Validation Service](https://val
 | Edit Profile    |  ✔️   |   0    |    0     |
 | 404 Error       |  ✔️   |   0    |    0     |
 
+
+## Validators
+
+- **HTML**
+    - All main templates (`base.html`, `index.html`, `gallery.html`, `artwork_detail.html`, `cart.html`, `checkout.html`, `profile.html`, `signup.html`, `login.html`, `testimonial.html`, `my_orders.html`, `edit_profile.html`, `404.html`) were tested using the [W3C Markup Validation Service](https://validator.w3.org/).
+    - All templates pass with 0 errors and 0 warnings (Django template tags are ignored by the validator).
+    - Screenshots of validation results are included below for each template.
+
+<hr>
+
 > All screenshots are displayed below in a container. Each image can optionally be wrapped in a link to the live Cloudinary validator result or a larger version. For example:
 
-<div style="display: flex; flex-wrap: wrap; gap: 16px;">
-  <a href="https://res.cloudinary.com/your_cloud_name/image/upload/v1234567890/validator/base-html.png" target="_blank">
-    <img src="https://res.cloudinary.com/your_cloud_name/image/upload/v1234567890/validator/base-html.png" alt="base.html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
-  </a>
-  <!-- Repeat for each template screenshot, or use a plain <img> if no link is needed -->
-</div>
 
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="https://res.cloudinary.com/dyemjyefz/image/upload/v1747858504/base.html_obtz9k.png" target="_blank">
+    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1747858504/base.html_obtz9k.png" alt="base.html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="https://res.cloudinary.com/dyemjyefz/image/upload/v1747858510/gallery.html_pzf60m.png" target="_blank">
+    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1747858510/gallery.html_pzf60m.png" alt="gallery.html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="https://res.cloudinary.com/dyemjyefz/image/upload/v1747858519/index.html_o3tic9.png" target="_blank">
+    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1747858519/index.html_o3tic9.png" alt="index.html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="https://res.cloudinary.com/dyemjyefz/image/upload/v1747863759/profileval_nkmymp.png" target="_blank">
+    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1747863759/profileval_nkmymp.png" alt="profile.html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="https://res.cloudinary.com/dyemjyefz/image/upload/v1747864414/profileval_pzsaju.png" target="_blank">
+    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1747864414/profileval_pzsaju.png" alt="profile.html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="https://res.cloudinary.com/dyemjyefz/image/upload/v1747864403/chartval_agiwe5.png" target="_blank">
+    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1747864403/chartval_agiwe5.png" alt="chart.html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="" target="_blank">
+    <img src="" alt=".html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="" target="_blank">
+    <img src="" alt=".html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a> 
+  </div> 
+
+  <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="" target="_blank">
+    <img src="" alt=".html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a>
+  </div>
+
+
+  <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="" target="_blank">
+    <img src="" alt=".html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a>
+  </div>
+
+
+
+  <hr>
 
 <hr>
 

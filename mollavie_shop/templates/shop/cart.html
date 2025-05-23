@@ -21,7 +21,15 @@
       {% for item in cart_items %}
       <tr>
         <td>
-          <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" width="60" class="me-2 rounded">
+          {% if item.product.image %}
+            <img src="{{ item.product.image.url }}"
+                 alt="{{ item.product.name }}"
+                 width="60" class="me-2 rounded">
+          {% else %}
+            <img src="{% static 'shop/img/default.jpg' %}"
+                 alt="Default product image"
+                 width="60" class="me-2 rounded">
+          {% endif %}
           {{ item.product.name }}
         </td>
         <td>£{{ item.product.price }}</td>

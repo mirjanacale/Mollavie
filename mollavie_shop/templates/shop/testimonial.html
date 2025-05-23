@@ -3,19 +3,23 @@
 {% block title %}Testimonials – Mollavie{% endblock %}
 
 {% block content %}
-<main class="container py-5" aria-label="Testimonials">
-  <h1 class="mb-4 text-center">What Our Customers Say</h1>
+<main class="container py-5" aria-labelledby="testimonial-heading">
+  <h1 id="testimonial-heading" class="mb-4 text-center">What Our Customers Say</h1>
 
   {% if testimonials %}
     <div class="row">
       {% for t in testimonials %}
         <div class="col-md-6 mb-4">
-          <div class="card h-100 shadow-sm">
+          <article class="card h-100 shadow-sm" aria-label="Customer Testimonial">
             <div class="card-body">
-              <p class="card-text">“{{ t.message }}”</p>
-              <p class="fw-bold mb-0">— {{ t.author_name }}</p>
+              <blockquote class="blockquote mb-3">
+                <p class="mb-0">“{{ t.message }}”</p>
+              </blockquote>
+              <footer class="blockquote-footer text-end">
+                {{ t.author_name }}
+              </footer>
             </div>
-          </div>
+          </article>
         </div>
       {% endfor %}
     </div>
@@ -24,7 +28,9 @@
   {% endif %}
 
   <div class="text-center mt-4">
-    <a href="{% url 'shop:gallery' %}" class="btn btn-outline-primary">Back to Gallery</a>
+    <a href="{% url 'shop:gallery' %}" class="btn btn-outline-primary" aria-label="Back to Gallery">
+      Back to Gallery
+    </a>
   </div>
 </main>
 {% endblock %}
