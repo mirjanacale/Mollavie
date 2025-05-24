@@ -1,4 +1,4 @@
-/* Reset & Base Typography */
+/* === Reset & Base Typography === */
 * {
     margin: 0;
     padding: 0;
@@ -7,118 +7,101 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #fafafa;
+    background-color:#f5faf7;
     color: #895332f2;
     line-height: 1.6;
     font-size: 16px;
     position: relative;
     overflow-x: hidden;
-    background-image: url(''); /* Update path if needed */
+    background-image: url('');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
+    scrollbar-width: thin;
+    scrollbar-color: #18a085 #fafafa;
 }
 
-
-
+/* === Links === */
 a {
     text-decoration: none;
     color: #0056b3;
 }
-
 a:hover {
     text-decoration: underline;
 }
 
-/* Header & Navigation */
+/* === Header & Navigation === */
 header {
     background-color: #0e493d;
     padding: 1rem 2rem;
     color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
-/* === Navbar Styling for Mollavie === */
-
-/* Make navbar sticky and on top */
 .navbar.sticky-top {
-  position: sticky;
-  top: 0;
-  z-index: 1030;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
 }
-
-/* Style hamburger menu */
 .navbar-toggler {
-  border: none;
-  box-shadow: none !important;
-  outline: none;
+    border: none;
+    box-shadow: none !important;
+    outline: none;
 }
-
 .navbar-toggler:focus {
-  box-shadow: none;
-  outline: none;
+    box-shadow: none;
+    outline: none;
 }
-
-/* Collapse behavior & layout fix */
 .navbar-collapse {
-  flex-grow: 1;
-  justify-content: flex-end;
-  background: none !important;
-  padding: 0 !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
+    flex-grow: 1;
+    justify-content: flex-end;
+    background: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
 }
-
-/* Main navbar link styles */
 .navbar-nav .nav-link {
-  color: white !important;
-  text-transform: uppercase;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  transition: background-color 0.2s ease;
+    color: white !important;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.2s ease;
 }
-
 .navbar-nav .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.1);
+    text-decoration: underline;
 }
-
-/* Logout button inside form styled like a nav link */
 .navbar-nav li form .nav-link {
-  display: block;
-  width: 100%;
-  text-align: left;
-  background: transparent;
-  border: none;
-  color: white;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  text-transform: uppercase;
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
 }
-
 .navbar-nav li form .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.1);
+    text-decoration: underline;
 }
 
-
-
-/* Main Layout */
+/* === Main Layout === */
 main {
     padding: 2rem;
     max-width: 1200px;
     margin: auto;
 }
 
-/* Headings */
+/* === Headings === */
 h1, h2 {
     color: #222;
     text-align: center;
     margin-bottom: 1.5rem;
 }
 
-/* === Mollavie Index Image Style === */
+/* === Index Hero Image === */
 .index-hero-img {
     width: 100%;
     max-width: 500px;
@@ -132,155 +115,213 @@ h1, h2 {
     object-fit: cover;
 }
 
-/* Gallery / Artwork Grid */
-.artwork-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-}
+/* === Card Grid & Art Cards === */
 .card {
-    height: 100%;
+    border-radius: 18px;
+    box-shadow: 0 2px 18px rgba(0,0,0,0.11);
+    background: #fffdfa;
+    padding: 1.2rem 1.1rem 1.5rem 1.1rem;
+    transition: transform 0.18s cubic-bezier(.33,1.17,.62,.99), box-shadow 0.2s;
+    min-height: 460px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 400px;
+    margin-bottom: 1.5rem;
+}
+.card:hover {
+    transform: translateY(-7px) scale(1.02);
+    box-shadow: 0 6px 36px rgba(24, 160, 133, 0.15); 
 }
 
-
-.artwork-card {
-    background-color: white;
-    padding: 1rem;
+.card-body .btn, .card-body > a.btn {
+    width: 100% !important;
+    min-width: 100% !important;
+    display: block !important;
+    font-size: 1.1em;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease;
 }
 
-.artwork-card:hover {
-    transform: translateY(-5px);
-}
 
-.artwork-card img {
-    max-width: 100%;
-    height: 250px;
+/* === Product Images for Card Grid === */
+.product-image, .card-img-top {
+    width: 100%;
+    max-width: 320px;
+    height: 180px;
     object-fit: cover;
     border-radius: 8px;
-    border: 2px solid #ddd;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
+    border: 2px solid #eee;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+    margin: 0 auto 1.2rem auto;
+    transition: transform 0.3s, border-color 0.3s;
+    background: #f8f8f8;
 }
-
-.artwork-card h3 {
-    margin-top: 0.5rem;
-    font-size: 1.1rem;
-    color: #444;
-}
-
-
-.artwork-card .button {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: #18a085;
-    color: #fff;
-    border: none;
-    transition: background 0.2s, color 0.2s;
-}
-
-.artwork-card .button:hover {
-    background-color: #117964;
-    color: #fff;
-}
-
-.artwork-card img:hover {
+.product-image:hover, .card-img-top:hover {
     transform: scale(1.03);
-    border-color: #999;
-}
-.artwork-card .image-wrapper {
-    padding: 8px;
-    background: #f9f9f9;
-    border-radius: 10px;
+    border-color: #888;
 }
 
-.product-image {
-    aspect-ratio: 3/2;
-    object-fit: cover;
+/* === Product Image for Detail Page === */
+.product-image-detail {
     width: 100%;
-    height: 250px;
+    max-width: 540px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 14px;
+    box-shadow: 0 2px 18px rgba(0,0,0,0.09);
+    background: #f8f8f8;
+}
+@media (max-width: 768px) {
+    .product-image-detail {
+        max-width: 98vw;
+    }
+}
+
+/* === Card Body & Buttons === */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+.card-body .btn {
+    width: 100% !important;
+    display: block;
+    text-align: center;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    transition: transform 0.3s, box-shadow 0.3s;
+    margin-top: auto;
+}
+.card-body form {
+    margin-top: auto;
 }
 
-.product-image:hover {
-    transform: scale(1.04);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+.card-body .btn, .card-body > a.btn {
+    width: 100% !important;
+    min-width: 100% !important;
+    display: block !important;
 }
 
 
-/* Forms */
-/* === Form Styling === */
+/* === Card Title & Text === */
+.card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #462c18;
+    margin-bottom: 0.8rem;
+    margin-top: 0;
+    text-align: center;
+}
+.card-text {
+    font-size: 1.02rem;
+    color: #684c34;
+    margin-bottom: 1.1rem;
+    margin-top: 0;
+    text-align: center;
+}
+
+/* === Sold Out Message === */
+.text-muted.mt-2 {
+    margin-top: 1.5rem !important;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* === Container for Gallery Section === */
+.container.py-4 {
+    background: rgba(255,255,255,0.82);
+    border-radius: 18px;
+    box-shadow: 0 2px 18px rgba(0,0,0,0.05);
+    padding: 1rem;
+}
+
+/* === Forms === */
 form {
-  max-width: 500px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
-
 form input[type="text"],
 form input[type="email"],
 form input[type="password"],
 form input[type="number"],
 form textarea,
 form select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
 }
-
 form button {
-  width: 100%;
-  padding: 10px 20px;
-  background-color: #0056b3;
-  border: none;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-weight: bold;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #0056b3;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
 }
-
 form button:hover {
-  background-color: #003f8a;
+    background-color: #003f8a;
 }
 
-
-/* You can safely delete this: */
-.navbar-nav li form.d-inline .nav-link {
-  display: none;
-}
-
-
-/* Footer */
+/* === Footer === */
 footer {
-  background-color: #18a085;
-  border-top: 1px solid #ddd;
-  padding: 20px 0;
+    background-color: #18a085;
+    border-top: 1px solid #ddd;
+    padding: 20px 0;
 }
-
 footer a {
-  color: #333;
-  transition: color 0.3s ease;
+    color: #333;
+    transition: color 0.3s ease;
 }
-
 footer a:hover {
-  color: #dc3545; /* Mollavie red tone */
+    color: #dc3545; /* Mollavie red tone */
 }
-
-main, header, footer, .artwork-card, form {
+main, header, footer, form {
     background: rgba(255,255,255,0.85);
     backdrop-filter: blur(0.5px);
     border-radius: 10px;
+}
+
+/* === Media Queries for Responsive Design === */
+@media (min-width: 1200px) {
+    .product-image {
+        max-width: 350px;
+        height: 300px;
+    }
+    .card {
+        max-width: 400px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1199px) {
+    .product-image {
+        max-width: 320px;
+        height: 280px;
+    }
+    .card {
+        max-width: 350px;
+    }
+}
+@media (max-width: 768px) {
+    .card {
+        min-height: 340px;
+        padding: 0.9rem;
+    }
+    .product-image, .card-img-top {
+        height: 150px;
+    }
 }
 
 

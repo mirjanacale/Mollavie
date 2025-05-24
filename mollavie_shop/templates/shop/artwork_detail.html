@@ -5,15 +5,16 @@
 
 {% block content %}
 <div class="card mx-auto" style="max-width: 600px;">
-    <img src="{{ artwork.image.url }}" alt="{{ artwork.name }}" class="card-img-top img-fluid" loading="lazy">
+    <img src="{{ artwork.image.url }}" alt="{{ artwork.name }}" class="product-image-detail img-fluid" loading="lazy">
     <div class="card-body">
-        <h1 class="card-title">{{ artwork.name }}</h1>
-        <p class="card-text">{{ artwork.description }}</p>
-        <p class="card-text"><strong>£{{ artwork.price }}</strong></p>
+    <h1 class="card-title text-center">{{ artwork.name }}</h1>
+    <p class="card-text text-center">{{ artwork.description }}</p>
+    <p class="card-text text-center"><strong>£{{ artwork.price }}</strong></p>
+    
         {% if artwork.is_available %}
             <form action="{% url 'shop:create_checkout_session' artwork.id %}" method="POST">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-success">Buy Now</button>
+                <button type="submit" class="btn btn-success w-100" style="font-size:1.2em;">Buy Now</button>
             </form>
         {% else %}
             <p class="text-muted">This piece has been sold.</p>

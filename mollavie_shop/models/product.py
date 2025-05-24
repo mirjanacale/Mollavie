@@ -10,7 +10,7 @@ class Product(models.Model):
     image = CloudinaryField(
         'image',
         transformation=[
-            {'width': 300, 'height': 250, 'crop': 'fill', 'quality': 'auto'}
+            {'width': 300, 'height': 250, 'crop': 'pad', 'quality': 'auto', 'background': 'auto'}
         ]
     )
     created_at = models.DateTimeField(auto_now_add=True)

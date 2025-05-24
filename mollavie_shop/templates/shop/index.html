@@ -12,9 +12,14 @@
     <div style="text-align: center; padding: 40px 20px;">
         <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1747743136/6231dd09dcf626bc2f758aa7_Untitled2029_qnugwk.jpg" alt="Featured Artwork" class="index-hero-img">
         <p style="max-width: 600px; margin: auto;">
-            Discover unique hand-painted artworks and personalised designs.
-            Whether you're decorating your space or looking for a one-of-a-kind gift,
-            Mollavie brings creativity to life on canvas.
+           Welcome to Mollavie – the online gallery and store of Mirjana Cale.
+
+I am an artist passionate about capturing emotion, storytelling, and vibrant color in every painting I create. Each piece is an original work, inspired by my journey, my surroundings, and the stories I want to share.
+
+Whether you’re searching for a unique artwork to brighten your home, a one-of-a-kind gift, or simply want to browse and connect with my creative process, I hope you’ll find something here that inspires you.
+
+Thank you for supporting independent art and being part of my journey!
+
         </p>
         <div style="margin-top: 30px;">
             <a href="{% url 'shop:signup' %}" class="btn btn-danger">
@@ -26,16 +31,20 @@
     <h2 class="mt-5 mb-4 text-center">Featured Artworks</h2>
     <div class="row justify-content-center">
         {% for product in featured_products %}
-            <div class="col-md-3 mb-4">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                 <div class="card h-100 shadow-sm">
                     <a href="{% url 'shop:artwork_detail' product.id %}">
                         <img src="{{ product.image.url }}" class="card-img-top product-image" alt="{{ product.name }}">
                     </a>
-                    <div class="card-body text-center d-flex flex-column">
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text">£{{ product.price }}</p>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-center">{{ product.name }}</h5>
+                        <p class="card-text text-center">£{{ product.price }}</p>
                         {% if product.is_available %}
-                            <a href="{% url 'shop:artwork_detail' product.id %}" class="btn" style="background-color: #18a085; color: #fff; border: none; width: 100%; margin-top: auto;">View</a>
+                            <a href="{% url 'shop:artwork_detail' product.id %}"
+                               class="btn btn-success w-100 mt-auto"
+                               style="font-size:1.1em; border-radius:10px;">
+                                View
+                            </a>
                         {% else %}
                             <span class="badge bg-secondary mt-auto">Sold</span>
                         {% endif %}
