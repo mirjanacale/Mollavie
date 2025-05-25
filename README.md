@@ -399,6 +399,12 @@ All user stories were manually tested and passed as expected. Screenshots and fu
 
 ---
 
+#### Error Handling
+
+Custom error pages for 400, 403, 404, and 500 errors are implemented and tested.  
+Users always see branded, helpful messages—never default Django error screens.
+
+
 ## Deployment
 This project utilizes [Heroku](http://heroku.com) , for deployment, allowing developers to build, run, and manage applications in the cloud.
 Follow these steps to deploy the ArtBlog on Heroku:
