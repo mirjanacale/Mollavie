@@ -3,7 +3,7 @@
 
 <div style="display: flex; flex-wrap: wrap; gap: 16px;">
   <a href="https://res.cloudinary.com/dyemjyefz/image/upload/v1748204215/firstimg_kugk4c.png" target="_blank">
-    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748204215/firstimg_kugk4c.png" alt="base.html validation screenshot" width="500" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748204215/firstimg_kugk4c.png" alt="base.html validation screenshot" width="800" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
   </a>
   </div>
 
@@ -342,9 +342,10 @@ Tested Mollavie on the following real devices:
 
 | Device | Result | Screenshot |
 |--------|--------|------------|
-| Samsung Galaxy A52 |  Works as expected | ![Samsung A52](https://res.cloudinary.com/dyemjyefz/image/upload/v1748204251/samsunggalaxy_sm4omc.png) |
-| iPhone 13 Mini     |  WAS                | ![iPhone 13](https://res.cloudinary.com/dyemjyefz/image/upload/v1748204238/iphone13_nff9ct.png)    |
-| iPad (3rd Gen)     |  WAS                | ![iPad](https://res.cloudinary.com/dyemjyefz/image/upload/v1748204230/ipadpro_fxdlph.png)              |
+| Samsung Galaxy A52 |  ✔️ | ![Samsung A52](https://res.cloudinary.com/dyemjyefz/image/upload/v1748204251/samsunggalaxy_sm4omc.png) |
+| iPhone 13 Mini     |  ✔️                | ![iPhone 13](https://res.cloudinary.com/dyemjyefz/image/upload/v1748204238/iphone13_nff9ct.png)    |
+| iPad (3rd Gen)     |    ✔️                | ![iPad](https://res.cloudinary.com/dyemjyefz/image/upload/v1748204230/ipadpro_fxdlph.png)              |
+
 
 ---
 
@@ -352,9 +353,9 @@ Tested Mollavie on the following real devices:
 
 | Browser        | Result | Screenshot |
 |----------------|--------|------------|
-| Google Chrome  |  WAS | ![Chrome](https://res.cloudinary.com/dyemjyefz/image/upload/v1748204202/googlecrom_kxnjzj.png) |
-| Mozilla Firefox|  WAS | ![Firefox](https://res.cloudinary.com/dyemjyefz/image/upload/v1748205103/firfox_h4vbpg.png) |
-| Microsoft Edge |  WAS | ![Edge](https://res.cloudinary.com/dyemjyefz/image/upload/v1748205117/age_sa71ia.png)     |
+| Google Chrome  |  ✔️ | ![Chrome](https://res.cloudinary.com/dyemjyefz/image/upload/v1748204202/googlecrom_kxnjzj.png) |
+| Mozilla Firefox|  ✔️ | ![Firefox](https://res.cloudinary.com/dyemjyefz/image/upload/v1748205103/firfox_h4vbpg.png) |
+| Microsoft Edge |  ✔️ | ![Edge](https://res.cloudinary.com/dyemjyefz/image/upload/v1748205117/age_sa71ia.png)     |
 
 ---
 
