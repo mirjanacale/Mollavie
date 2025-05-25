@@ -1,8 +1,45 @@
 # Mollavie
 
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="https://res.cloudinary.com/dyemjyefz/image/upload/v1748204215/firstimg_kugk4c.png" target="_blank">
+    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748204215/firstimg_kugk4c.png" alt="base.html validation screenshot" width="500" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a>
+  </div>
+
+
 A modern, accessible Django-based art shop for unique artworks.
 
 ---
+
+## Features
+
+- Browse original art and prints
+- User registration and profile management
+- Shopping cart and checkout with Stripe integration
+- Order history and profile management for users
+- Custom error pages (400, 403, 404, 500)
+- Responsive design for all devices
+- Admin panel for product and order management
+- Testimonials and customer reviews
+
+
+## Table of Contents
+
+- [Database Planning](#database-planning)
+- [Design](#design)
+- [Wireframes](#wireframes)
+- [Agile Development Process](#agile-development-process)
+- [Technologies Used](#technologies-used)
+- [Lighthouse Scores](#lighthouse-scores)
+- [HTML Validation Results](#html-validation-results)
+- [Testing](#testing)
+- [Error Handling](#error-handling)
+- [Deployment](#deployment)
+- [Future Features](#future-features)
+- [References](#references)
+- [Contributing](#contributing)
+
 
 ### Database Planning
 
@@ -182,6 +219,29 @@ Other tools: Google Fonts, Font Awesome, Lucidchart, W3C Validators, Pep8, JSHin
 <hr>
 
 
+## Lighthouse Scores
+
+Lighthouse testing was carried out using the [Chrome DevTools](https://developers.google.com/web/tools/lighthouse/).
+
+
+  <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="https://res.cloudinary.com/dyemjyefz/image/upload/v1748196665/preformace_lhc9ad.png" target="_blank">
+    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748196665/preformace_lhc9ad.png" alt="chart.html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a>
+  </div>
+
+   <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="https://res.cloudinary.com/dyemjyefz/image/upload/v1748196672/performance3_lcjmq3.png" target="_blank">
+    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748196672/performance3_lcjmq3.png" alt="chart.html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a>
+  </div>
+  
+   <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="https://res.cloudinary.com/dyemjyefz/image/upload/v1748196655/asesebiliti4_gqj9mz.png" target="_blank">
+    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748196655/asesebiliti4_gqj9mz.png" alt="chart.html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a>
+  </div>
+
 ##  HTML Validation Results
 
 All HTML files were tested using the [W3C Markup Validation Service](https://validator.w3.org/). The results are as follows:
@@ -239,6 +299,7 @@ All HTML files were tested using the [W3C Markup Validation Service](https://val
   </a>
   </div>
 
+
   <div style="display: flex; flex-wrap: wrap; gap: 16px;">
   <a href="https://res.cloudinary.com/dyemjyefz/image/upload/v1747864414/profileval_pzsaju.png" target="_blank">
     <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1747864414/profileval_pzsaju.png" alt="profile.html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
@@ -251,38 +312,17 @@ All HTML files were tested using the [W3C Markup Validation Service](https://val
   </a>
   </div>
 
-  <div style="display: flex; flex-wrap: wrap; gap: 16px;">
-  <a href="" target="_blank">
-    <img src="" alt=".html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
-  </a>
-  </div>
-
-  <div style="display: flex; flex-wrap: wrap; gap: 16px;">
-  <a href="" target="_blank">
-    <img src="" alt=".html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
-  </a> 
-  </div> 
-
-  <div style="display: flex; flex-wrap: wrap; gap: 16px;">
-  <a href="" target="_blank">
-    <img src="" alt=".html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
-  </a>
-  </div>
-
-
-  <div style="display: flex; flex-wrap: wrap; gap: 16px;">
-  <a href="" target="_blank">
-    <img src="" alt=".html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
-  </a>
-  </div>
-
-
-
-  <hr>
-
 <hr>
 
 ---
+##  CSS Validation Results
+All CSS files were tested using the [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/). The results are as follows:
+
+ <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="https://res.cloudinary.com/dyemjyefz/image/upload/v1748204304/w3ccss_xtcw3i.png" target="_blank">
+    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748204304/w3ccss_xtcw3i.png" alt="profile.html validation screenshot" width="220" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a>
+  </div>
 
 
 
@@ -292,7 +332,7 @@ All HTML files were tested using the [W3C Markup Validation Service](https://val
 - [Device Testing](#device-testing)
 - [Browser Compatibility](#browser-compatibility)
 - [Manual Testing of User Stories](#manual-testing-of-user-stories)
-- [Automated Testing](#automated-testing)
+
 
 ---
 
@@ -302,9 +342,9 @@ Tested Mollavie on the following real devices:
 
 | Device | Result | Screenshot |
 |--------|--------|------------|
-| Samsung Galaxy A52 |  Works as expected | ![Samsung A52]() |
-| iPhone 13 Mini     |  WAS                | ![iPhone 13]()    |
-| iPad (3rd Gen)     |  WAS                | ![iPad]()              |
+| Samsung Galaxy A52 |  Works as expected | ![Samsung A52](https://res.cloudinary.com/dyemjyefz/image/upload/v1748204251/samsunggalaxy_sm4omc.png) |
+| iPhone 13 Mini     |  WAS                | ![iPhone 13](https://res.cloudinary.com/dyemjyefz/image/upload/v1748204238/iphone13_nff9ct.png)    |
+| iPad (3rd Gen)     |  WAS                | ![iPad](https://res.cloudinary.com/dyemjyefz/image/upload/v1748204230/ipadpro_fxdlph.png)              |
 
 ---
 
@@ -312,9 +352,9 @@ Tested Mollavie on the following real devices:
 
 | Browser        | Result | Screenshot |
 |----------------|--------|------------|
-| Google Chrome  |  WAS | ![Chrome]() |
-| Mozilla Firefox|  WAS | ![Firefox]() |
-| Microsoft Edge |  WAS | ![Edge]()     |
+| Google Chrome  |  WAS | ![Chrome](https://res.cloudinary.com/dyemjyefz/image/upload/v1748204202/googlecrom_kxnjzj.png) |
+| Mozilla Firefox|  WAS | ![Firefox](https://res.cloudinary.com/dyemjyefz/image/upload/v1748205103/firfox_h4vbpg.png) |
+| Microsoft Edge |  WAS | ![Edge](https://res.cloudinary.com/dyemjyefz/image/upload/v1748205117/age_sa71ia.png)     |
 
 ---
 
@@ -412,7 +452,32 @@ Custom error pages for 400, 403, 404, and 500 errors are implemented and tested.
 Users always see branded, helpful messages—never default Django error screens.
 
 
+
+<details>
+<summary><strong>403 Error Page</strong></summary>
+
+- **Purpose:** Alerts users that they do not have permission to access a page or resource.
+- ![403 Error Screenshot](https://res.cloudinary.com/dyemjyefz/image/upload/v1748204278/test403_f2mxoq.png)
+</details>
+
+<details>
+<summary><strong>404 Error Page</strong></summary>
+
+- **Purpose:** Informs users when a page is not found and provides navigation options.
+- ![404 Error Screenshot](https://res.cloudinary.com/dyemjyefz/image/upload/v1748204284/test404_ahohfj.png)
+</details>
+
+<details>
+<summary><strong>500 Error Page</strong></summary>
+
+- **Purpose:** Shows when an internal server error occurs and reassures users that the issue is being addressed.
+- ![500 Error Screenshot](https://res.cloudinary.com/dyemjyefz/image/upload/v1748204291/test500_qflesv.png)
+</details>
+
+
+
 ## Deployment
+
 This project utilizes [Heroku](http://heroku.com) , for deployment, allowing developers to build, run, and manage applications in the cloud.
 Follow these steps to deploy the ArtBlog on Heroku:
 
@@ -444,17 +509,87 @@ Follow these steps to deploy the ArtBlog on Heroku:
 - Once deployed successfully, your blog will be accessible via the provided Heroku URL.
 
 
+##  Future Features
+
+- **Wishlist / Favorites:**  
+  Allow users to save artworks to a wishlist or mark items as favorites for future reference.
+
+- **Product Reviews and Ratings:**  
+  Enable customers to leave reviews and ratings on individual artworks to build trust and engagement.
+
+- **Order Tracking:**  
+  Provide real-time order status updates and tracking for customers after purchase.
+
+- **Live Chat Support:**  
+  Integrate a live chat feature to assist visitors and answer questions instantly.
+
+- **Newsletter Subscription:**  
+  Let users subscribe to a newsletter for updates on new artwork, exhibitions, or promotions.
+
+- **Admin Dashboard Enhancements:**  
+  Add advanced analytics and sales reporting tools for administrators.
+
+- **Gift Cards and Coupons:**  
+  Allow customers to purchase and redeem gift cards or apply discount coupons at checkout.
+
+- **Multi-language Support:**  
+  Offer site translations for a wider, international audience.
+
+- **Blog Section:**  
+  Share news, artist insights, and painting process stories to engage the community.
+
+- **Social Media Integration:**  
+  Display a live Instagram feed or enable sharing artworks directly to social platforms.
+
+### Lighthouse Scores
+
+Lighthouse testing was carried out using the [Chrome DevTools](https://developers.google.com/web/tools/lighthouse/).
+The results are as follows:
+
+
+##  References
+
+- **Django Documentation (v3):**  
+  [https://docs.djangoproject.com/en/3.0/](https://docs.djangoproject.com/en/3.0/)
+
+- **Bootstrap 5 Documentation:**  
+  [https://getbootstrap.com/docs/5.3/getting-started/introduction/](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+
+- **YouTube Tutorials:**  
+  - *How to Build an E-commerce Site with Django*  
+    [https://www.youtube.com/watch?v=YOUR_VIDEO_1](https://www.youtube.com/watch?v=eZlosaH3fvE&list=PL2aJidc6QnyOe-fp1m4yKHjcInCRTF53N&ab_channel=ARKPROCODER)
+  - *Django Custom Error Pages*  
+    [https://www.youtube.com/watch?v=YOUR_VIDEO_2](https://www.youtube.com/watch?v=o0XbHvKxw7Y&ab_channel=freeCodeCamp.org)
+
+- **Cloudinary for Django:**  
+  [https://cloudinary.com/documentation/django_integration](https://cloudinary.com/documentation/django_integration)
+
+  
+- **Stack Overflow:**  
+  [https://stackoverflow.com/](https://stackoverflow.com/)  
+  (Community answers and code snippets used for troubleshooting and problem-solving.)
+
+- **Perplexity AI:**  
+  [https://www.perplexity.ai/](https://www.perplexity.ai/)  
+  (Utilized for quick AI-powered research, explanations, and coding solutions.)
+
+- **Other Helpful Resources:**  
+  - [dbdiagram.io – Database Diagram Tool](https://dbdiagram.io/)
+  - [Heroku – Django Deployment Guide](https://devcenter.heroku.com/categories/django-support)
+  - [codeinstitute.net](https://codeinstitute.net/)
+
+
 
 
 ## Deployment
 
 The site was deployed to GitHub Pages. The steps to deploy are as follows:
 
-- In the [GitHub repository](), navigate to the Settings tab
+- In the [GitHub repository](https://github.com/mirjanacale/Mollavie.git), navigate to the Settings tab
 - From the source section drop-down menu, select the **Main** Branch, then click "Save".
 - The page will be automatically refreshed with a detailed ribbon display to indicate the successful deployment.
 
-The live link can be found [here]()
+The live link can be found [here](https://mollaviart-f52cde6730c6.herokuapp.com/)
 
 ### Local Deployment
 
@@ -464,7 +599,7 @@ This project can be cloned or forked in order to make a local copy on your own s
 
 You can clone the repository by following these steps:
 
-1. Go to the [GitHub repository]()
+1. Go to the [GitHub repository](https://github.com/mirjanacale/Mollavie.git)
 2. Locate the Code button above the list of files and click it
 3. Select if you prefer to clone using HTTPS, SSH, or GitHub CLI and click the copy button to copy the URL to your clipboard
 4. Open Git Bash or Terminal
@@ -493,7 +628,15 @@ You can fork this repository by using the following steps:
 
 There are no major differences between the local (Gitpod) version and the deployed (GitHub Pages) version that I'm aware of.
 
+## Acknowledgements
+
+- Inspired by artists everywhere, especially my daughter for original artworks.
+- Special thanks to Code Institute mentors and the Stack Overflow community.
+
+
 ## Contributing
-Contributions are welcome! If you have suggestions for new questions or improvements to the game, please feel free to open an issue .
+
+If you have suggestions for new features or improvements to the site, please feel free to open an issue.
+If you would like to contribute code, please fork the repository and create a pull request.
 
 
