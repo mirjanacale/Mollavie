@@ -8,7 +8,14 @@ A modern, accessible Django-based art shop for unique artworks.
 
 The database is designed to support unique products, user profiles, orders, and testimonials. See the admin page for a visual overview:
 
-![admin page](static/images/admin/admin-page.png)
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="https://res.cloudinary.com/dyemjyefz/image/upload/v1748197772/database_hux1p4.png" target="_blank">
+    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748197772/database_hux1p4.png" alt="base.html validation screenshot" width="500" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a>
+  </div>
+
+
 
 ### Design
 
