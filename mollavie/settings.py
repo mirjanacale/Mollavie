@@ -143,3 +143,7 @@ LOGOUT_REDIRECT_URL = reverse_lazy('shop:home')
 LOGIN_URL = reverse_lazy('shop:login')
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
