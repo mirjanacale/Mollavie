@@ -28,7 +28,7 @@
             <div class="card-body text-center d-flex flex-column">
               <h5 class="card-title">{{ artwork.name }}</h5>
               <p class="card-text">{{ artwork.description|truncatewords:15 }}</p>
-              <p class="card-text">£{{ artwork.price }}</p>
+              <p class="card-text">€{{ artwork.price }}</p>
 
               {% if artwork.is_available %}
                 <a href="{% url 'shop:artwork_detail' artwork.id %}"

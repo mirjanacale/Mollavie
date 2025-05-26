@@ -10,7 +10,7 @@
                 <li class="list-group-item">
                     <strong>Order #{{ order.id }}</strong> — {{ order.ordered_at|date:"F j, Y H:i" }}<br>
                     {% for item in order.items.all %}
-                        {{ item.product.name }} (£{{ item.product.price }})<br>
+                        {{ item.product.name }} (€{{ item.product.price }})<br>
                     {% endfor %}
                     <span class="badge bg-success mt-1">Paid</span>
                 </li>

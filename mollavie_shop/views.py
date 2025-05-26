@@ -60,7 +60,7 @@ def create_checkout_session(request, artwork_id):
                 payment_method_types=["card"],
                 line_items=[{
                     "price_data": {
-                        "currency": "gbp",
+                        "currency": "eur",
                         "unit_amount": int(artwork.price * 100),
                         "product_data": {"name": artwork.name},
                     },
@@ -182,7 +182,7 @@ def checkout_cart_view(request):
             p = Product.objects.get(id=pid)
             items.append({
                 "price_data": {
-                    "currency": "gbp",
+                    "currency": "eur",
                     "unit_amount": int(p.price * 100),
                     "product_data": {"name": p.name}
                 },
