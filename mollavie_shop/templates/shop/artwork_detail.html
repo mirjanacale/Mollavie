@@ -9,7 +9,7 @@
     <div class="card-body">
     <h1 class="card-title text-center">{{ artwork.name }}</h1>
     <p class="card-text text-center">{{ artwork.description }}</p>
-    <p class="card-text text-center"><strong>£{{ artwork.price }}</strong></p>
+    <p class="card-text text-center"><strong>€{{ artwork.price }}</strong></p>
     
         {% if artwork.is_available %}
             <form action="{% url 'shop:create_checkout_session' artwork.id %}" method="POST">

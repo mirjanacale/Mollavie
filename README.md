@@ -9,6 +9,7 @@
 
 
 A modern, accessible Django-based art shop for unique artworks.
+Mollavie is a Django-based e-commerce platform designed to showcase and sell original artworks and prints. The site features a user-friendly interface, responsive design, and robust functionality for both customers and administrators. Mollavie supports user registration, product browsing, shopping cart management, and secure checkout with Stripe integration.
 
 ---
 
@@ -21,7 +22,7 @@ A modern, accessible Django-based art shop for unique artworks.
 - Custom error pages (400, 403, 404, 500)
 - Responsive design for all devices
 - Admin panel for product and order management
-- Testimonials and customer reviews
+
 
 
 ## Table of Contents
@@ -85,72 +86,52 @@ Below are wireframes for each major feature/page of Mollavie. These illustrate t
 <summary><strong>Homepage</strong></summary>
 
 - **Purpose:** Welcomes users, highlights featured artworks, and provides navigation to other sections.
-- ![Homepage Wireframe](static/images/wireframes/homepage.png)
+- ![Homepage Wireframe](https://res.cloudinary.com/dyemjyefz/image/upload/v1748284763/image_8_rviaeg.png)
 </details>
 
 <details>
 <summary><strong>Gallery</strong></summary>
 
 - **Purpose:** Displays all available artworks in a grid, each with image, name, and short description.
-- ![Gallery Wireframe](static/images/wireframes/gallery.png)
+- ![Gallery Wireframe](https://res.cloudinary.com/dyemjyefz/image/upload/v1748284752/image_11_qq7ggt.png)
 </details>
 
 <details>
 <summary><strong>Product Detail</strong></summary>
 
 - **Purpose:** Shows detailed information about a selected artwork, including image, description, and purchase option.
-- ![Product Detail Wireframe](static/images/wireframes/product_detail.png)
+- ![Product Detail Wireframe](https://res.cloudinary.com/dyemjyefz/image/upload/v1748284730/image_12_ycsfla.png)
 </details>
 
 <details>
 <summary><strong>Cart</strong></summary>
 
 - **Purpose:** Lists selected artworks for purchase, allows removal, and proceeds to checkout.
-- ![Cart Wireframe](static/images/wireframes/cart.png)
+- ![Cart Wireframe](https://res.cloudinary.com/dyemjyefz/image/upload/v1748284748/image_10_c84y74.png)
 </details>
 
 <details>
 <summary><strong>Checkout</strong></summary>
 
 - **Purpose:** Collects user details and payment information to complete the purchase.
-- ![Checkout Wireframe](static/images/wireframes/checkout.png)
+- ![Checkout Wireframe](https://res.cloudinary.com/dyemjyefz/image/upload/v1748284717/image_14_o51kwg.png)
 </details>
 
 <details>
 <summary><strong>Profile</strong></summary>
 
 - **Purpose:** Allows users to view and edit their personal information and see order history.
-- ![Profile Wireframe](static/images/wireframes/profile.png)
+- ![Profile Wireframe](https://res.cloudinary.com/dyemjyefz/image/upload/v1748284705/image_15_pyazyi.png)
 </details>
 
 <details>
 <summary><strong>Signup / Login</strong></summary>
 
 - **Purpose:** Enables users to create an account or log in to access personalized features.
-- ![Signup Wireframe](static/images/wireframes/signup.png)
-- ![Login Wireframe](static/images/wireframes/login.png)
+- ![Signup Wireframe](https://res.cloudinary.com/dyemjyefz/image/upload/v1748284705/image_15_pyazyi.png)
+- ![Login Wireframe](https://res.cloudinary.com/dyemjyefz/image/upload/v1748284717/image_14_o51kwg.png)
 </details>
 
-<details>
-<summary><strong>Testimonials</strong></summary>
-
-- **Purpose:** Displays customer testimonials to build trust and credibility.
-- ![Testimonials Wireframe](static/images/wireframes/testimonials.png)
-</details>
-
-<details>
-<summary><strong>My Orders</strong></summary>
-
-- **Purpose:** Shows a list of the user's past orders with details and statuses.
-- ![My Orders Wireframe](static/images/wireframes/my_orders.png)
-</details>
-
-<details>
-<summary><strong>404 Error Page</strong></summary>
-
-- **Purpose:** Informs users when a page is not found and provides navigation options.
-- ![404 Wireframe](static/images/wireframes/404.png)
-</details>
 
 ---
 
@@ -178,7 +159,6 @@ User stories were written from the perspective of different users, including:
 
 Each story followed the standard format:
 
-> As a [type of user], I want [some goal] so that [some reason].
 
  All user stories were manually tested and tracked via GitHub issues and commits.
 
@@ -541,11 +521,6 @@ Follow these steps to deploy the ArtBlog on Heroku:
 
 - **Social Media Integration:**  
   Display a live Instagram feed or enable sharing artworks directly to social platforms.
-
-### Lighthouse Scores
-
-Lighthouse testing was carried out using the [Chrome DevTools](https://developers.google.com/web/tools/lighthouse/).
-The results are as follows:
 
 
 ##  References
