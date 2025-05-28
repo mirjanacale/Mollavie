@@ -116,6 +116,29 @@ My Instagram strategy focuses on:
 These platforms support the **brand presence and discoverability** of *Mollavie Art*, fulfilling the digital marketing objective of the Full-Stack Toolkit. They demonstrate both the potential and the practice of marketing artwork through modern platforms.
 
 
+##  Newsletter Signup
+
+To support user engagement and digital marketing goals, *Mollavie Art* includes a fully functional newsletter signup form.
+
+###  Technical Overview
+
+- **Location**: Available on every page in the footer (`base.html`)
+- **Model**: `NewsletterSubscriber` model stores unique email addresses
+- **Validation**: Prevents duplicate signups using Django's ORM
+- **Feedback**: Users receive success or info messages using Django's `messages` framework
+
+###  Why It Matters
+
+This feature demonstrates the ability to:
+
+- Collect user data for future email marketing
+- Apply form handling and model logic securely
+- Integrate consistent user experience elements (UX)
+
+The setup is ready for integration with a tool like **Mailchimp** or **SendGrid** in the future.
+
+
+
   ## Wireframes
 
 Below are wireframes for each major feature/page of Mollavie. These illustrate the layout and user flow, helping guide the design and development process. (Replace image links with your actual wireframes as needed.)

@@ -2,6 +2,7 @@
 
 from django.contrib import admin
 from .models import Category, Product, CustomerProfile, Order, OrderItem
+from .models import NewsletterSubscriber
 
 
 @admin.register(Product)
@@ -21,3 +22,4 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(CustomerProfile)
 admin.site.register(Order)
 admin.site.register(OrderItem)
+admin.site.register(NewsletterSubscriber)
