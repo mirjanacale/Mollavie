@@ -78,6 +78,44 @@ This table reflects the actual colors used in the current CSS for Mollavie.
 
 The fonts used are [Open Sans](https://fonts.google.com/specimen/Open+Sans) and [Lato](https://fonts.google.com/specimen/Lato) for a clean, modern, and readable appearance.
 
+
+##  Digital Marketing
+
+To meet the digital marketing criteria, I’ve included realistic mockups of my online artist presence on both **Facebook** and **Instagram**, showcasing how I promote and brand my *Mollavie Art* business online.
+
+###  Facebook Business Page (Mockups)
+
+I created a **Facebook business page mockup** that displays my branding, including a professional profile picture, a cover photo featuring my artwork, and recent post previews of my original paintings.
+
+- ![Facebook Page Mockup](https://res.cloudinary.com/dyemjyefz/image/upload/v1748443203/Screenshot_2025-05-28_153753_rnlvwt.png)
+- ![Facebook Desktop Mockup](https://res.cloudinary.com/dyemjyefz/image/upload/v1748442920/mockuper_zkfnns.png)
+
+These mockups simulate how I would use Facebook to:
+
+- Reach a wider audience through posts, events, or ads  
+- Cross-promote my Etsy and Instagram  
+- Build credibility as a professional artist  
+
+###  Instagram Business Account
+
+Alongside the Facebook mockups, I also maintain a real **Instagram business account** where I actively share visual stories and promote my artwork:
+
+- [Instagram: @moly.art083](https://www.instagram.com/moly.art083/)
+- [Etsy Shop](https://mollavie.etsy.com)
+
+My Instagram strategy focuses on:
+
+- High-impact visuals of original paintings  
+- Behind-the-scenes content and Reels  
+- Direct connection with art lovers and potential buyers  
+
+---
+
+###  Summary
+
+These platforms support the **brand presence and discoverability** of *Mollavie Art*, fulfilling the digital marketing objective of the Full-Stack Toolkit. They demonstrate both the potential and the practice of marketing artwork through modern platforms.
+
+
   ## Wireframes
 
 Below are wireframes for each major feature/page of Mollavie. These illustrate the layout and user flow, helping guide the design and development process. (Replace image links with your actual wireframes as needed.)
@@ -192,6 +230,7 @@ Each sprint focused on delivering user value, iterating on feedback, and ensurin
 - **Stripe**
 - **Heroku**
 - **Git & GitHub**
+- **Balsamiq** 
 
 Other tools: Google Fonts, Font Awesome, Lucidchart, W3C Validators, Pep8, JSHint, Tinyjpg, Convertio.
 
@@ -455,6 +494,12 @@ Users always see branded, helpful messages—never default Django error screens.
 - ![500 Error Screenshot](https://res.cloudinary.com/dyemjyefz/image/upload/v1748204291/test500_qflesv.png)
 </details>
 
+### JavaScript Testing
+
+The navbar behavior (auto-collapse on link click) was tested manually in:
+- Desktop (Chrome, Firefox)
+- Mobile emulator via Chrome DevTools
+- Verified that nav collapses after clicking a link
 
 
 ## Deployment
