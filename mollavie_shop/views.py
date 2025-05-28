@@ -7,6 +7,8 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.decorators.http import require_POST
+from .models import NewsletterSubscriber
+
 import stripe
 
 from .forms import SignUpForm, UserUpdateForm, CustomerProfileForm
@@ -236,3 +238,15 @@ def edit_profile(request):
     return render(request, "shop/edit_profile.html",
                   {"user_form": uf, "profile_form": pf})
 
+
+def subscribe(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        if email:
+            # Prevent duplicate subscriptions
+            if not NewsletterSubscriber.objects.filter(email=email).exists():
+                NewsletterSubscriber.objects.create(email=email)
+                messages.success(request, "Thank you for subscribing!")
+            else:
+                messages.info(request, "You're already subscribed.")
+    return redirect("shop:home")

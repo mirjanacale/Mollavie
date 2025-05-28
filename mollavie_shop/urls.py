@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, reverse_lazy
 from django.contrib.auth import views as auth_views
-
+from .views import subscribe
 from . import views
 app_name = 'shop'
 
@@ -40,4 +40,5 @@ urlpatterns = [
     path('my-orders/',    views.my_orders_view, name='my_orders'),
     path('profile/',      views.profile_view,   name='profile'),
     path('profile/edit/', views.edit_profile,  name='edit_profile'),
+    path("subscribe/", views.subscribe, name="subscribe"),
 ]

@@ -276,6 +276,25 @@ form button:hover {
     background-color: #003f8a;
 }
 
+.newsletter-form {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.newsletter-form input::placeholder {
+  color: #aaa;
+}
+
+.newsletter-form .form-control {
+  border-radius: 0.25rem 0 0 0.25rem;
+}
+
+.newsletter-form .btn {
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+
+
 /* === Footer === */
 footer {
     background-color: #18a085;
