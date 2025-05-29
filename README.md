@@ -87,8 +87,20 @@ To meet the digital marketing criteria, I’ve included realistic mockups of my 
 
 I created a **Facebook business page mockup** that displays my branding, including a professional profile picture, a cover photo featuring my artwork, and recent post previews of my original paintings.
 
-- ![Facebook Page Mockup](https://res.cloudinary.com/dyemjyefz/image/upload/v1748443203/Screenshot_2025-05-28_153753_rnlvwt.png)
-- ![Facebook Desktop Mockup](https://res.cloudinary.com/dyemjyefz/image/upload/v1748442920/mockuper_zkfnns.png)
+
+ <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="https://res.cloudinary.com/dyemjyefz/image/upload/v1748443203/Screenshot_2025-05-28_153753_rnlvwt.png" target="_blank">
+    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748443203/Screenshot_2025-05-28_153753_rnlvwt.png" alt="chart.html validation screenshot" width="300" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a>
+  </div>
+
+   <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="https://res.cloudinary.com/dyemjyefz/image/upload/v1748442920/mockuper_zkfnns.png" target="_blank">
+    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748442920/mockuper_zkfnns.png" alt="chart.html validation screenshot" width="300" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  </a>
+  </div>
+
+
 
 These mockups simulate how I would use Facebook to:
 
@@ -238,7 +250,7 @@ Each sprint focused on delivering user value, iterating on feedback, and ensurin
 
 ---
 
- A full list of issues and progress can be viewed on the [GitHub Project Board](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME/projects/X).
+ A full list of issues and progress can be viewed on the [GitHub Project Board](https://github.com/users/mirjanacale/projects/11).
 
 
  ## Technologies Used
@@ -381,6 +393,8 @@ All CSS files were tested using the [W3C CSS Validation Service](https://jigsaw.
 ##  Device Testing
 
 Tested Mollavie on the following real devices:
+
+
 
 | Device | Result | Screenshot |
 |--------|--------|------------|
