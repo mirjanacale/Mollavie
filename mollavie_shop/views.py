@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.decorators.http import require_POST
 from .models import NewsletterSubscriber
-
+from .forms import CheckoutForm
 import stripe
 
 from .forms import SignUpForm, UserUpdateForm, CustomerProfileForm
@@ -83,26 +83,19 @@ def create_checkout_session(request, artwork_id):
 
 
 def payment_success(request):
-    product_id = request.session.pop("last_product", None)
+    order_id = request.session.pop("order_id", None)
     order = None
-    if product_id:
-        product = get_object_or_404(Product, id=product_id)
-        customer = request.user if request.user.is_authenticated else None
-        order = Order.objects.create(customer=customer, paid=True)
-        OrderItem.objects.create(order=order, product=product, quantity=1)
-        product.is_available = False
-        product.save(update_fields=["is_available"])
-        messages.success(
-            request,
-            "Thank you! Your order has been placed."
-            if customer
-            else "Thank you! Your order has been placed (guest checkout)."
-        )
+    if order_id:
+        order = get_object_or_404(Order, id=order_id)
+        order.paid = True
+        order.save()
+        # Optionally clear the cart after success
+        request.session["cart"] = {}
+        messages.success(request, "Thank you! Your order has been placed.")
     else:
         messages.warning(
             request,
-            "No product recorded in session — order not saved. "
-            "If you were charged, please contact support."
+            "No order recorded in session — order not saved. If you were charged, please contact support."
         )
     return render(request, "shop/payment_success.html", {"order": order})
 
@@ -173,38 +166,6 @@ def clear_cart(request):
 
 
 @login_required
-def checkout_cart_view(request):
-    cart = request.session.get("cart", {})
-    if not cart:
-        messages.error(request, "Your cart is empty.")
-        return redirect(reverse_lazy("shop:view_cart"))
-    items = []
-    for pid, qty in cart.items():
-        try:
-            p = Product.objects.get(id=pid)
-            items.append({
-                "price_data": {
-                    "currency": "eur",
-                    "unit_amount": int(p.price * 100),
-                    "product_data": {"name": p.name}
-                },
-                "quantity": qty,
-            })
-        except Product.DoesNotExist:
-            continue
-    session = stripe.checkout.Session.create(
-        payment_method_types=["card"],
-        line_items=items,
-        mode="payment",
-        success_url=request.build_absolute_uri(
-            reverse_lazy("shop:payment_success")),
-        cancel_url=request.build_absolute_uri(
-            reverse_lazy("shop:payment_cancel")),
-    )
-    return redirect(session.url, code=303)
-
-
-@login_required
 def my_orders_view(request):
     profile, _ = CustomerProfile.objects.get_or_create(user=request.user)
     orders = Order.objects.filter(
@@ -250,3 +211,48 @@ def subscribe(request):
             else:
                 messages.info(request, "You're already subscribed.")
     return redirect("shop:home")
+
+
+@login_required
+def checkout_view(request):
+    cart = request.session.get("cart", {})
+    if not cart:
+        messages.error(request, "Your cart is empty.")
+        return redirect("shop:view_cart")
+
+    cart_items = []
+    for pid, qty in cart.items():
+        try:
+            p = Product.objects.get(id=pid)
+            cart_items.append({
+                "product": p,
+                "quantity": qty,
+                "subtotal": p.price * qty
+            })
+        except Product.DoesNotExist:
+            continue
+    total = sum(item["subtotal"] for item in cart_items)
+
+    if request.method == "POST":
+        form = CheckoutForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.customer = request.user
+            order.paid = False  # Payment will be marked after Stripe callback
+            order.save()
+            # Add items to order
+            for item in cart_items:
+                OrderItem.objects.create(
+                    order=order,
+                    product=item["product"],
+                    quantity=item["quantity"]
+                )
+            request.session["order_id"] = order.id  # store order for payment success
+            return redirect("shop:start_payment")  # We'll add this Stripe view next!
+    else:
+        form = CheckoutForm()
+    return render(request, "shop/checkout.html", {
+        "form": form,
+        "cart_items": cart_items,
+        "total": total,
+    })

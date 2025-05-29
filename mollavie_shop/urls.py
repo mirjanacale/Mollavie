@@ -23,7 +23,7 @@ urlpatterns = [
          name='artwork_detail'),
     path('buy/<int:artwork_id>/', views.create_checkout_session,
          name='create_checkout_session'),
-    path('checkout/', views.checkout_cart_view, name='checkout'),
+    path('checkout/', views.checkout_view, name='checkout'),
     path('success/', views.payment_success, name='payment_success'),
     path('cancel/', views.payment_cancel, name='payment_cancel'),
 

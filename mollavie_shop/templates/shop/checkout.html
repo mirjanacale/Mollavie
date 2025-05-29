@@ -29,18 +29,36 @@
     </tbody>
   </table>
 
-  <div class="d-flex justify-content-between align-items-center mt-4">
-    <h4>Total: €{{ total }}</h4>
-    <form method="post" action="{% url 'shop:checkout' %}">
-      {% csrf_token %}
+  <!-- --- NEW: Address & Phone Form --- -->
+  <form method="post" action="{% url 'shop:checkout' %}">
+    {% csrf_token %}
+    <div class="row mb-3">
+      <div class="col-md-6 mb-2">
+        {{ form.address.label_tag }}
+        {{ form.address }}
+        {% if form.address.errors %}
+          <div class="text-danger">{{ form.address.errors }}</div>
+        {% endif %}
+      </div>
+      <div class="col-md-6 mb-2">
+        {{ form.phone.label_tag }}
+        {{ form.phone }}
+        {% if form.phone.errors %}
+          <div class="text-danger">{{ form.phone.errors }}</div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mt-4">
+      <h4>Total: €{{ total }}</h4>
       <button type="submit" class="btn btn-success">Proceed to Payment</button>
-    </form>
-  </div>
+    </div>
+  </form>
+  <!-- --- END NEW FORM --- -->
 
   {% else %}
   <div class="text-center">
     <p>Your cart is empty.</p>
-    <a href="{% url shop:gallery %}" class="btn btn-outline-primary">Return to Gallery</a>
+    <a href="{% url 'shop:gallery' %}" class="btn btn-outline-primary">Return to Gallery</a>
   </div>
   {% endif %}
 </div>
