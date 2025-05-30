@@ -256,3 +256,34 @@ def checkout_view(request):
         "cart_items": cart_items,
         "total": total,
     })
+
+
+@login_required
+def start_payment(request):
+    order_id = request.session.get("order_id")
+    if not order_id:
+        messages.error(request, "Order not found.")
+        return redirect("shop:checkout")
+    order = get_object_or_404(Order, id=order_id, customer=request.user)
+    line_items = []
+    for item in order.items.all():
+        line_items.append({
+            "price_data": {
+                "currency": "eur",
+                "unit_amount": int(item.product.price * 100),
+                "product_data": {"name": item.product.name}
+            },
+            "quantity": item.quantity,
+        })
+    session = stripe.checkout.Session.create(
+        payment_method_types=["card"],
+        line_items=line_items,
+        mode="payment",
+        success_url=request.build_absolute_uri(
+            reverse_lazy("shop:payment_success")),
+        cancel_url=request.build_absolute_uri(
+            reverse_lazy("shop:payment_cancel")),
+    )
+    return redirect(session.url, code=303)
+
+

@@ -94,12 +94,12 @@ I created a **Facebook business page mockup** that displays my branding, includi
   </a>
   </div>
 
-   <div style="display: flex; flex-wrap: wrap; gap: 16px;">
-  <a href="https://res.cloudinary.com/dyemjyefz/image/upload/v1748442920/mockuper_zkfnns.png" target="_blank">
-    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748442920/mockuper_zkfnns.png" alt="chart.html validation screenshot" width="300" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
+  
+<div style="display: flex; flex-wrap: wrap; gap: 16px;">
+  <a href="https://res.cloudinary.com/dyemjyefz/image/upload/v1748442920/mockuper_zkfnns.jpg" target="_blank">
+    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748442920/mockuper_zkfnns.jpg" alt="Facebook page mockup screenshot" width="300" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc; margin-bottom: 8px;" />
   </a>
   </div>
-
 
 
 These mockups simulate how I would use Facebook to:
@@ -637,6 +637,25 @@ Follow these steps to deploy the ArtBlog on Heroku:
   - [codeinstitute.net](https://codeinstitute.net/)
 
 
+### Bug: "No order recorded in session — order not saved" after Stripe payment
+
+**Issue:**
+After a successful Stripe payment, the payment success page sometimes displayed the message:
+> No order recorded in session — order not saved. If you were charged, please contact support.
+
+**Diagnosis:**
+This error occurred because the session variable `order_id` was not always available on the payment success page after returning from Stripe. This happened if the session was lost or not set correctly before redirecting to Stripe Checkout.
+
+**Steps Taken to Fix:**
+- Double-checked that `order_id` is saved to `request.session` immediately after the order is created and before redirecting to payment.
+- Made sure the redirect to Stripe is only triggered after `order_id` is saved.
+- Tested the entire flow (cart → checkout → payment → success) in a single browser window to ensure session data persists through Stripe’s redirect.
+
+**Result:**
+The payment flow now consistently creates, saves, and confirms orders after successful payment, and the user sees their correct order confirmation message. Edge cases (like session loss or page refresh) now show an appropriate warning.
+
+**Note:**  
+If you experience this issue while testing, always complete the payment process in one browser tab without reloading the server between steps.
 
 
 ## Deployment
