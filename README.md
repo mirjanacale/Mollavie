@@ -459,8 +459,8 @@ All user stories were manually tested and passed as expected. Screenshots and fu
 
 ### Python (Django)
 - All Django models and views are tested using the built-in test runner:
-  - Run with: `python manage.py test`
-  - Tests cover model validation, view responses, and form handling.
+- Run with: `python manage.py test`
+- Tests cover model validation, view responses, and form handling.
 - Stripe payment integration is tested using Stripe's official test cards (e.g., `4242 4242 4242 4242`).
 - The Django admin site is verified to be accessible and functional for superusers.
 - Example test result screenshot:
@@ -539,37 +539,6 @@ The navbar behavior (auto-collapse on link click) was tested manually in:
 - Verified that nav collapses after clicking a link
 
 
-## Deployment
-
-This project utilizes [Heroku](http://heroku.com) , for deployment, allowing developers to build, run, and manage applications in the cloud.
-Follow these steps to deploy the ArtBlog on Heroku:
-
-1. Create a New Heroku App
-- Log in to Heroku or sign up for a new account.
-- Navigate to your Heroku dashboard and click on the "New" button.
-- Select "Create new app" from the dropdown menu.
-- Choose a unique name for your app, select a region (EU or USA), and click "Create app".
-2. Configure Environment Variables
-- In your app's settings, navigate to the "Config Vars" section.
-- Click on "Reveal Config Vars" and add the following variables:
-  - PORT: Set the value to 8000.
-  - Any other confidential credentials or configuration settings required by the blog.
-3. Add Buildpacks
-- In the "Buildpacks" section, add the following buildpacks in the specified order:
-  - Python
-  - Node.js
-4. Prepare Required Files
-- Ensure your project includes the following files:
-  - requirements.txt: Contains the project's Python dependencies.
-  - Procfile: Specifies the commands to run the app.
-5. Connect GitHub Repository
-
-- Under the "Deploy" tab, select "GitHub" as the deployment method.
-- Connect your GitHub repository to the Heroku app.
-- Enable automatic deploys for continuous deployment.
-6. Deploy Your App
-- Trigger a manual deployment by clicking "Deploy Branch" or wait for automatic deployments to occur.
-- Once deployed successfully, your blog will be accessible via the provided Heroku URL.
 
 
 ##  Future Features
@@ -637,7 +606,9 @@ Follow these steps to deploy the ArtBlog on Heroku:
   - [codeinstitute.net](https://codeinstitute.net/)
 
 
-### Bug: "No order recorded in session — order not saved" after Stripe payment
+### Bug Fixes
+
+- "No order recorded in session — order not saved" after Stripe payment"
 
 **Issue:**
 After a successful Stripe payment, the payment success page sometimes displayed the message:
@@ -655,7 +626,41 @@ This error occurred because the session variable `order_id` was not always avail
 The payment flow now consistently creates, saves, and confirms orders after successful payment, and the user sees their correct order confirmation message. Edge cases (like session loss or page refresh) now show an appropriate warning.
 
 **Note:**  
-If you experience this issue while testing, always complete the payment process in one browser tab without reloading the server between steps.
+If  experience this issue while testing, always complete the payment process in one browser tab without reloading the server between steps.
+
+
+## Deployment
+
+This project utilizes [Heroku](http://heroku.com) , for deployment, allowing developers to build, run, and manage applications in the cloud.
+Follow these steps to deploy the ArtBlog on Heroku:
+
+1. Create a New Heroku App
+- Log in to Heroku or sign up for a new account.
+- Navigate to your Heroku dashboard and click on the "New" button.
+- Select "Create new app" from the dropdown menu.
+- Choose a unique name for your app, select a region (EU or USA), and click "Create app".
+2. Configure Environment Variables
+- In your app's settings, navigate to the "Config Vars" section.
+- Click on "Reveal Config Vars" and add the following variables:
+  - PORT: Set the value to 8000.
+  - Any other confidential credentials or configuration settings required by the blog.
+3. Add Buildpacks
+- In the "Buildpacks" section, add the following buildpacks in the specified order:
+  - Python
+  - Node.js
+4. Prepare Required Files
+- Ensure your project includes the following files:
+  - requirements.txt: Contains the project's Python dependencies.
+  - Procfile: Specifies the commands to run the app.
+5. Connect GitHub Repository
+
+- Under the "Deploy" tab, select "GitHub" as the deployment method.
+- Connect your GitHub repository to the Heroku app.
+- Enable automatic deploys for continuous deployment.
+6. Deploy Your App
+- Trigger a manual deployment by clicking "Deploy Branch" or wait for automatic deployments to occur.
+- Once deployed successfully, your blog will be accessible via the provided Heroku URL.
+
 
 
 ## Deployment
