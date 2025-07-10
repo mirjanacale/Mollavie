@@ -6,13 +6,23 @@
 <div class="text-center mt-5">
     <h2> Thank you for your purchase!</h2>
 
-    {% if order %}
-        <p>Your order ID is <strong>#{{ order.id }}</strong></p>
-        <p>You purchased: <strong>{{ order.items.first.product.name }}</strong></p>
-        <p>Total: <strong>€{{ order.items.first.product.price }}</strong></p>
-    {% else %}
-        <p>Sorry, we couldn't find your order details.</p>
-    {% endif %}
+{% if order %}
+    <p>Your order ID is <strong>#{{ order.id }}</strong></p>
+
+    <p>You purchased:</p>
+    <ul class="list-unstyled">
+      {% for item in order.items.all %}
+        <li>
+          {{ item.quantity }} × "{{ item.product.name }}" — €{{ item.product.price|floatformat:2 }}
+        </li>
+      {% endfor %}
+    </ul>
+
+    <p>Total: <strong>€{{ total|floatformat:2 }}</strong></p>
+{% else %}
+    <p>Sorry, we couldn't find your order details.</p>
+{% endif %}
+   
 
     <a href="{% url 'shop:gallery' %}" class="btn btn-outline-primary mt-3">Continue Browsing</a>
 </div>

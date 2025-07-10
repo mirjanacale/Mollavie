@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from .product import Product
 
+
 class Order(models.Model):
     """
     Stores a single customer order, including shipping address, phone, and status.
@@ -18,6 +19,12 @@ class Order(models.Model):
     address = models.CharField(max_length=255, blank=False, help_text="Shipping address for the order.")
     phone = models.CharField(max_length=20, blank=False, help_text="Customer's phone number.")
     paid = models.BooleanField(default=False, help_text="Order payment status.")
+    stripe_session_id = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+        help_text="Stripe Checkout Session ID for verifying payment."
+    )
 
     def __str__(self):
         username = self.customer.username if self.customer else "Guest"
@@ -25,6 +32,7 @@ class Order(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
 
 class OrderItem(models.Model):
     """

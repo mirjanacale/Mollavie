@@ -84,20 +84,31 @@ def create_checkout_session(request, artwork_id):
 
 def payment_success(request):
     order_id = request.session.pop("order_id", None)
+    stripe_session_id = request.GET.get("session_id")
     order = None
+
     if order_id:
         order = get_object_or_404(Order, id=order_id)
+    elif stripe_session_id:
+        try:
+            order = Order.objects.get(stripe_session_id=stripe_session_id)
+        except Order.DoesNotExist:
+            order = None
+
+    if order:
         order.paid = True
         order.save()
-        # Optionally clear the cart after success
         request.session["cart"] = {}
         messages.success(request, "Thank you! Your order has been placed.")
+        total = sum(item.product.price * item.quantity for item in order.items.all())
     else:
         messages.warning(
             request,
             "No order recorded in session — order not saved. If you were charged, please contact support."
         )
-    return render(request, "shop/payment_success.html", {"order": order})
+        total = 0
+
+    return render(request, "shop/payment_success.html", {"order": order, "total": total})
 
 
 def payment_cancel(request):
@@ -280,10 +291,13 @@ def start_payment(request):
         line_items=line_items,
         mode="payment",
         success_url=request.build_absolute_uri(
-            reverse_lazy("shop:payment_success")),
+            reverse_lazy("shop:payment_success") +
+            "?session_id={CHECKOUT_SESSION_ID}"),
         cancel_url=request.build_absolute_uri(
             reverse_lazy("shop:payment_cancel")),
     )
-    return redirect(session.url, code=303)
+    order.stripe_session_id = session.id
+    order.save()
 
+    return redirect(session.url, code=303)
 
