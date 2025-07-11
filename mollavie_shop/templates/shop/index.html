@@ -48,6 +48,11 @@
                                style="font-size:1.1em; border-radius:10px;">
                                 View
                             </a>
+                            <a href="{% url 'shop:add_to_cart' product.id %}"
+                               class="btn btn-outline-primary w-100 mt-2"
+                               style="font-size:1.1em; border-radius:10px;">
+                                Add to Cart
+                            </a>
                         {% else %}
                             <span class="badge bg-secondary mt-auto">Sold</span>
                         {% endif %}
