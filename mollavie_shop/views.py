@@ -51,34 +51,61 @@ def artwork_detail_view(request, artwork_id):
     artwork = get_object_or_404(Product, id=artwork_id)
     return render(request, "shop/artwork_detail.html", {"artwork": artwork})
 
-
+@login_required
 def create_checkout_session(request, artwork_id):
     artwork = get_object_or_404(Product, id=artwork_id)
+
+    #  1) Check availability!
+    if not artwork.is_available:
+        messages.error(request, "Sorry, this artwork has already been sold.")
+        return redirect("shop:gallery")
+
     if request.method == "POST":
-        request.session["last_product"] = artwork.id
-        try:
-            checkout_session = stripe.checkout.Session.create(
-                mode="payment",
-                payment_method_types=["card"],
-                line_items=[{
-                    "price_data": {
-                        "currency": "eur",
-                        "unit_amount": int(artwork.price * 100),
-                        "product_data": {"name": artwork.name},
-                    },
-                    "quantity": 1,
-                }],
-                success_url=request.build_absolute_uri(
-                    reverse_lazy("shop:payment_success") +
-                    "?session_id={CHECKOUT_SESSION_ID}"
-                ),
-                cancel_url=request.build_absolute_uri(
-                    reverse_lazy("shop:payment_cancel")),
-            )
-            return redirect(checkout_session.url, code=303)
-        except Exception as e:
-            messages.error(request, f"Stripe error: {e}")
-            return redirect("shop:artwork_detail", artwork_id=artwork_id)
+        #  2) Lock it immediately
+        artwork.is_available = False
+        artwork.save()
+
+        #  3) Create an Order and OrderItem
+        order = Order.objects.create(
+            customer=request.user,
+            address="Direct purchase - N/A",
+            phone="N/A",
+            paid=False
+        )
+        OrderItem.objects.create(
+            order=order,
+            product=artwork,
+            quantity=1
+        )
+
+        #  4) Create the Stripe session
+        checkout_session = stripe.checkout.Session.create(
+            mode="payment",
+            payment_method_types=["card"],
+            line_items=[{
+                "price_data": {
+                    "currency": "eur",
+                    "unit_amount": int(artwork.price * 100),
+                    "product_data": {"name": artwork.name},
+                },
+                "quantity": 1,
+            }],
+            success_url=request.build_absolute_uri(
+                reverse_lazy("shop:payment_success") +
+                "?session_id={CHECKOUT_SESSION_ID}"
+            ),
+            cancel_url=request.build_absolute_uri(
+                reverse_lazy("shop:payment_cancel")
+            ),
+        )
+
+        #  5) Store the session ID on your Order
+        order.stripe_session_id = checkout_session.id
+        order.save()
+        request.session["order_id"] = order.id
+
+        return redirect(checkout_session.url, code=303)
+
     return redirect("shop:artwork_detail", artwork_id=artwork_id)
 
 
@@ -98,6 +125,11 @@ def payment_success(request):
     if order:
         order.paid = True
         order.save()
+
+        for item in order.items.all():
+            item.product.is_available = False
+            item.product.save()
+
         request.session["cart"] = {}
         messages.success(request, "Thank you! Your order has been placed.")
         total = sum(item.product.price * item.quantity for item in order.items.all())
@@ -112,6 +144,14 @@ def payment_success(request):
 
 
 def payment_cancel(request):
+    order_id = request.session.get("order_id")
+    if order_id:
+        order = get_object_or_404(Order, id=order_id)
+        if not order.paid:  # If they never paid
+            for item in order.items.all():
+                item.product.is_available = True
+                item.product.save()
+    messages.info(request, "Payment was cancelled. The item is back in the store.")
     return render(request, "shop/payment_cancel.html")
 
 
