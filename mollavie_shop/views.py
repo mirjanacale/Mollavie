@@ -156,6 +156,12 @@ def payment_cancel(request):
 
 
 def add_to_cart(request, artwork_id):
+    product = get_object_or_404(Product, id=artwork_id)
+
+    if not product.is_available:
+        messages.error(request, "Sorry, this artwork is sold out and can't be added.")
+        return redirect(reverse_lazy("shop:gallery"))
+
     cart = request.session.get("cart", {})
     key = str(artwork_id)
     if key in cart:

@@ -30,13 +30,13 @@
               <p class="card-text">{{ artwork.description|truncatewords:15 }}</p>
               <p class="card-text">€{{ artwork.price }}</p>
 
-              {% if artwork.is_available %}
+            
                 <a href="{% url 'shop:artwork_detail' artwork.id %}"
                    class="btn btn-success w-100 mt-2 mt-auto"
                    style="font-size:1em; padding: 0.5rem 1rem;">
                   View
                 </a>
-
+               {% if artwork.is_available %}
                 <form method="post"
                       action="{% url 'shop:add_to_cart' artwork.id %}"
                       class="d-inline mt-2">
