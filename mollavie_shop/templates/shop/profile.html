@@ -13,6 +13,11 @@
         <p><strong>Phone:</strong> {{ profile.phone }}</p>
         <p><strong>Address:</strong> {{ profile.address }}</p>
         <a href="{% url 'shop:edit_profile' %}" class="btn btn-outline-primary mb-3">Edit Profile</a>
+        <a href="{% url 'shop:delete_profile' %}" 
+        class="btn btn-outline-danger mb-3"
+        onclick="return confirm('Are you sure you want to delete your account?');">
+        Delete My Account
+        </a>
 
         <!-- Order History Section -->
         {% if orders %}

@@ -1,0 +1,16 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Delete Profile - Mollavie{% endblock %}
+
+{% block content %}
+<div class="container py-5 text-center">
+  <h2>Are you sure you want to delete your account?</h2>
+  <p>This action cannot be undone. All your data will be removed.</p>
+  
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, delete my account</button>
+    <a href="{% url 'shop:profile' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

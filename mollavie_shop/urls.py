@@ -42,4 +42,5 @@ urlpatterns = [
     path('profile/edit/', views.edit_profile,  name='edit_profile'),
     path("subscribe/", views.subscribe, name="subscribe"),
     path('start-payment/', views.start_payment, name='start_payment'),
+    path('profile/delete/', views.delete_profile, name='delete_profile'),
 ]

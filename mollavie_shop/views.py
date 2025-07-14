@@ -36,6 +36,7 @@ def signup_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
+            messages.success(request, "Your account was created successfully! Welcome to Mollavie.")
             return redirect("shop:home")
     else:
         form = SignUpForm()
@@ -50,6 +51,7 @@ def gallery_view(request):
 def artwork_detail_view(request, artwork_id):
     artwork = get_object_or_404(Product, id=artwork_id)
     return render(request, "shop/artwork_detail.html", {"artwork": artwork})
+
 
 @login_required
 def create_checkout_session(request, artwork_id):
@@ -255,6 +257,16 @@ def edit_profile(request):
         pf = CustomerProfileForm(instance=profile)
     return render(request, "shop/edit_profile.html",
                   {"user_form": uf, "profile_form": pf})
+
+@login_required
+def delete_profile(request):
+    if request.method == "POST":
+        user = request.user
+        user.delete()
+        messages.success(request, "Your account has been deleted.")
+        return redirect("shop:home")
+    return render(request, "shop/delete_profile_confirm.html")
+
 
 
 def subscribe(request):
