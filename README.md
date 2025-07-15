@@ -606,7 +606,7 @@ The navbar behavior (auto-collapse on link click) was tested manually in:
   - [codeinstitute.net](https://codeinstitute.net/)
 
 
-### Bug Fixes
+## Bug Fixes
 
 - "No order recorded in session — order not saved" after Stripe payment"
 
@@ -627,6 +627,19 @@ The payment flow now consistently creates, saves, and confirms orders after succ
 
 **Note:**  
 If  experience this issue while testing, always complete the payment process in one browser tab without reloading the server between steps.
+
+## Bug Fix: User Deletion 500 Error
+
+**Issue:**  
+Previously, deleting a `User` from the admin panel caused a `500 Internal Server Error` because the `customer` field in the `Order` model did not allow `NULL` values. This caused database integrity errors when related user data was removed.
+
+**Solution:**  
+Updated the `Order` model’s `customer` field:
+- Changed `on_delete` to `SET_NULL` and set `null=True` so when a `User` is deleted, any related `Order` records will have their `customer` field set to `NULL` instead of breaking.
+- Created and applied a new migration to update the database schema.
+
+**Outcome:**  
+The admin panel now safely handles deleting users without causing errors, and related `Order` records remain intact but are linked to `NULL` instead of a deleted user.
 
 
 ## Deployment
