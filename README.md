@@ -628,18 +628,88 @@ The payment flow now consistently creates, saves, and confirms orders after succ
 **Note:**  
 If  experience this issue while testing, always complete the payment process in one browser tab without reloading the server between steps.
 
-## Bug Fix: User Deletion 500 Error
 
-**Issue:**  
-Previously, deleting a `User` from the admin panel caused a `500 Internal Server Error` because the `customer` field in the `Order` model did not allow `NULL` values. This caused database integrity errors when related user data was removed.
+## **Shopping Cart and Stripe Payment Flow**
 
-**Solution:**  
-Updated the `Order` model’s `customer` field:
-- Changed `on_delete` to `SET_NULL` and set `null=True` so when a `User` is deleted, any related `Order` records will have their `customer` field set to `NULL` instead of breaking.
-- Created and applied a new migration to update the database schema.
+**Test Case 1: Add to Cart**
+-  Added single and multiple products to the cart.
+-  Verified that quantities update correctly.
+-  Removed items and confirmed cart updates dynamically.
 
-**Outcome:**  
-The admin panel now safely handles deleting users without causing errors, and related `Order` records remain intact but are linked to `NULL` instead of a deleted user.
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034036/signals.py_bbrfcj.png" alt="signals.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034041/urls.pymollavie_jg4jis.png" alt="urls.pymollavie" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034045/urla.pyshop_ejw8uj.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" /> 
+
+**Test Case 2: Checkout**
+-  Proceeded to checkout with valid user.
+-  Filled in shipping address and phone number fields.
+-  Verified form validation for required fields.
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034036/signals.py_bbrfcj.png" alt="signals.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034041/urls.pymollavie_jg4jis.png" alt="urls.pymollavie" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034045/urla.pyshop_ejw8uj.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+**Test Case 3: Stripe Payment**
+-  Confirmed Stripe test mode is active.
+-  Used valid test card numbers (e.g., `4242 4242 4242 4242`) to simulate payment.
+-  Confirmed redirection to Stripe Checkout page.
+-  Completed payment successfully.
+-  Verified that the order status updates to “Paid.”
+-  Verified that the `stripe_session_id` is stored for payment tracking.
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034036/signals.py_bbrfcj.png" alt="signals.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034041/urls.pymollavie_jg4jis.png" alt="urls.pymollavie" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034045/urla.pyshop_ejw8uj.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+**Test Case 4: Payment Failure**
+-  Tested an invalid card number to confirm payment fails gracefully.
+-  Verified that a clear error message is shown to the user.
+-  Confirmed no order is marked as paid if payment fails.
+
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034036/signals.py_bbrfcj.png" alt="signals.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034041/urls.pymollavie_jg4jis.png" alt="urls.pymollavie" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034045/urla.pyshop_ejw8uj.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />-
+
+
+
+##  Known Bug: Old Project Users in Admin
+
+In my **Mollavie** project, the Django admin dashboard shows some user accounts that do not belong to this project.  
+These users were created for my **previous project**, which uses the **same database**.
+
+They still appear because Django’s `auth_user` table is shared when you reuse the same database.  
+I did **not** delete these old users because my previous project is still **submitted for assessment** and must stay complete for grading.  
+Deleting them could break the integrity of the old project’s data.
+
+---
+
+###  Solution
+
+- I fixed my `Order.customer_id` field to be **nullable**, so any **new Mollavie users** can be deleted properly from the admin site.
+- I verified that orders do not block user deletion.
+- This ensures Mollavie’s user management works correctly and safely.
+
+---
+
+## Future Improvement
+
+In the future, I will use **separate databases** for each Django project to keep data isolated and avoid this overlap.
+
+---
+
+** Note for assessors:**  
+This issue does **not affect** the core functionality of Mollavie’s authentication or order system.
+
+
+
 
 
 ## Deployment
