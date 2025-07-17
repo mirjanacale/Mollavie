@@ -13,6 +13,33 @@ Mollavie is a Django-based e-commerce platform designed to showcase and sell ori
 
 ---
 
+## Business Model
+
+Mollavie is a business-to-consumer  e-commerce platform that sells original artwork directly to customers. The business model is built around providing a curated experience for art collectors and design-focused buyers.
+
+### Revenue Stream
+- Direct sale of original art pieces through Stripe payment integration.
+- No commission or marketplace model — Mollavie sells only Mirjana’s artwork.
+
+### Target Audience
+- Art collectors
+- Home and office decorators
+- Online art enthusiasts
+- Interior designers looking for bespoke pieces
+
+### Unique Selling Points (USP)
+- Hand-crafted, original artwork
+- Direct connection with the artist (no middleman)
+- High-quality visual previews of paintings
+- Simple checkout and delivery system
+
+### Future Expansion (optional ideas)
+- Commission-based custom orders
+- User reviews and artwork ratings
+- Artist spotlight section or blog
+
+
+
 ## Features
 
 - Browse original art and prints
@@ -26,7 +53,8 @@ Mollavie is a Django-based e-commerce platform designed to showcase and sell ori
 
 
 ## Table of Contents
-
+- [Business Model](#business-model)
+- [Features](#features)
 - [Database Planning](#database-planning)
 - [Design](#design)
 - [Wireframes](#wireframes)
@@ -40,6 +68,9 @@ Mollavie is a Django-based e-commerce platform designed to showcase and sell ori
 - [Future Features](#future-features)
 - [References](#references)
 - [Contributing](#contributing)
+- [Acknowledgements](#acknowledgements)
+- [Bug Fixes](#bug-fixes)
+
 
 
 ### Database Planning
@@ -251,6 +282,15 @@ Each sprint focused on delivering user value, iterating on feedback, and ensurin
 ---
 
  A full list of issues and progress can be viewed on the [GitHub Project Board](https://github.com/users/mirjanacale/projects/11).
+
+
+## CRUD Functionality
+
+- **Create**: Users can register and create an account.
+- **Read**: Users can view products and their profile information.
+- **Update**: Users can edit their profile and cart.
+- **Delete**: Users can delete their account from the profile page via a “Delete My Account” button.
+
 
 
  ## Technologies Used
@@ -708,10 +748,21 @@ In the future, I will use **separate databases** for each Django project to keep
 ** Note for assessors:**  
 This issue does **not affect** the core functionality of Mollavie’s authentication or order system.
 
+##  Bug: Cannot Delete Users with Related Profiles
+
+### Problem
+While testing the Django admin panel, attempting to delete a user triggered a 500 `IntegrityError`. The error indicated that the user could not be deleted due to a foreign key constraint from the `CustomerProfile` (or `UserProfile`) model.
+
+### Root Cause
+The `CustomerProfile` model had a foreign key to Django’s built-in `User` model with `on_delete=models.CASCADE`. This configuration prevents a user from being deleted if a profile still references them, unless the profile is deleted first.
+
+### Fix
+The `user` field in the profile model was updated to:
+```python
+user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
 
 
-
-
+```
 ## Deployment
 
 This project utilizes [Heroku](http://heroku.com) , for deployment, allowing developers to build, run, and manage applications in the cloud.
@@ -745,14 +796,15 @@ Follow these steps to deploy the ArtBlog on Heroku:
 - Once deployed successfully, your blog will be accessible via the provided Heroku URL.
 
 
-
 ## Deployment
 
-The site was deployed to GitHub Pages. The steps to deploy are as follows:
+The site was deployed to Heroku. The steps to deploy are as follows:
 
-- In the [GitHub repository](https://github.com/mirjanacale/Mollavie.git), navigate to the Settings tab
-- From the source section drop-down menu, select the **Main** Branch, then click "Save".
-- The page will be automatically refreshed with a detailed ribbon display to indicate the successful deployment.
+- In the [GitHub repository](https://github.com/mirjanacale/Mollavie.git), navigate to the Settings tab.
+- From the source section drop-down menu in Heroku, connect to your GitHub repository and select the **main** branch.
+- Enable automatic deploys or click "Deploy Branch" to trigger a manual deployment.
+- Ensure your project contains a `Procfile`, `requirements.txt`, and all necessary environment variables in the Heroku dashboard (under Settings > Config Vars).
+- Add the Heroku Postgres add-on from the Resources tab.
 
 The live link can be found [here](https://mollaviart-f52cde6730c6.herokuapp.com/)
 
@@ -770,28 +822,23 @@ You can clone the repository by following these steps:
 4. Open Git Bash or Terminal
 5. Change the current working directory to the one where you want the cloned directory
 6. In your IDE Terminal, type the following command to clone my repository:
-   - `git clone https://github.com/mirjanacale/.git`
+   - `git clone https://github.com/mirjanacale/Mollavie.git`
 7. Press Enter to create your local clone.
-
-Alternatively, if using Gitpod, you can click below to create your own workspace using this repository.
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/mirjanacale//)
-
-Please note that in order to directly open the project in Gitpod, you need to have the browser extension installed.
-A tutorial on how to do that can be found [here](https://www.gitpod.io/docs/configure/user-settings/browser-extension).
 
 #### Forking
 
 By forking the GitHub Repository, we make a copy of the original repository on our GitHub account to view and/or make changes without affecting the original owner's repository.
 You can fork this repository by using the following steps:
 
-1. Log in to GitHub and locate the [GitHub Repository](https://mirjanacale.github.io//)
+1. Log in to GitHub and locate the [GitHub Repository](https://github.com/mirjanacale/Mollavie.git)
 2. At the top of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
 3. Once clicked, you should now have a copy of the original repository in your own GitHub account!
 
+
+
 ### Local VS Deployment
 
-There are no major differences between the local (Gitpod) version and the deployed (GitHub Pages) version that I'm aware of.
+There are no major differences between the local (Gitpod) version and the deployed (Heroku) version that I'm aware of.
 
 ## Acknowledgements
 
