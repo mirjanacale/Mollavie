@@ -38,6 +38,11 @@ Mollavie is a business-to-consumer  e-commerce platform that sells original artw
 - User reviews and artwork ratings
 - Artist spotlight section or blog
 
+## Role-Based Authorization
+
+- Only superusers (admin) can access the Django admin interface to manage products, orders, and users.
+- Regular users are restricted from accessing admin-only features or pages.
+- Direct URL access to restricted views (e.g., /admin/) redirects unauthorized users.
 
 
 ## Features
@@ -720,11 +725,11 @@ If  experience this issue while testing, always complete the payment process in 
 -  Verified that quantities update correctly.
 -  Removed items and confirmed cart updates dynamically.
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752770579/Screenshot_2025-05-19_133627_ujzbai.png" alt="signals.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752770579/Screenshot_2025-05-19_133627_ujzbai.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752770568/Screenshot_2025-05-18_001257_koq8eo.png" alt="urls.pymollavie" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752770568/Screenshot_2025-05-18_001257_koq8eo.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752771552/Screenshot_2025-07-16_202337_prlotc.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" /> 
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752771552/Screenshot_2025-07-16_202337_prlotc.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" /> 
 
 **Test Case 2: Checkout**
 -  Proceeded to checkout with valid user.
@@ -761,7 +766,7 @@ If  experience this issue while testing, always complete the payment process in 
 
 <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752791333/Screenshot_2025-07-17_232326_tab8ef.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-<img src="" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+<img src="" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 
 
