@@ -38,6 +38,8 @@ def signup_view(request):
             login(request, user)
             messages.success(request, "Your account was created successfully! Welcome to Mollavie.")
             return redirect("shop:home")
+        else:
+            messages.error(request, "Please correct the errors below.")
     else:
         form = SignUpForm()
     return render(request, "shop/signup.html", {"form": form})
@@ -258,6 +260,7 @@ def edit_profile(request):
     return render(request, "shop/edit_profile.html",
                   {"user_form": uf, "profile_form": pf})
 
+
 @login_required
 def delete_profile(request):
     if request.method == "POST":
@@ -266,7 +269,6 @@ def delete_profile(request):
         messages.success(request, "Your account has been deleted.")
         return redirect("shop:home")
     return render(request, "shop/delete_profile_confirm.html")
-
 
 
 def subscribe(request):

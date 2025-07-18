@@ -648,6 +648,34 @@ The navbar behavior (auto-collapse on link click) was tested manually in:
 
 ## Bug Fixes
 
+
+### Registration Form Submitted Without Feedback
+
+**Issue:**  
+Users were previously not shown any confirmation or error messages after submitting the registration form. This caused confusion—especially when form validation failed (e.g., mismatched passwords or missing fields)—because the page silently reloaded without any indication of success or failure.
+
+**Fix:**  
+Integrated Django’s `messages` framework into the `signup.html` template. This ensures that users now receive immediate visual feedback about the result of their registration attempt.
+
+**Code Update:**  
+The following block was added to `signup.html` above the form:
+
+```django
+{% if messages %}
+  <div class="mb-3">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+```
+
+
+## No order recorded in session — order not saved after Stripe payment
+
 - "No order recorded in session — order not saved" after Stripe payment"
 
 **Issue:**
@@ -668,6 +696,9 @@ The payment flow now consistently creates, saves, and confirms orders after succ
 **Note:**  
 If  experience this issue while testing, always complete the payment process in one browser tab without reloading the server between steps.
 
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752771535/Screenshot_2025-07-16_201850_ahem6x.png" alt="signals.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+
 
 ## **Shopping Cart and Stripe Payment Flow**
 
@@ -676,22 +707,22 @@ If  experience this issue while testing, always complete the payment process in 
 -  Verified that quantities update correctly.
 -  Removed items and confirmed cart updates dynamically.
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034036/signals.py_bbrfcj.png" alt="signals.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752770579/Screenshot_2025-05-19_133627_ujzbai.png" alt="signals.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034041/urls.pymollavie_jg4jis.png" alt="urls.pymollavie" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752770568/Screenshot_2025-05-18_001257_koq8eo.png" alt="urls.pymollavie" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034045/urla.pyshop_ejw8uj.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" /> 
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752771552/Screenshot_2025-07-16_202337_prlotc.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" /> 
 
 **Test Case 2: Checkout**
 -  Proceeded to checkout with valid user.
 -  Filled in shipping address and phone number fields.
 -  Verified form validation for required fields.
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034036/signals.py_bbrfcj.png" alt="signals.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+<img src="" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034041/urls.pymollavie_jg4jis.png" alt="urls.pymollavie" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+<img src="" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034045/urla.pyshop_ejw8uj.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752791333/Screenshot_2025-07-17_232326_tab8ef.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 **Test Case 3: Stripe Payment**
 -  Confirmed Stripe test mode is active.
@@ -701,22 +732,23 @@ If  experience this issue while testing, always complete the payment process in 
 -  Verified that the order status updates to “Paid.”
 -  Verified that the `stripe_session_id` is stored for payment tracking.
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034036/signals.py_bbrfcj.png" alt="signals.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752771455/Screenshot_2025-07-13_144412_unn3me.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034041/urls.pymollavie_jg4jis.png" alt="urls.pymollavie" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752771454/Screenshot_2025-07-13_144238_zzpmyu.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034045/urla.pyshop_ejw8uj.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752771461/Screenshot_2025-07-13_151021_u6sw5f.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
 **Test Case 4: Payment Failure**
 -  Tested an invalid card number to confirm payment fails gracefully.
 -  Verified that a clear error message is shown to the user.
 -  Confirmed no order is marked as paid if payment fails.
 
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034036/signals.py_bbrfcj.png" alt="signals.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752794041/Screenshot_2025-05-19_141832_o5375n.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034041/urls.pymollavie_jg4jis.png" alt="urls.pymollavie" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752791333/Screenshot_2025-07-17_232326_tab8ef.png" alt="urls.pymollavie" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1748034045/urla.pyshop_ejw8uj.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />-
+<img src="" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />-
 
 
 
@@ -763,38 +795,6 @@ user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=Tr
 
 
 ```
-## Deployment
-
-This project utilizes [Heroku](http://heroku.com) , for deployment, allowing developers to build, run, and manage applications in the cloud.
-Follow these steps to deploy the ArtBlog on Heroku:
-
-1. Create a New Heroku App
-- Log in to Heroku or sign up for a new account.
-- Navigate to your Heroku dashboard and click on the "New" button.
-- Select "Create new app" from the dropdown menu.
-- Choose a unique name for your app, select a region (EU or USA), and click "Create app".
-2. Configure Environment Variables
-- In your app's settings, navigate to the "Config Vars" section.
-- Click on "Reveal Config Vars" and add the following variables:
-  - PORT: Set the value to 8000.
-  - Any other confidential credentials or configuration settings required by the blog.
-3. Add Buildpacks
-- In the "Buildpacks" section, add the following buildpacks in the specified order:
-  - Python
-  - Node.js
-4. Prepare Required Files
-- Ensure your project includes the following files:
-  - requirements.txt: Contains the project's Python dependencies.
-  - Procfile: Specifies the commands to run the app.
-5. Connect GitHub Repository
-
-- Under the "Deploy" tab, select "GitHub" as the deployment method.
-- Connect your GitHub repository to the Heroku app.
-- Enable automatic deploys for continuous deployment.
-6. Deploy Your App
-- Trigger a manual deployment by clicking "Deploy Branch" or wait for automatic deployments to occur.
-- Once deployed successfully, your blog will be accessible via the provided Heroku URL.
-
 
 ## Deployment
 
