@@ -649,29 +649,40 @@ The navbar behavior (auto-collapse on link click) was tested manually in:
 ## Bug Fixes
 
 
-### Registration Form Submitted Without Feedback
+##  Registration Bug Fix and Testing
 
-**Issue:**  
-Users were previously not shown any confirmation or error messages after submitting the registration form. This caused confusion—especially when form validation failed (e.g., mismatched passwords or missing fields)—because the page silently reloaded without any indication of success or failure.
+###  Bug Fixed:
+The original issue prevented users from registering due to missing success messages and validation feedback. This has been fixed by:
+- Updating the `signup_view` to handle form errors
+- Adding Django's `messages` framework for user feedback
+- Including visible success/error messages on the frontend
 
-**Fix:**  
-Integrated Django’s `messages` framework into the `signup.html` template. This ensures that users now receive immediate visual feedback about the result of their registration attempt.
+###  Manual Testing Scenarios:
 
-**Code Update:**  
-The following block was added to `signup.html` above the form:
+| Test Description                      | Input                                   | Expected Outcome                                               | Status |
+|--------------------------------------|-----------------------------------------|----------------------------------------------------------------|--------|
+| Valid registration                   | Unique username, email, matching strong passwords | User created and redirected to homepage, success message shown | yes     |
+| Duplicate username/email             | Existing username or email              | Error message: "User already exists"                           | yes     |
+| Weak/mismatched passwords            | `12345` and `password2` mismatch        | Errors about password strength or mismatch                    | yes     |
+| Empty form submission                | No input                                | Validation errors shown under each field                       | yes     |
+| Success message visibility (UX)      | Valid registration                      | Bootstrap alert shows: "Account created successfully"          | yes     |
 
-```django
-{% if messages %}
-  <div class="mb-3">
-    {% for message in messages %}
-      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-        {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    {% endfor %}
-  </div>
-{% endif %}
-```
+All registration scenarios have now been addressed and confirmed to work as expected.
+
+## Registration Bug Fix Screenshots
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752864078/Screenshot_2025-07-18_190246_p0jmf8.png" alt="Registration Success" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752864072/Screenshot_2025-07-18_190421_w5owdt.png" alt="Registration " width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752864098/Screenshot_2025-07-18_174305_xauqhh.png" alt="registration" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752864090/Screenshot_2025-07-18_190011_bdmh02.png" alt="registration" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752864129/Screenshot_2025-07-18_172628_e9tf6t.png" alt="registration" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+
+
 
 
 ## No order recorded in session — order not saved after Stripe payment
@@ -696,7 +707,9 @@ The payment flow now consistently creates, saves, and confirms orders after succ
 **Note:**  
 If  experience this issue while testing, always complete the payment process in one browser tab without reloading the server between steps.
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752771535/Screenshot_2025-07-16_201850_ahem6x.png" alt="signals.py" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+## Screenshots for No order recorded in session  
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752771535/Screenshot_2025-07-16_201850_ahem6x.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 
 
@@ -746,9 +759,9 @@ If  experience this issue while testing, always complete the payment process in 
 
 <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752794041/Screenshot_2025-05-19_141832_o5375n.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752791333/Screenshot_2025-07-17_232326_tab8ef.png" alt="urls.pymollavie" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752791333/Screenshot_2025-07-17_232326_tab8ef.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-<img src="" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />-
+<img src="" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 
 
@@ -782,6 +795,7 @@ This issue does **not affect** the core functionality of Mollavie’s authentica
 
 ##  Bug: Cannot Delete Users with Related Profiles
 
+
 ### Problem
 While testing the Django admin panel, attempting to delete a user triggered a 500 `IntegrityError`. The error indicated that the user could not be deleted due to a foreign key constraint from the `CustomerProfile` (or `UserProfile`) model.
 
@@ -795,6 +809,49 @@ user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=Tr
 
 
 ```
+##  CRUD Functionality Fix (Create, Read, Update, Delete)
+
+###  Original Issue
+The assessor noted that CRUD (especially Delete) functionality was missing or incomplete in the user interface. Users were not able to delete their own accounts or related data from the frontend, and there was no evidence of role-based deletion in the app.
+
+###  Fix Implemented
+
+#### Delete (User Account)
+- A **"Delete My Account"** button was added to the user **Profile page** (`profile.html`).
+- This links to a secure view (`delete_profile`) which allows logged-in users to permanently delete their own accounts after confirmation.
+- When a user is deleted:
+  - Their associated `CustomerProfile` and `Order` records are also deleted thanks to Django's `on_delete=models.CASCADE`.
+
+#### Delete (Admin Panel)
+- Admins can delete users and products through the Django admin interface (`/admin/`).
+- Orders associated with deleted users are removed automatically.
+
+#### Read & Update
+- **Read**: Users can view their account info, orders, and artwork details from their profile and gallery.
+- **Update**: Users can update their profile information (name, email, address) via a form on the **Edit Profile** page.
+
+###  Testing Performed
+
+| Operation | Description                                 | Access Role        | Status |
+|-----------|---------------------------------------------|--------------------|--------|
+| Create    | Register user, place order                  | User               | yes    |
+| Read      | View profile, order history, product details| User, Admin        | yes     |
+| Update    | Edit profile info                           | User               | yes     |
+| Delete    | Delete own account                          | User               | yes     |
+| Delete    | Remove users/products via admin             | Admin              | yes     |
+
+All CRUD operations are now functional from both the user interface and the admin backend.
+
+
+
+
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752771545/Screenshot_2025-07-16_202020_gz5g3p.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752771492/Screenshot_2025-07-15_164115_ehuoyj.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752791772/Screenshot_2025-07-16_193811_jblyip.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
 
 ## Deployment
 
