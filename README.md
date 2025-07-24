@@ -714,7 +714,7 @@ If  experience this issue while testing, always complete the payment process in 
 
 ## Screenshots for No order recorded in session  
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752771535/Screenshot_2025-07-16_201850_ahem6x.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752794041/Screenshot_2025-05-19_141832_o5375n.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 
 
@@ -729,18 +729,20 @@ If  experience this issue while testing, always complete the payment process in 
 
 <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752770568/Screenshot_2025-05-18_001257_koq8eo.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752771552/Screenshot_2025-07-16_202337_prlotc.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" /> 
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752771552/Screenshot_2025-07-16_202337_prlotc.png" alt=" test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" /> 
 
 **Test Case 2: Checkout**
 -  Proceeded to checkout with valid user.
 -  Filled in shipping address and phone number fields.
 -  Verified form validation for required fields.
 
-<img src="" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-<img src="" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752771499/Screenshot_2025-07-15_164346_lnfczj.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752791333/Screenshot_2025-07-17_232326_tab8ef.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752864129/Screenshot_2025-07-18_172628_e9tf6t.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
 
 **Test Case 3: Stripe Payment**
 -  Confirmed Stripe test mode is active.
@@ -764,9 +766,8 @@ If  experience this issue while testing, always complete the payment process in 
 
 <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752794041/Screenshot_2025-05-19_141832_o5375n.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752791333/Screenshot_2025-07-17_232326_tab8ef.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752770568/Screenshot_2025-05-18_001257_koq8eo.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-<img src="" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 
 
@@ -900,7 +901,7 @@ You can fork this repository by using the following steps:
 
 ### Local VS Deployment
 
-There are no major differences between the local (Gitpod) version and the deployed (Heroku) version that I'm aware of.
+There are no major differences between the local   version and the deployed (Heroku) version that I'm aware of.
 
 ## Acknowledgements
 
