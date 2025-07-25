@@ -69,13 +69,12 @@ Mollavie is a business-to-consumer  e-commerce platform that sells original artw
 - [HTML Validation Results](#html-validation-results)
 - [Testing](#testing)
 - [Error Handling](#error-handling)
-- [Deployment](#deployment)
 - [Future Features](#future-features)
 - [References](#references)
+- [Bug Fixes](#bug-fixes)
+- [Deployment](#deployment)
 - [Contributing](#contributing)
 - [Acknowledgements](#acknowledgements)
-- [Bug Fixes](#bug-fixes)
-
 
 
 ### Database Planning
@@ -311,6 +310,14 @@ Each sprint focused on delivering user value, iterating on feedback, and ensurin
 - **Heroku**
 - **Git & GitHub**
 - **Balsamiq** 
+- **Visual Studio Code**
+- **PostgreSQL**
+- **Django Debug Toolbar**
+- **Django Allauth** 
+- **Django Crispy Forms** 
+- **Django Messages Framework** 
+- **Django Stripe** 
+- **WhyNoPadlock.com** 
 
 Other tools: Google Fonts, Font Awesome, Lucidchart, W3C Validators, Pep8, JSHint, Tinyjpg, Convertio.
 
@@ -857,6 +864,22 @@ All CRUD operations are now functional from both the user interface and the admi
 <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752771492/Screenshot_2025-07-15_164115_ehuoyj.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752791772/Screenshot_2025-07-16_193811_jblyip.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+
+##  Security Testing: Mixed Content Validation
+
+To ensure Mollavie was fully secure and compliant with modern browser standards, I tested the live deployed site using [WhyNoPadlock.com](https://www.whynopadlock.com) – a third-party SSL and content security validator.
+
+###  Why I Used WhyNoPadlock.com
+
+Although my Heroku deployment included HTTPS by default, browsers may still show security warnings if any **resources (images, stylesheets, scripts)** are loaded using `http://` instead of `https://`. This is known as **mixed content**, and can:
+- Decrease user trust
+
+### screenshots of WhyNoPadlock.com results:
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1753469442/Screenshot_2025-07-25_193731_l6iint.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1753469449/Screenshot_2025-07-25_193455_bljgef.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 
 ## Deployment
