@@ -13,9 +13,8 @@
         <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
           <div class="card h-100 shadow-sm d-flex flex-column">
             <a href="{% url 'shop:artwork_detail' artwork.id %}">
-               Replace http:// with https:// 
               {% if artwork.image %}
-                <img src="{{ artwork.image.url |replace:'http://','https://'}}"
+                <img src="{{ artwork.image.url }}"
                      class="product-image"
                      alt="{{ artwork.name }}"
                      loading="lazy">
@@ -25,7 +24,6 @@
                      alt="Default placeholder image"
                      loading="lazy">
               {% endif %}
-              
             </a>
             <div class="card-body text-center d-flex flex-column">
               <h5 class="card-title">{{ artwork.name }}</h5>
