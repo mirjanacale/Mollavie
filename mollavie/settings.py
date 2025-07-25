@@ -45,6 +45,7 @@ CLOUDINARY_STORAGE = {
      "CLOUDINARY_URL": os.environ.get("CLOUDINARY_URL") or
      "cloudinary://dummy:dummy@dummy"
 }
+CLOUDINARY_STORAGE['SECURE'] = True
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Stripe config
