@@ -22,7 +22,11 @@ if os.path.exists(env_path):
 #  Secret Key
 SECRET_KEY = os.environ.get('SECRET_KEY') or 'temporary-insecure-key'
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = ["*", "localhost", "127.0.0.1", ".herokuapp.com"]
+ALLOWED_HOSTS = [
+    "mollaviart-f52cde6730c6.herokuapp.com",
+    "localhost",
+    "127.0.0.1",
+]
 
 
 #  Installed apps
@@ -45,7 +49,7 @@ CLOUDINARY_STORAGE = {
      "CLOUDINARY_URL": os.environ.get("CLOUDINARY_URL") or
      "cloudinary://dummy:dummy@dummy"
 }
-CLOUDINARY_STORAGE['SECURE'] = True
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Stripe config
