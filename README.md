@@ -873,7 +873,7 @@ To ensure Mollavie was fully secure and compliant with modern browser standards,
 ###  Why I Used WhyNoPadlock.com
 
 Although my Heroku deployment included HTTPS by default, browsers may still show security warnings if any **resources (images, stylesheets, scripts)** are loaded using `http://` instead of `https://`. This is known as **mixed content**, and can:
-- Decrease user trust
+ Decrease user trust.
 
 ### screenshots of WhyNoPadlock.com results:
 
