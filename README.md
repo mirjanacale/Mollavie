@@ -880,6 +880,15 @@ Although my Heroku deployment included HTTPS by default, browsers may still show
 <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1753469442/Screenshot_2025-07-25_193731_l6iint.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1753469449/Screenshot_2025-07-25_193455_bljgef.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+   
+
+
+### Fixed: CustomerProfile admin 500 error
+
+- **Issue:** Attempting to access `CustomerProfile` in Django admin caused a 500 server error if a profile had no linked user.  
+- **Cause:** The admin list tried to display `user` directly, which was `NULL` for some profiles.  
+- **Fix:** Replaced `user` in `list_display` with a custom `get_username` method that safely handles null values.  
+- **Test:** Verified in Django admin that Customer Profiles now display correctly, even if no user is linked.
 
 
 ## Deployment
