@@ -19,7 +19,16 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
 
-admin.site.register(CustomerProfile)
+@admin.register(CustomerProfile)
+class CustomerProfileAdmin(admin.ModelAdmin):
+    list_display = ("id", "get_username", "phone", "address")
+    search_fields = ("user__username", "phone")
+
+    def get_username(self, obj):
+        return obj.user.username if obj.user else "No User"
+    get_username.short_description = "Username"
+
+
 admin.site.register(Order)
 admin.site.register(OrderItem)
 admin.site.register(NewsletterSubscriber)
