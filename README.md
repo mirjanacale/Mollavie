@@ -889,6 +889,24 @@ Although my Heroku deployment included HTTPS by default, browsers may still show
 - **Cause:** The admin list tried to display `user` directly, which was `NULL` for some profiles.  
 - **Fix:** Replaced `user` in `list_display` with a custom `get_username` method that safely handles null values.  
 - **Test:** Verified in Django admin that Customer Profiles now display correctly, even if no user is linked.
+ 
+### Deployment Fixes on Heroku
+
+During deployment to Heroku, I encountered two major issues:
+
+1. **`django-extensions` not found**  
+   - **Cause:** `django-extensions` was installed locally but not included in `requirements.txt`.  
+   - **Fix:** Added `django-extensions==4.1` to `requirements.txt` and ensured it was only used in development (`DEBUG=True`).
+
+2. **PostgreSQL adapter error (`psycopg2`)**  
+   - **Cause:** Heroku was building with Python 3.13, and `psycopg2` is not fully compatible with this version. This caused the build to fail with `_PyInterpreterState_Get` errors.  
+   - **Fix:**  
+     - Removed `psycopg2` from `requirements.txt` and replaced it with `psycopg2-binary==2.9.10`.  
+     - Added a `runtime.txt` file to pin the Python version to `python-3.12.7`, which is stable for Django apps on Heroku.  
+
+3. **Result:**  
+   - The app now builds and deploys successfully on Heroku.  
+   - Verified that static files are collected, the admin panel is functional, and the `CustomerProfile` section no longer throws a 500 error.  
 
 
 ## Deployment
