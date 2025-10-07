@@ -146,15 +146,23 @@ def payment_success(request):
 
     return render(request, "shop/payment_success.html", {"order": order, "total": total})
 
+# mollavie_shop/views.py
+
 
 def payment_cancel(request):
     order_id = request.session.get("order_id")
     if order_id:
         order = get_object_or_404(Order, id=order_id)
-        if not order.paid:  # If they never paid
+        if not order.paid:
+            # return stock to the product(s)
             for item in order.items.all():
                 item.product.is_available = True
                 item.product.save()
+            # delete unpaid order and its items
+            order.delete()
+        # clean up session
+        request.session.pop("order_id", None)
+
     messages.info(request, "Payment was cancelled. The item is back in the store.")
     return render(request, "shop/payment_cancel.html")
 
