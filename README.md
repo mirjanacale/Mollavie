@@ -775,6 +775,17 @@ If  experience this issue while testing, always complete the payment process in 
 
 <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752770568/Screenshot_2025-05-18_001257_koq8eo.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
+## Features / Payment Flow
+
+Orders are now created **only after a successful payment** is confirmed by Stripe.  
+When a user cancels or abandons the payment process, the unpaid order is **automatically removed**, and the product is **returned to stock**.
+
+## Testing
+
+1. **Add a product to your cart** and proceed to payment.  
+2. **Cancel or close** the Stripe payment page before completing the transaction.  
+3. Confirm that the product is **available again** and **no new order** appears in “My Orders.”  
+4. Complete a payment successfully and verify that the order appears with the status **“Paid.”**
 
 
 
