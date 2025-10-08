@@ -789,6 +789,16 @@ When a user cancels or abandons the payment process, the unpaid order is **autom
 
 
 
+ ### Category Filter
+Users can browse artworks by category. Each artwork can be assigned to a category (e.g., Abstract, Landscape) via the admin panel.
+
+#### Testing
+1. Add categories in the admin panel.
+2. Assign artworks to categories.
+3. Visit `/gallery/` and use the buttons to filter by category.
+4. Confirm that only artworks from the selected category are displayed.
+  
+
 ##  Known Bug: Old Project Users in Admin
 
 In my **Mollavie** project, the Django admin dashboard shows some user accounts that do not belong to this project.  

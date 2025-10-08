@@ -14,6 +14,7 @@ import stripe
 from .forms import SignUpForm, UserUpdateForm, CustomerProfileForm
 from .models import Product, CustomerProfile
 from .models.order import Order, OrderItem
+from .models import Product, Category
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -46,8 +47,22 @@ def signup_view(request):
 
 
 def gallery_view(request):
-    artworks = Product.objects.all().order_by("-created_at")
-    return render(request, "shop/gallery.html", {"artworks": artworks})
+    # Get selected category ID from the query string (e.g., ?category=2)
+    category_id = request.GET.get("category")
+
+    # If a category is selected, filter artworks by that category
+    if category_id:
+        artworks = Product.objects.filter(is_available=True, category_id=category_id).order_by("-created_at")
+    else:
+        artworks = Product.objects.filter(is_available=True).order_by("-created_at")
+
+    # Get all categories for the filter buttons
+    categories = Category.objects.all().order_by("name")
+
+    return render(request, "shop/gallery.html", {
+        "artworks": artworks,
+        "categories": categories,
+    })
 
 
 def artwork_detail_view(request, artwork_id):

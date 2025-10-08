@@ -6,33 +6,46 @@
 {% block content %}
 <div class="container py-4">
   <h1 class="mb-4 text-center">Gallery</h1>
-
+<div class="category-filter mb-4 text-center">
+  <h5 class="mb-3">Browse by Category</h5>
+  {% for cat in categories %}
+    <a href="?category={{ cat.id }}" class="btn btn-outline-dark m-1">
+      {{ cat.name }}
+    </a>
+  {% empty %}
+    <p class="text-muted">No categories available yet.</p>
+  {% endfor %}
+</div>
   {% if artworks %}
     <div class="row">
       {% for artwork in artworks %}
         <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
           <div class="card h-100 shadow-sm d-flex flex-column">
             <a href="{% url 'shop:artwork_detail' artwork.id %}">
-             {% if artwork.image %}
-  {% with artwork.image.url as image_url %}
-    {% if image_url|slice:":5" == "http:" %}
-      <img src="https:{{ image_url|slice:'5:' }}"
-           class="product-image"
-           alt="{{ artwork.name }}"
-           loading="lazy">
-    {% else %}
-      <img src="{{ image_url }}"
-           class="product-image"
-           alt="{{ artwork.name }}"
-           loading="lazy">
-    {% endif %}
-  {% endwith %}
-{% else %}
-  <img src="{% static 'shop/img/default.jpg' %}"
-       class="product-image"
-       alt="Default placeholder image"
-       loading="lazy">
-{% endif %}
+
+          <!-- 🖼 FIXED IMAGE SECTION -->
+              {% if artwork.image %}
+                {% with artwork.image.url as image_url %}
+                  {% if image_url|slice:":7" == "/image/" %}
+
+                    <img src="https://res.cloudinary.com/dyemjyefz{{ image_url }}"
+                         class="product-image"
+                         alt="{{ artwork.name }}"
+                         loading="lazy">
+                  {% else %}
+                    <img src="{{ image_url }}"
+                         class="product-image"
+                         alt="{{ artwork.name }}"
+                         loading="lazy">
+                  {% endif %}
+                {% endwith %}
+              {% else %}
+                <img src="{% static 'shop/img/default.jpg' %}"
+                     class="product-image"
+                     alt="Default placeholder image"
+                     loading="lazy">
+              {% endif %}
+              <!-- 🖼 END FIX -->
 
             </a>
             <div class="card-body text-center d-flex flex-column">
