@@ -787,9 +787,27 @@ When a user cancels or abandons the payment process, the unpaid order is **autom
 3. Confirm that the product is **available again** and **no new order** appears in “My Orders.”  
 4. Complete a payment successfully and verify that the order appears with the status **“Paid.”**
 
+###  Stripe Payment Flow Test
+
+**Test Objective:**  
+Verify that successful payments trigger order creation and confirmation in the database.
+
+**Test Steps:**
+1. Added a product ("Rosalina") to cart and completed Stripe test checkout.
+2. After payment, the app redirected to the success page showing:  
+   *“Thank you! Your order has been placed.”*  
+   with Order ID `#78`.
+3. Verified in Django shell that the order was saved:
+
+   ```python
+   python manage.py shell
+   >>> from orders.models import Order
+   >>> Order.objects.latest('created_at')
+   <Order: Order #78 by Mirjana1>
 
 
- ### Category Filter
+ ## Category Filter
+
 Users can browse artworks by category. Each artwork can be assigned to a category (e.g., Abstract, Landscape) via the admin panel.
 
 #### Testing
@@ -797,7 +815,8 @@ Users can browse artworks by category. Each artwork can be assigned to a categor
 2. Assign artworks to categories.
 3. Visit `/gallery/` and use the buttons to filter by category.
 4. Confirm that only artworks from the selected category are displayed.
-  
+
+  <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1759956199/category_ldhqdm.png" alt="category" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 ##  Known Bug: Old Project Users in Admin
 

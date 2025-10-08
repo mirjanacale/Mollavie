@@ -22,8 +22,6 @@
         <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
           <div class="card h-100 shadow-sm d-flex flex-column">
             <a href="{% url 'shop:artwork_detail' artwork.id %}">
-
-          <!-- 🖼 FIXED IMAGE SECTION -->
               {% if artwork.image %}
                 {% with artwork.image.url as image_url %}
                   {% if image_url|slice:":7" == "/image/" %}
@@ -45,7 +43,6 @@
                      alt="Default placeholder image"
                      loading="lazy">
               {% endif %}
-              <!-- 🖼 END FIX -->
 
             </a>
             <div class="card-body text-center d-flex flex-column">
