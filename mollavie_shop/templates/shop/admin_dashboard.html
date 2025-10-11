@@ -1,0 +1,63 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <h1 class="mb-4 text-center">Admin Dashboard</h1>
+
+  <h2>Products</h2>
+  <table class="table table-striped">
+    <thead><tr><th>Name</th><th>Price</th><th>Category</th><th>Actions</th></tr></thead>
+    <tbody>
+    {% for product in products %}
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>€{{ product.price }}</td>
+        <td>{{ product.category.name }}</td>
+        <td>
+          <a href="{% url 'shop:admin_edit_product' product.id %}" class="btn btn-sm btn-secondary">Edit</a>
+          <a href="{% url 'shop:admin_delete_product' product.id %}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="4">No products.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <h3>Add Product</h3>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ product_form.as_p }}
+    <button type="submit" name="add_product" class="btn btn-primary">Add Product</button>
+  </form>
+
+  <hr>
+
+  <h2>Categories</h2>
+  <table class="table table-striped">
+    <thead><tr><th>Name</th><th>Actions</th></tr></thead>
+    <tbody>
+    {% for category in categories %}
+      <tr>
+        <td>{{ category.name }}</td>
+        <td>
+          <a href="{% url 'shop:admin_edit_category' category.id %}" class="btn btn-sm btn-secondary">Edit</a>
+          <a href="{% url 'shop:admin_delete_category' category.id %}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+      </tr>
+    {% empty %}
+      <tr><td>No categories.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <h3>Add Category</h3>
+  <form method="post">
+    {% csrf_token %}
+    {{ category_form.as_p }}
+    <button type="submit" name="add_category" class="btn btn-primary">Add Category</button>
+  </form>
+</div>
+{% endblock %}

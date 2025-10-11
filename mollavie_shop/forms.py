@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from django import forms
 from .models.order import Order
 from .models.customer import CustomerProfile  
-
+from .models.product import Product
+from .models.category import Category
 
 # ---- Signup Form ----
 class SignUpForm(UserCreationForm):
@@ -47,4 +48,15 @@ class CheckoutForm(forms.ModelForm):
                 'placeholder': 'Enter your phone number',
                 'class': 'form-control'
             }),
-        }        
+        }
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['name', 'description', 'price', 'image', 'category', 'is_available']
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name', 'slug']
+         
+             

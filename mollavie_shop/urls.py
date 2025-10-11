@@ -3,6 +3,7 @@ from django.urls import path, reverse_lazy
 from django.contrib.auth import views as auth_views
 from .views import subscribe
 from . import views
+from django.urls import path
 app_name = 'shop'
 
 urlpatterns = [
@@ -43,4 +44,11 @@ urlpatterns = [
     path("subscribe/", views.subscribe, name="subscribe"),
     path('start-payment/', views.start_payment, name='start_payment'),
     path('profile/delete/', views.delete_profile, name='delete_profile'),
+
+    # … existing routes
+    path('admin-dashboard/', views.admin_dashboard, name='admin_dashboard'),
+    path('admin/product/<int:product_id>/delete/', views.admin_delete_product, name='admin_delete_product'),
+    path('admin/category/<int:category_id>/delete/', views.admin_delete_category, name='admin_delete_category'),
+    path('admin/product/<int:product_id>/edit/', views.admin_edit_product, name='admin_edit_product'),
+    path('admin/category/<int:category_id>/edit/', views.admin_edit_category, name='admin_edit_category'),
 ]

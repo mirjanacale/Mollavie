@@ -15,6 +15,10 @@ from .forms import SignUpForm, UserUpdateForm, CustomerProfileForm
 from .models import Product, CustomerProfile
 from .models.order import Order, OrderItem
 from .models import Product, Category
+from django.contrib.auth.decorators import user_passes_test
+from .forms import ProductForm, CategoryForm
+from .models.category import Category
+from .models.product import Product
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -383,4 +387,74 @@ def start_payment(request):
     order.save()
 
     return redirect(session.url, code=303)
+
+@user_passes_test(lambda u: u.is_staff)
+def admin_dashboard(request):
+    """Display products & categories with add forms."""
+    products = Product.objects.all().order_by('-created_at')
+    categories = Category.objects.all().order_by('name')
+
+    if request.method == 'POST':
+        if 'add_product' in request.POST:
+            p_form = ProductForm(request.POST, request.FILES)
+            if p_form.is_valid():
+                p_form.save()
+                messages.success(request, "Product created successfully.")
+                return redirect('shop:admin_dashboard')
+        elif 'add_category' in request.POST:
+            c_form = CategoryForm(request.POST)
+            if c_form.is_valid():
+                c_form.save()
+                messages.success(request, "Category created successfully.")
+                return redirect('shop:admin_dashboard')
+    else:
+        p_form = ProductForm()
+        c_form = CategoryForm()
+
+    return render(request, 'shop/admin_dashboard.html', {
+        'products': products,
+        'categories': categories,
+        'product_form': p_form,
+        'category_form': c_form,
+    })
+
+@user_passes_test(lambda u: u.is_staff)
+def admin_delete_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    product.delete()
+    messages.success(request, "Product deleted.")
+    return redirect('shop:admin_dashboard')
+
+@user_passes_test(lambda u: u.is_staff)
+def admin_delete_category(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+    category.delete()
+    messages.success(request, "Category deleted.")
+    return redirect('shop:admin_dashboard')
+
+@user_passes_test(lambda u: u.is_staff)
+def admin_edit_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Product updated.")
+            return redirect('shop:admin_dashboard')
+    else:
+        form = ProductForm(instance=product)
+    return render(request, 'shop/admin_edit_product.html', {'form': form, 'product': product})
+
+@user_passes_test(lambda u: u.is_staff)
+def admin_edit_category(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Category updated.")
+            return redirect('shop:admin_dashboard')
+    else:
+        form = CategoryForm(instance=category)
+    return render(request, 'shop/admin_edit_category.html', {'form': form, 'category': category})
 

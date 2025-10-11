@@ -658,7 +658,7 @@ The navbar behavior (auto-collapse on link click) was tested manually in:
   - [codeinstitute.net](https://codeinstitute.net/)
 
 
-## Bug Fixes
+# Bug Fixes
 
 
 ##  Registration Bug Fix and Testing
@@ -947,6 +947,34 @@ During deployment to Heroku, I encountered two major issues:
 3. **Result:**  
    - The app now builds and deploys successfully on Heroku.  
    - Verified that static files are collected, the admin panel is functional, and the `CustomerProfile` section no longer throws a 500 error.  
+
+
+### Admin Dashboard (Staff Only)
+
+A `/admin-dashboard/` route allows staff users to manage products and categories from a front-end interface.  
+Only users with `is_staff=True` can access this dashboard.  
+Features include:
+
+- Viewing all products and categories in tables
+- Adding new products and categories via forms
+- Editing existing products and categories
+- Deleting products and categories
+
+This feature demonstrates custom CRUD functionality beyond the course walkthrough projects and meets the role‑based authorization requirements.
+
+#### Staff-Only Dashboard Testing
+
+1. Log in as a staff user (either by running `python manage.py createsuperuser` or by marking an existing user as staff via the Django admin).
+2. Navigate to `/admin-dashboard/`.  
+3. Confirm that:
+   - Products and categories are listed correctly.
+   - You can add a new product or category via the forms.
+   - The edit and delete buttons work (items update or are removed).
+4. Log in as a regular user and attempt to access `/admin-dashboard/` — you should receive a “Forbidden” or redirect response.
+
+A superuser (`is_superuser=True`) has full control of the site, including all models via Django admin.  
+A staff user (`is_staff=True` but `is_superuser=False`) can access the custom `/admin-dashboard/` interface but does not have unrestricted access to every model.  
+The dashboard ensures only authorized staff can perform CRUD on products and categories.
 
 
 ## Deployment
