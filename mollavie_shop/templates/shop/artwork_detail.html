@@ -5,7 +5,28 @@
 
 {% block content %}
 <div class="card mx-auto shadow" style="max-width: 750px;">
-    <img src="{{ artwork.image.url }}" alt="{{ artwork.name }}" class="img-fluid rounded-top" loading="lazy">
+    {% if artwork.image %}
+  {% with artwork.image.url as image_url %}
+    {% if image_url|slice:":7" == "/image/" %}
+      <img src="https://res.cloudinary.com/dyemjyefz{{ image_url }}"
+           class="img-fluid rounded-top"
+           alt="{{ artwork.name }}"
+           loading="lazy">
+    {% else %}
+      <img src="{{ image_url }}"
+           class="img-fluid rounded-top"
+           alt="{{ artwork.name }}"
+           loading="lazy">
+    {% endif %}
+  {% endwith %}
+{% else %}
+  <img src="{% static 'shop/img/default.jpg' %}"
+       class="img-fluid rounded-top"
+       alt="Default placeholder image"
+       loading="lazy">
+{% endif %}
+
+
     <div class="card-body">
         <h1 class="card-title text-center mb-3">{{ artwork.name }}</h1>
         <div class="card-text text-start" style="font-size: 1.1rem;">

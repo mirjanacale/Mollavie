@@ -37,7 +37,28 @@
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                 <div class="card h-100 shadow-sm">
                     <a href="{% url 'shop:artwork_detail' product.id %}">
-                        <img src="{{ product.image.url }}" class="card-img-top product-image" alt="{{ product.name }}">
+                        
+                        {% if product.image %}
+  {% with product.image.url as image_url %}
+    {% if image_url|slice:":7" == "/image/" %}
+      <img src="https://res.cloudinary.com/dyemjyefz{{ image_url }}"
+           class="card-img-top product-image"
+           alt="{{ product.name }}"
+           loading="lazy">
+    {% else %}
+      <img src="{{ image_url }}"
+           class="card-img-top product-image"
+           alt="{{ product.name }}"
+           loading="lazy">
+    {% endif %}
+  {% endwith %}
+{% else %}
+  <img src="{% static 'shop/img/default.jpg' %}"
+       class="card-img-top product-image"
+       alt="Default placeholder image"
+       loading="lazy">
+{% endif %}
+
                     </a>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title text-center">{{ product.name }}</h5>
