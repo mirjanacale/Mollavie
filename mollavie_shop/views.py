@@ -53,12 +53,10 @@ def signup_view(request):
 def gallery_view(request):
     # Get selected category ID from the query string (e.g., ?category=2)
     category_id = request.GET.get("category")
-
-    # If a category is selected, filter artworks by that category
     if category_id:
-        artworks = Product.objects.filter(is_available=True, category_id=category_id).order_by("-created_at")
+        artworks = Product.objects.filter(category_id=category_id).order_by("-created_at")
     else:
-        artworks = Product.objects.filter(is_available=True).order_by("-created_at")
+        artworks = Product.objects.all().order_by("-created_at")
 
     # Get all categories for the filter buttons
     categories = Category.objects.all().order_by("name")
@@ -388,6 +386,7 @@ def start_payment(request):
 
     return redirect(session.url, code=303)
 
+
 @user_passes_test(lambda u: u.is_staff)
 def admin_dashboard(request):
     """Display products & categories with add forms."""
@@ -418,6 +417,7 @@ def admin_dashboard(request):
         'category_form': c_form,
     })
 
+
 @user_passes_test(lambda u: u.is_staff)
 def admin_delete_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
@@ -425,12 +425,14 @@ def admin_delete_product(request, product_id):
     messages.success(request, "Product deleted.")
     return redirect('shop:admin_dashboard')
 
+
 @user_passes_test(lambda u: u.is_staff)
 def admin_delete_category(request, category_id):
     category = get_object_or_404(Category, id=category_id)
     category.delete()
     messages.success(request, "Category deleted.")
     return redirect('shop:admin_dashboard')
+
 
 @user_passes_test(lambda u: u.is_staff)
 def admin_edit_product(request, product_id):
@@ -444,6 +446,7 @@ def admin_edit_product(request, product_id):
     else:
         form = ProductForm(instance=product)
     return render(request, 'shop/admin_edit_product.html', {'form': form, 'product': product})
+
 
 @user_passes_test(lambda u: u.is_staff)
 def admin_edit_category(request, category_id):
