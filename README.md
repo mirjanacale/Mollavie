@@ -55,6 +55,10 @@ Mollavie is a business-to-consumer  e-commerce platform that sells original artw
 - Responsive design for all devices
 - Admin panel for product and order management
 
+- **Category filtering** – the gallery page now shows filter buttons for each category (e.g., *Abstract*, *Landscape*, *Portrait*).  Users can click a category to see only the artworks in that category.
+- **Staff admin dashboard** – added a secure `/admin-dashboard/` page.  Staff users (`is_staff=True`) can view, add, edit, and delete products and categories in a friendly interface.  Non‑staff users receive a 403 Forbidden response.
+- **Improved payment flow** – orders are now created **only after** Stripe confirms payment.  Cancelling or abandoning the payment on Stripe automatically returns the product to stock and deletes any unpaid order.
+
 
 
 ## Table of Contents
@@ -724,6 +728,43 @@ If  experience this issue while testing, always complete the payment process in 
 <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1752794041/Screenshot_2025-05-19_141832_o5375n.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 
+### Order creation & payment flow fix
+
+- **Issue:** In the original submission, an order record was created as soon as the user initiated checkout.  If the user cancelled on the Stripe payment page, an unpaid order remained in the database and the product stayed reserved.
+- **Fix:** Refactored the checkout workflow so that orders and order items are created only after Stripe confirms payment.  If the Stripe session is cancelled, any reserved product is restored to stock and the order record is deleted.
+- **Test:** Attempt to cancel a Stripe payment; verify the product is still available and no unpaid order appears.  Complete a payment; verify the order appears with status “Paid” and the product is marked as sold.
+
+
+#### Staff admin dashboard
+
+| Step | Expected Result |
+|-----|-----------------|
+| Create or designate a user with `is_staff=True` (non‑superuser) in the Django admin | A staff user exists |
+| Log in as the staff user and navigate to `/admin-dashboard/` | You see a dashboard displaying products and categories with forms to add new items |
+| Use the “Add product” form to create a new product | The product appears in the list with a success message |
+| Use the “Add category” form to create a new category | The category appears in the list with a success message |
+| Edit an existing product or category via the dashboard and save | Changes are reflected immediately |
+| Delete a product or category via the dashboard | The item is removed and a confirmation message appears |
+| Log out and then log in as a regular user; visit `/admin-dashboard/` | You receive a 403 Forbidden response or are redirected (non‑staff users cannot access the dashboard) |
+
+#### Category filtering
+
+| Step | Expected Result |
+|-----|-----------------|
+| Ensure products are assigned to categories via Django admin or the staff dashboard | Products have categories |
+| Visit the gallery page | Category buttons appear (e.g., *Abstract*, *Landscape*, *Portrait*) |
+| Click a category button | Only artworks belonging to that category are displayed |
+| Click another category button | The list updates to show artworks from the newly selected category |
+| Clear the filter (by removing the `?category=` parameter) | All available artworks are displayed again |
+
+#### Improved payment flow
+
+| Step | Expected Result |
+|-----|-----------------|
+| Add an artwork to the cart and proceed to payment | The product becomes temporarily unavailable; a Stripe checkout session is created |
+| On the Stripe page, cancel or close the payment session | The product returns to “available” status; no new unpaid order appears in “My Orders” |
+| Add an artwork to the cart again and complete the payment using a Stripe test card | You are redirected to the success page; the order is listed in “My Orders” with status **Paid**; the product shows as sold/out of stock |
+
 
 ## **Shopping Cart and Stripe Payment Flow**
 
@@ -804,6 +845,13 @@ Verify that successful payments trigger order creation and confirmation in the d
    >>> from orders.models import Order
    >>> Order.objects.latest('created_at')
    <Order: Order #78 by Mirjana1>
+
+
+## New Features Added in Resubmission
+
+- **Staff admin dashboard** – implemented a role‑based front‑end dashboard (`/admin-dashboard/`) for staff members.  The dashboard lists all products and categories in tables and includes forms to create new items.  Staff can edit and delete existing entries.  Access is controlled via a `@user_passes_test(lambda u: u.is_staff)` decorator.
+- **Category filter** – added a `Category` model and filter buttons on the gallery page.  Users can click a category to limit artworks to that category.  Categories can be created and assigned to products in Django admin or via the staff dashboard.
+- **Enhanced payment flow** – refined the checkout process so that orders and order items are saved only after the customer completes payment.  If a payment session is cancelled, the reserved product is restored to its available state and no unpaid order remains.
 
 
  ## Category Filter
