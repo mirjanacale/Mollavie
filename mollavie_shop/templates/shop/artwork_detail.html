@@ -32,6 +32,7 @@
         <div class="card-text text-start" style="font-size: 1.1rem;">
             {{ artwork.description|safe }}
         </div>
+        <p class="card-text">Category: {{ artwork.category.name }}</p>
         <p class="card-text text-center mt-4" style="font-size:1.3em;"><strong>€{{ artwork.price }}</strong></p>
         {% if artwork.is_available %}
             <form action="{% url 'shop:create_checkout_session' artwork.id %}" method="POST">

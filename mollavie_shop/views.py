@@ -51,16 +51,26 @@ def signup_view(request):
 
 
 def gallery_view(request):
-    # Get selected category ID from the query string (e.g., ?category=2)
     category_id = request.GET.get("category")
+    query = request.GET.get("q")  # new: search term
+    sort = request.GET.get("sort")  # new: sort parameter
+
+    artworks = Product.objects.all()
+
     if category_id:
-        artworks = Product.objects.filter(category_id=category_id).order_by("-created_at")
+        artworks = artworks.filter(category_id=category_id)
+
+    if query:
+        artworks = artworks.filter(name__icontains=query)
+
+    # Apply sorting; default is newest first
+    if sort == "price_asc":
+        artworks = artworks.order_by("price")
+    elif sort == "price_desc":
+        artworks = artworks.order_by("-price")
     else:
-        artworks = Product.objects.all().order_by("-created_at")
-
-    # Get all categories for the filter buttons
+        artworks = artworks.order_by("-created_at")
     categories = Category.objects.all().order_by("name")
-
     return render(request, "shop/gallery.html", {
         "artworks": artworks,
         "categories": categories,
