@@ -42,18 +42,19 @@ Mollavie is a business-to-consumer  e-commerce platform that sells original artw
 
 - Only superusers (admin) can access the Django admin interface to manage products, orders, and users.
 - Regular users are restricted from accessing admin-only features or pages.
-- Direct URL access to restricted views (e.g., /admin/) redirects unauthorized users.
-
+- Direct URL access to restricted views (e.g., /admin/) redirects unauthorized user
 
 ## Features
 
-- Browse original art and prints
-- User registration and profile management
-- Shopping cart and checkout with Stripe integration
-- Order history and profile management for users
-- Custom error pages (400, 403, 404, 500)
-- Responsive design for all devices
-- Admin panel for product and order management
+- Browse original art and prints with responsive design.
+- User registration, login and profile management.
+- Shopping cart and checkout with Stripe integration.
+- Orders created **only after successful payment**; cancelled payments automatically return stock and discard unpaid orders.
+- Staff‑only dashboard for adding, editing and deleting products and categories.
+- Category filter buttons on the Gallery page.
+- Custom 400/403/404/500 error pages.
+- Admin panel (superuser) for managing all models.
+- Newsletter signup form in the footer (stores unique emails).
 
 - **Category filtering** – the gallery page now shows filter buttons for each category (e.g., *Abstract*, *Landscape*, *Portrait*).  Users can click a category to see only the artworks in that category.
 - **Staff admin dashboard** – added a secure `/admin-dashboard/` page.  Staff users (`is_staff=True`) can view, add, edit, and delete products and categories in a friendly interface.  Non‑staff users receive a 403 Forbidden response.
@@ -845,6 +846,23 @@ Verify that successful payments trigger order creation and confirmation in the d
    >>> from orders.models import Order
    >>> Order.objects.latest('created_at')
    <Order: Order #78 by Mirjana1>
+
+## Payment Flow Testing
+
+1. **Add a product to your cart** and proceed to payment.
+2. **Cancel or close** the Stripe payment page. You should see:
+   - No new order in “My Orders”.
+   - The product is again marked as available in the gallery.
+3. **Complete a payment** with a Stripe test card (e.g., `4242 4242 4242 4242`). Upon return:
+   - A success message and order summary appear.
+   - The order status is “Paid” in the database.
+4. **Abandon the session** and refresh the page. You should not see leftover unpaid orders.
+
+## Account Deletion Testing
+
+1. Log in as a user and go to **Profile → Delete My Account**.
+2. Confirm deletion. The user account, associated `CustomerProfile`, and any orders linked to the user are removed.
+3. Verify that you can now delete the same user from the Django admin without foreign‑key errors.
 
 
 ## New Features Added in Resubmission

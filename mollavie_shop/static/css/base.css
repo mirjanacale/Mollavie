@@ -7,8 +7,8 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color:#f5faf7;
-    color: #895332f2;
+    background-color:#f2f8f4;
+    color: #0f745f;
     line-height: 1.6;
     font-size: 16px;
     position: relative;
@@ -33,7 +33,7 @@ a:hover {
 
 /* === Header & Navigation === */
 header {
-    background-color: #0e493d;
+    background-color: #18a085;
     padding: 1rem 2rem;
     color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -264,7 +264,7 @@ form select {
 form button {
     width: 100%;
     padding: 10px 20px;
-    background-color: #0056b3;
+    background-color: #18a085;
     border: none;
     color: white;
     border-radius: 6px;
@@ -273,7 +273,7 @@ form button {
     font-weight: bold;
 }
 form button:hover {
-    background-color: #003f8a;
+    background-color:  #117a65;
 }
 
 .newsletter-form {
@@ -314,6 +314,34 @@ main, header, footer, form {
     border-radius: 10px;
 }
 
+
+/* Override Bootstrap primary button color (Django uses this by default) */
+.btn-primary {
+    background-color: #18a085 !important;  /* Mollavie green */
+    border-color: #18a085 !important;
+    color: white !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #117a65 !important;  /* darker green hover */
+    border-color: #117a65 !important;
+    color: white !important;
+}
+
+.btn-outline-primary {
+  background-color: #18a085;  /* Mollavie green */
+  border-color: #18a085;
+  color: white;
+}
+
+.btn-outline-primary:hover {
+  background-color: #117a65;  /* darker hover */
+  border-color: #117a65;
+  color: white;
+}
+
+
 /* === Media Queries for Responsive Design === */
 @media (min-width: 1200px) {
     .product-image {
@@ -343,4 +371,16 @@ main, header, footer, form {
     }
 }
 
+/* ==== Override Bootstrap theme colors (safely) ==== */
+:root {
+  --bs-success-rgb: 24, 160, 133; /* Mollavie green in RGB */
+  --bs-primary-rgb: 24, 160, 133; /* also make 'primary' green for buttons */
+  --bs-info-rgb: 17, 122, 101; /* darker shade for hover or accents */
+}
+
+/* Optional: make success backgrounds darker for better contrast */
+.bg-success {
+  background-color: rgb(var(--bs-success-rgb)) !important;
+  color: #fff !important;
+}
 
