@@ -287,6 +287,18 @@ Each story followed the standard format:
 | 6      | Responsive design, gallery image enhancements, validator documentation, deployment to Heroku |
 
 Each sprint focused on delivering user value, iterating on feedback, and ensuring the site is robust, accessible, and visually appealing. Features were tracked and reviewed using GitHub Projects and Issues for transparency and continuous improvement.
+  
+
+###  Resubmission Updates
+
+During the resubmission phase, two new user stories were added to address assessment feedback and improve the overall functionality and user experience of the site.
+
+| Feature | Description | Sprint |
+|----------|--------------|---------|
+|  **Favorites System** | Logged-in users can now add or remove artworks from their personal favorites list. The button dynamically toggles between  and  depending on the favorite status. This feature enhances personalization and user engagement. | 7 |
+|  **Category Filtering** | Artworks are now organized by category, allowing users to browse and explore pieces by artistic style or type. Categories are displayed on the artwork detail page and managed through the admin dashboard. | 7 |
+
+Both features were implemented, tested, and tracked using the GitHub Project Board to demonstrate iterative Agile development and responsiveness to assessment feedback.
 
 ---
 
@@ -1042,6 +1054,28 @@ A superuser (`is_superuser=True`) has full control of the site, including all mo
 A staff user (`is_staff=True` but `is_superuser=False`) can access the custom `/admin-dashboard/` interface but does not have unrestricted access to every model.  
 The dashboard ensures only authorized staff can perform CRUD on products and categories.
 
+
+###  Favorite Artwork Feature
+
+Registered users can now mark artworks as **favorites** directly from the Artwork Detail page.  
+A toggle button allows users to add or remove any artwork from their personal favorites list.
+
+- The button text and icon dynamically change based on favorite status:
+  -  *Add to Favorites* (if not yet added)
+  -  *Remove from Favorites* (if already added)
+- Favorites are linked to the logged-in user profile.
+- This feature introduces more personalization and engagement for returning users.
+
+#### Favorite Artwork Testing
+
+| Test Action | Expected Result | Pass |
+|--------------|----------------|------|
+| Logged-in user clicks "Add to Favorites" | Artwork added to user's favorites | yes |
+| User clicks again "Remove from Favorites" | Artwork removed from favorites | yes |
+| Button text changes correctly | Reflects current favorite state | yes |
+| Non-logged-in user | Button not shown | yes |
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1760620213/Screenshot_2025-10-16_140406_ccqzlw.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 ## Deployment
 
