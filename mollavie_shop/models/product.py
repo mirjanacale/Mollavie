@@ -4,6 +4,7 @@ from cloudinary.models import CloudinaryField
 # mollavie_shop/models/product.py
 from django.db import models
 from .category import Category
+from django.contrib.auth.models import User
 
 
 class Product(models.Model):
@@ -16,6 +17,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to="products/")
     is_available = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    favorites = models.ManyToManyField(User, related_name='favorite_products', blank=True)
 
     def __str__(self):
         return self.name

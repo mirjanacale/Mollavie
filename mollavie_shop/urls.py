@@ -51,4 +51,5 @@ urlpatterns = [
     path('admin/category/<int:category_id>/delete/', views.admin_delete_category, name='admin_delete_category'),
     path('admin/product/<int:product_id>/edit/', views.admin_edit_product, name='admin_edit_product'),
     path('admin/category/<int:category_id>/edit/', views.admin_edit_category, name='admin_edit_category'),
+    path('favorite/<int:artwork_id>/', views.toggle_favorite, name='toggle_favorite')
 ]

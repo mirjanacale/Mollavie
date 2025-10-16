@@ -330,13 +330,13 @@ main, header, footer, form {
 }
 
 .btn-outline-primary {
-  background-color: #18a085;  /* Mollavie green */
+  background-color: #18a085;  
   border-color: #18a085;
   color: white;
 }
 
 .btn-outline-primary:hover {
-  background-color: #117a65;  /* darker hover */
+  background-color: #117a65;  
   border-color: #117a65;
   color: white;
 }
@@ -371,14 +371,14 @@ main, header, footer, form {
     }
 }
 
-/* ==== Override Bootstrap theme colors (safely) ==== */
+/* ==== Override Bootstrap theme colors  ==== */
 :root {
-  --bs-success-rgb: 24, 160, 133; /* Mollavie green in RGB */
-  --bs-primary-rgb: 24, 160, 133; /* also make 'primary' green for buttons */
-  --bs-info-rgb: 17, 122, 101; /* darker shade for hover or accents */
+  --bs-success-rgb: 24, 160, 133; 
+  --bs-primary-rgb: 24, 160, 133; 
+  --bs-info-rgb: 17, 122, 101; 
 }
 
-/* Optional: make success backgrounds darker for better contrast */
+
 .bg-success {
   background-color: rgb(var(--bs-success-rgb)) !important;
   color: #fff !important;

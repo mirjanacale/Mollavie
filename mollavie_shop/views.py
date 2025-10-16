@@ -20,6 +20,7 @@ from .forms import ProductForm, CategoryForm
 from .models.category import Category
 from .models.product import Product
 
+
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
@@ -310,7 +311,6 @@ def subscribe(request):
     if request.method == "POST":
         email = request.POST.get("email")
         if email:
-            # Prevent duplicate subscriptions
             if not NewsletterSubscriber.objects.filter(email=email).exists():
                 NewsletterSubscriber.objects.create(email=email)
                 messages.success(request, "Thank you for subscribing!")
@@ -344,17 +344,16 @@ def checkout_view(request):
         if form.is_valid():
             order = form.save(commit=False)
             order.customer = request.user
-            order.paid = False  # Payment will be marked after Stripe callback
+            order.paid = False
             order.save()
-            # Add items to order
             for item in cart_items:
                 OrderItem.objects.create(
                     order=order,
                     product=item["product"],
                     quantity=item["quantity"]
                 )
-            request.session["order_id"] = order.id  # store order for payment success
-            return redirect("shop:start_payment")  # We'll add this Stripe view next!
+            request.session["order_id"] = order.id
+            return redirect("shop:start_payment")
     else:
         form = CheckoutForm()
     return render(request, "shop/checkout.html", {
@@ -471,3 +470,12 @@ def admin_edit_category(request, category_id):
         form = CategoryForm(instance=category)
     return render(request, 'shop/admin_edit_category.html', {'form': form, 'category': category})
 
+
+@login_required
+def toggle_favorite(request, artwork_id):
+    product = get_object_or_404(Product, pk=artwork_id)
+    if request.user in product.favorites.all():
+        product.favorites.remove(request.user)
+    else:
+        product.favorites.add(request.user)
+    return redirect('shop:artwork_detail', artwork_id=product.id)
