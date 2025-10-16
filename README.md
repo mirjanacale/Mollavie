@@ -296,9 +296,11 @@ During the resubmission phase, two new user stories were added to address assess
 | Feature | Description | Sprint |
 |----------|--------------|---------|
 |  **Favorites System** | Logged-in users can now add or remove artworks from their personal favorites list. The button dynamically toggles between  and  depending on the favorite status. This feature enhances personalization and user engagement. | 7 |
-|  **Category Filtering** | Artworks are now organized by category, allowing users to browse and explore pieces by artistic style or type. Categories are displayed on the artwork detail page and managed through the admin dashboard. | 7 |
+|  **Category Filtering** | Artworks are now organized by category, allowing users to browse and explore pieces by artistic style or type. Categories are displayed on the artwork detail page and managed through the admin dashboard. | 8 |
 
 Both features were implemented, tested, and tracked using the GitHub Project Board to demonstrate iterative Agile development and responsiveness to assessment feedback.
+  
+| **Admin Role Access** | Added `is_staff` restrictions to the admin dashboard and product/category management views. Only staff members can perform CRUD actions. | 9 |
 
 ---
 
@@ -642,6 +644,11 @@ The navbar behavior (auto-collapse on link click) was tested manually in:
 - **Social Media Integration:**  
   Display a live Instagram feed or enable sharing artworks directly to social platforms.
 
+- **Favorite Button Improvement**
+
+Currently, users can still mark sold artworks as favorites. This design choice allows visitors to save their favorite pieces for inspiration and maintain engagement even after a painting has been sold.  
+
+In a future update, the system could disable the **“Add to Favorites”** button for sold artworks or replace it with a label such as **“Saved for Inspiration”**. This enhancement would improve realism while still preserving the emotional connection users have with unavailable pieces.
 
 ##  References
 
