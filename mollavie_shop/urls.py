@@ -47,9 +47,28 @@ urlpatterns = [
 
     # … existing routes
     path('admin-dashboard/', views.admin_dashboard, name='admin_dashboard'),
-    path('admin/product/<int:product_id>/delete/', views.admin_delete_product, name='admin_delete_product'),
-    path('admin/category/<int:category_id>/delete/', views.admin_delete_category, name='admin_delete_category'),
-    path('admin/product/<int:product_id>/edit/', views.admin_edit_product, name='admin_edit_product'),
-    path('admin/category/<int:category_id>/edit/', views.admin_edit_category, name='admin_edit_category'),
+    path(
+        'admin-dashboard/product/<int:product_id>/edit/',
+        views.admin_edit_product,
+        name='admin_edit_product'
+    ),
+    path(
+        'admin-dashboard/product/<int:product_id>/delete/',
+        views.admin_delete_product,
+        name='admin_delete_product'
+    ),
+    path(
+        'admin-dashboard/category/<int:category_id>/edit/',
+        views.admin_edit_category,
+        name='admin_edit_category'
+    ),
+    path(
+        'admin-dashboard/category/<int:category_id>/delete/',
+        views.admin_delete_category,
+        name='admin_delete_category'
+    ),
+
+    
+    
     path('favorite/<int:artwork_id>/', views.toggle_favorite, name='toggle_favorite')
 ]

@@ -32,3 +32,9 @@ urlpatterns += static(
     settings.STATIC_URL,
     document_root=BASE_DIR / 'mollavie_shop' / 'static'
 )
+
+# Serve media (uploaded images) in development
+urlpatterns += static(
+    settings.MEDIA_URL,
+    document_root=settings.MEDIA_ROOT
+)

@@ -3,4 +3,4 @@ User-agent: *
 Disallow: /admin/
 Allow: /
 
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://mollaviart-f52cde6730c6.herokuapp.com/sitemap.xml
