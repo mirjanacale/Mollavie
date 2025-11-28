@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 # Ignore uploaded media (no longer used)
 mollavie_shop/products/
+.venv/

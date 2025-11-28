@@ -289,7 +289,163 @@ Each story followed the standard format:
 Each sprint focused on delivering user value, iterating on feedback, and ensuring the site is robust, accessible, and visually appealing. Features were tracked and reviewed using GitHub Projects and Issues for transparency and continuous improvement.
   
 
-###  Resubmission Updates
+#  Resubmission Updates for Assessment Feedback 07 december 2025
+
+## Sitemap & Robots.txt Fix
+
+Users encountered a `500 Internal Server Error` when visiting `/sitemap.xml` during assessment.
+
+### Root Cause
+The sitemap referenced undefined URL names:
+
+```
+return ['home', 'gallery']
+```
+
+but the actual URLs were namespaced:
+
+```
+return ['shop:home', 'shop:gallery']
+```
+
+The product sitemap also used an incorrect field (`is_active` instead of `is_available`).  
+`robots.txt` pointed to a non-working sitemap, which caused SEO issues.
+
+### Fix Implemented
+
+1. **Corrected sitemap URL names**  
+   Updated the sitemap to use namespaced routes.
+
+   **Before**
+   ```
+   return ['home', 'gallery']
+   ```
+
+   **After**
+   ```
+   return ['shop:home', 'shop:gallery']
+   ```
+
+2. **Updated product filtering**  
+   Replaced the non-existent `is_active` field with the correct `is_available` field.
+
+   **Before**
+   ```
+   Product.objects.filter(is_active=True)
+   ```
+
+   **After**
+   ```
+   Product.objects.filter(is_available=True)
+   ```
+
+3. **Corrected robots.txt**  
+   Updated the file to properly reference the live sitemap:
+
+   ```
+   User-agent: *
+   Disallow: /admin/
+   Allow: /
+
+   Sitemap: https://mollaviart-f52cde6730c6.herokuapp.com/sitemap.xml
+   ```
+
+### Testing
+
+- Opened the sitemap locally and on Heroku to confirm it loads successfully.
+- Verified that:
+  ```
+  reverse('shop:home')
+  reverse('shop:gallery')
+  ```
+  resolve correctly.
+- Confirmed sitemap lists:
+  - Home page
+  - Gallery
+  - Individual artworks with `<lastmod>`
+- Verified no broken links and correct product filtering.
+- Confirmed robots.txt formatting and SEO discoverability.
+
+### Outcome
+
+The `/sitemap.xml` error has been fully resolved.  
+The sitemap is valid, loads correctly, and meets SEO requirements.  
+`robots.txt` correctly references the sitemap, satisfying assessment criteria.
+
+## Admin CRUD Fix (Resubmission Update)
+
+- Users encountered broken CRUD actions in the custom admin dashboard during assessment.
+
+### Root Cause
+- Edit and delete actions returned `404` because the admin routes were incorrect or missing.
+
+- There was no direct link to the custom admin dashboard in the navbar, and admin access was not restricted to staff. These issues affected **LO1.4**, **LO1.8**, **LO1.13**, and **LO1.15**.
+
+### Fix Implemented
+
+1. **Corrected admin URL patterns**  
+   Updated `urls.py` to point to the correct edit/delete endpoints for products and categories:
+
+   ```python
+   path('admin-dashboard/product/<int:product_id>/edit/', views.admin_edit_product, name='admin_edit_product'),
+   path('admin-dashboard/product/<int:product_id>/delete/', views.admin_delete_product, name='admin_delete_product'),
+
+   path('admin-dashboard/category/<int:category_id>/edit/', views.admin_edit_category, name='admin_edit_category'),
+   path('admin-dashboard/category/<int:category_id>/delete/', views.admin_delete_category, name='admin_delete_category'),
+
+- Added staff-only admin link in the navbar
+  The link is visible only for staff users:
+
+
+
+```
+{% if user.is_staff %}
+<a class="nav-link" href="{% url 'shop:admin_dashboard' %}">Admin Dashboard</a>
+{% endif %}
+```
+Restricted admin views to staff
+All custom admin views now require staff privileges to access.
+
+Testing
+- Logged in as staff:
+
+- Create, edit, and delete actions work without 404 errors.
+
+- Forms load correctly and changes reflect instantly in the gallery.
+
+- Logged in as non-staff:
+
+- Cannot access the admin dashboard.
+
+-  Navbar link is hidden.
+
+Verified that navigation from the navbar reaches the admin dashboard and returns to catalog pages without broken links.
+
+### Outcome
+
+The admin CRUD system is now complete, functional, and secure. Routes resolve correctly, the dashboard is discoverable only to staff, and access is properly restricted. This satisfies the assessment criteria for CRUD and role-based access.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 During the resubmission phase, two new user stories were added to address assessment feedback and improve the overall functionality and user experience of the site.
 
@@ -313,6 +469,14 @@ Both features were implemented, tested, and tracked using the GitHub Project Boa
 - **Read**: Users can view products and their profile information.
 - **Update**: Users can edit their profile and cart.
 - **Delete**: Users can delete their account from the profile page via a “Delete My Account” button.
+
+
+
+
+
+
+
+
 
 
 
