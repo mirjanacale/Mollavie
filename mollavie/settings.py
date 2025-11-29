@@ -6,16 +6,11 @@ from django.urls import reverse_lazy
 
 load_dotenv()
 
-
-if os.path.exists("env.py"):
-    exec(open("env.py").read())
-
-
 #  Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-env_path = os.path.join(BASE_DIR, 'env.py')
-if os.path.exists(env_path):
+env_path = BASE_DIR / "env.py"
+if env_path.exists():
     exec(open(env_path).read())
 
 
@@ -47,8 +42,8 @@ INSTALLED_APPS = [
 #  Cloudinary media config
 
 CLOUDINARY_STORAGE = {
-     "CLOUDINARY_URL": os.environ.get("CLOUDINARY_URL") or
-     "cloudinary://dummy:dummy@dummy"
+     "CLOUDINARY_URL": os.environ.get("CLOUDINARY_URL") 
+     
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
