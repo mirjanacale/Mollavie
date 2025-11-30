@@ -12,31 +12,54 @@ A modern, accessible Django-based art shop for unique artworks.
 Mollavie is a Django-based e-commerce platform designed to showcase and sell original artworks and prints. The site features a user-friendly interface, responsive design, and robust functionality for both customers and administrators. Mollavie supports user registration, product browsing, shopping cart management, and secure checkout with Stripe integration.
 
 ---
-
 ## Business Model
 
-Mollavie is a business-to-consumer  e-commerce platform that sells original artwork directly to customers. The business model is built around providing a curated experience for art collectors and design-focused buyers.
+Mollavie is an independent e-commerce platform specialising in the sale of original artwork created by the artist Mirjana. The primary goal of the platform is to give customers direct access to unique paintings without any intermediary or commission-based marketplace. The business model focuses on presenting artwork in a modern, trustworthy, and visually rich environment that supports discovery, browsing, and seamless purchasing.
 
-### Revenue Stream
-- Direct sale of original art pieces through Stripe payment integration.
-- No commission or marketplace model — Mollavie sells only Mirjana’s artwork.
+## Value Proposition
 
-### Target Audience
-- Art collectors
-- Home and office decorators
-- Online art enthusiasts
-- Interior designers looking for bespoke pieces
+Mollavie offers authentic, hand-painted artworks that cannot be found in mass-production marketplaces. Each painting is presented with detailed information, clear imagery, and a simple purchase experience. Customers buying from Mollavie receive one-of-a-kind art directly from the artist, eliminating platform fees, agency commissions, or unknown production sources.
 
-### Unique Selling Points (USP)
-- Hand-crafted, original artwork
-- Direct connection with the artist (no middleman)
-- High-quality visual previews of paintings
-- Simple checkout and delivery system
+## Customer Segments
 
-### Future Expansion (optional ideas)
-- Commission-based custom orders
-- User reviews and artwork ratings
-- Artist spotlight section or blog
+The platform is designed for customers who value original hand-crafted artwork. These include individual art collectors, homeowners seeking unique decoration, interior designers sourcing bespoke pieces, and general online art buyers who want to support independent artists.
+
+## Product Strategy
+
+Mollavie sells only original paintings created by Mirjana. This creates a high-trust environment where customers know exactly who created the artwork, how it was made, and that every piece is unique. There are no digital prints, dropshipping items, or mass-manufactured goods. This positions the platform in a niche market of authentic, single-edition art products.
+
+## Pricing Strategy
+
+Each painting is priced according to size, materials used, complexity of the artwork, and the time required for production. Pricing is transparent, with no additional platform fees. Stripe handles secure payments, providing customers with a reliable and recognised checkout flow. The business avoids discount models or constant promotions to preserve the artistic and collectible value of the pieces.
+
+## Revenue Model
+
+Revenue is generated exclusively from direct sales of original paintings. No commissions, subscription fees, or marketplace charges apply. Because the platform operates independently, the full sale price goes to the artist, making the revenue model straightforward and sustainable.
+
+## Marketing and Audience Reach
+
+Mollavie uses a combination of organic marketing channels to reach potential customers. These include a dedicated Facebook business page, newsletter updates, and future potential channels such as Instagram, Pinterest, and an artist blog. Search Engine Optimisation is integrated into the site through descriptive meta tags, a structured sitemap, and a valid robots.txt file to improve discoverability.
+
+## Operations and Order Handling
+
+When a customer places an order, Stripe processes the payment and the order is saved into the database. The artist then prepares the painting for packaging and delivery. Orders are manually fulfilled to ensure quality control and safe handling of the artwork. As the business grows, shipping integrations or courier tracking may be added.
+
+## Competitive Positioning
+
+Mollavie differs from large marketplaces because it is fully artist-owned and does not include mass-produced prints or generic artwork. Customers who prefer boutique, authentic, and personal art-buying experiences can expect a higher level of trust and originality compared to general marketplaces.
+
+## Future Expansion
+
+The business model has room for expansion in several areas. These include custom commission requests from customers, seasonal art collections, limited-edition series, instructional blog content, and potential collaborations with interior designers. Expansion will remain aligned with the platform’s core principle: original art created directly by the artist.
+
+## Risk Considerations
+
+The main risks include low traffic during early stages and limited inventory because the artwork is hand-made. Marketing consistency and social media presence reduce this risk. Future additions such as customer reviews or artist storytelling may also improve customer confidence and increase conversions.
+
+## Summary
+
+Mollavie follows a direct-to-consumer business model built around authenticity and originality. It provides customers with a transparent and personal art-buying experience, supported by secure payment processing and independent control over product presentation and pricing.
+
 
 ## Role-Based Authorization
 
@@ -289,6 +312,47 @@ Each story followed the standard format:
 Each sprint focused on delivering user value, iterating on feedback, and ensuring the site is robust, accessible, and visually appealing. Features were tracked and reviewed using GitHub Projects and Issues for transparency and continuous improvement.
   
 
+
+During the resubmission phase, two new user stories were added to address assessment feedback and improve the overall functionality and user experience of the site.
+
+| Feature | Description | Sprint |
+|----------|--------------|---------|
+|  **Favorites System** | Logged-in users can now add or remove artworks from their personal favorites list. The button dynamically toggles between  and  depending on the favorite status. This feature enhances personalization and user engagement. | 7 |
+|  **Category Filtering** | Artworks are now organized by category, allowing users to browse and explore pieces by artistic style or type. Categories are displayed on the artwork detail page and managed through the admin dashboard. | 8 |
+
+Both features were implemented, tested, and tracked using the GitHub Project Board to demonstrate iterative Agile development and responsiveness to assessment feedback.
+  
+| **Admin Role Access** | Added `is_staff` restrictions to the admin dashboard and product/category management views. Only staff members can perform CRUD actions. | 9 |
+
+---
+
+ A full list of issues and progress can be viewed on the [GitHub Project Board](https://github.com/users/mirjanacale/projects/11).
+
+
+## CRUD Functionality
+
+- **Create**: Users can register and create an account.
+- **Read**: Users can view products and their profile information.
+- **Update**: Users can edit their profile and cart.
+- **Delete**: Users can delete their account from the profile page via a “Delete My Account” button.
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+   
 #  Resubmission Updates for Assessment Feedback 07 december 2025
 
 ## Sitemap & Robots.txt Fix
@@ -310,6 +374,8 @@ return ['shop:home', 'shop:gallery']
 
 The product sitemap also used an incorrect field (`is_active` instead of `is_available`).  
 `robots.txt` pointed to a non-working sitemap, which caused SEO issues.
+
+
 
 ### Fix Implemented
 
@@ -350,6 +416,10 @@ The product sitemap also used an incorrect field (`is_active` instead of `is_ava
    Sitemap: https://mollaviart-f52cde6730c6.herokuapp.com/sitemap.xml
    ```
 
+  
+   <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1764533407/Screenshot_2025-11-30_200036_a6kgoo.png" alt="sitemp" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+
 ### Testing
 
 - Opened the sitemap locally and on Heroku to confirm it loads successfully.
@@ -371,6 +441,7 @@ The product sitemap also used an incorrect field (`is_active` instead of `is_ava
 The `/sitemap.xml` error has been fully resolved.  
 The sitemap is valid, loads correctly, and meets SEO requirements.  
 `robots.txt` correctly references the sitemap, satisfying assessment criteria.
+
 
 ## Admin CRUD Fix (Resubmission Update)
 
@@ -397,6 +468,10 @@ The sitemap is valid, loads correctly, and meets SEO requirements.
   The link is visible only for staff users:
 
 
+  
+   <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1764533356/admin_dashboard_bzhhhs.png" alt="dashboard" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+
 
 ```
 {% if user.is_staff %}
@@ -406,7 +481,7 @@ The sitemap is valid, loads correctly, and meets SEO requirements.
 Restricted admin views to staff
 All custom admin views now require staff privileges to access.
 
-Testing
+### Testing
 - Logged in as staff:
 
 - Create, edit, and delete actions work without 404 errors.
@@ -421,56 +496,99 @@ Testing
 
 Verified that navigation from the navbar reaches the admin dashboard and returns to catalog pages without broken links.
 
+
+   <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1764533417/TESTING_CRUD_igiddh.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+
 ### Outcome
 
 The admin CRUD system is now complete, functional, and secure. Routes resolve correctly, the dashboard is discoverable only to staff, and access is properly restricted. This satisfies the assessment criteria for CRUD and role-based access.
 
+ 
+   <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1764533363/admin_deleted_r8hkju.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+   
+   <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1764533373/admin_product_created_hhvdca.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 
 
+## Cloudinary Image Upload Fix (Resubmission Update)
+
+This update explains how product images stopped appearing in the application and why existing images disappeared after each deployment. All issues were caused by the project storing images locally instead of in Cloudinary.
+
+### Root Cause
+
+The Product model used a local ImageField:
+
+```python
+image = models.ImageField(upload_to="products/")
+```
+
+Heroku does not keep local media files. Every deployment removed everything stored in the `/media/products/` directory. Cloudinary was configured, but due to duplicated and incorrectly ordered environment loading, Django never activated the Cloudinary storage backend. This caused every new upload to be stored locally instead of in Cloudinary, leading to missing images, 404 errors, and disappearing content.
+
+### Fix Implemented
+
+The Product model was updated to use CloudinaryField instead of ImageField.
+
+Before:
+```python
+image = models.ImageField(upload_to="products/")
+```
+
+After:
+```python
+from cloudinary.models import CloudinaryField
+image = CloudinaryField("image")
+```
+
+The environment variable loading in `settings.py` was corrected so that `BASE_DIR` is defined before executing `env.py`.
+
+Before:
+```python
+if os.path.exists("env.py"):
+    exec(open("env.py").read())
+
+env_path = os.path.join(BASE_DIR, "env.py")
+if os.path.exists(env_path):
+    exec(open(env_path).read())
+```
+
+After:
+```python
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+env_path = BASE_DIR / "env.py"
+if env_path.exists():
+    exec(open(env_path).read())
+```
+
+Cloudinary was then ensured as the active storage backend:
+
+```python
+CLOUDINARY_STORAGE = {
+    "CLOUDINARY_URL": os.environ.get("CLOUDINARY_URL")
+}
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+STATICFILES_STORAGE = "cloudinary_storage.storage.StaticHashedCloudinaryStorage"
+MEDIA_URL = "/media/"
+```
+
+A new migration was created and applied so that the updated field could take effect.
+
+### Testing
+
+New product images were uploaded through Django Admin and confirmed to appear in the Cloudinary Media Library. The Gallery and Product Detail pages were reloaded and displayed the images correctly. The application was redeployed to Heroku, and the images remained in place, confirming that they now persist across deployments. All previously missing and broken image URLs were resolved.
+
+### Outcome
+
+The project now stores all product images directly in Cloudinary, which provides permanent and stable media storage. Images no longer disappear after deployments, and new uploads display correctly across the application. This fully resolves the media persistence issue identified during assessment.
+
+ <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1764533351/admin_clodenery_edekz6.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-During the resubmission phase, two new user stories were added to address assessment feedback and improve the overall functionality and user experience of the site.
-
-| Feature | Description | Sprint |
-|----------|--------------|---------|
-|  **Favorites System** | Logged-in users can now add or remove artworks from their personal favorites list. The button dynamically toggles between  and  depending on the favorite status. This feature enhances personalization and user engagement. | 7 |
-|  **Category Filtering** | Artworks are now organized by category, allowing users to browse and explore pieces by artistic style or type. Categories are displayed on the artwork detail page and managed through the admin dashboard. | 8 |
-
-Both features were implemented, tested, and tracked using the GitHub Project Board to demonstrate iterative Agile development and responsiveness to assessment feedback.
-  
-| **Admin Role Access** | Added `is_staff` restrictions to the admin dashboard and product/category management views. Only staff members can perform CRUD actions. | 9 |
-
----
-
- A full list of issues and progress can be viewed on the [GitHub Project Board](https://github.com/users/mirjanacale/projects/11).
-
-
-## CRUD Functionality
-
-- **Create**: Users can register and create an account.
-- **Read**: Users can view products and their profile information.
-- **Update**: Users can edit their profile and cart.
-- **Delete**: Users can delete their account from the profile page via a “Delete My Account” button.
-
-
+ 
+   <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1764533389/image_ClodinaryField_rpvzmj.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 
 
@@ -1239,7 +1357,7 @@ A toggle button allows users to add or remove any artwork from their personal fa
 
 #### Favorite Artwork Testing
 
-| Test Action | Expected Result | Pass |
+| Test Action | Expected Result | Pass |g
 |--------------|----------------|------|
 | Logged-in user clicks "Add to Favorites" | Artwork added to user's favorites | yes |
 | User clicks again "Remove from Favorites" | Artwork removed from favorites | yes |
@@ -1297,6 +1415,359 @@ There are no major differences between the local   version and the deployed (Her
 - Inspired by artists everywhere, especially my daughter for original artworks.
 - Special thanks to Code Institute mentors and the Stack Overflow community.
 
+
+## Deployment
+
+### Overview
+
+Mollavie is a Django e-commerce application. It is developed locally and deployed to Heroku for production. This section explains how to run the project locally, how to deploy it to Heroku, how to configure environment variables, and how static and media files are handled.
+
+## Local Development Setup
+
+Clone the repository:
+
+```
+git clone https://github.com/<your-username>/<your-repo-name>.git
+cd <your-repo-name>
+```
+
+
+Create and activate a virtual environment:
+
+```
+python -m venv venv
+source venv/bin/activate
+```
+
+For Windows:
+
+venv\Scripts\activate
+```
+
+## Deployment
+
+### Overview
+
+Mollavie is a Django e-commerce application. It is developed locally and deployed to Heroku for production. This section explains how to run the project locally, how to deploy it to Heroku, how to configure environment variables, and how static and media files are handled.
+
+## Local Development Setup
+
+Clone the repository:
+```
+git clone https://github.com/<your-username>/<your-repo-name>.git
+cd <your-repo-name>
+```
+
+Create and activate a virtual environment:
+```
+python -m venv venv
+source venv/bin/activate
+```
+
+
+For Windows:
+
+venv\Scripts\activate
+
+
+
+
+Install dependencies:
+```
+pip install -r requirements.txt
+```
+
+
+
+Create a .env file containing:
+
+SECRET_KEY=your_secret_key
+DEBUG=True
+ALLOWED_HOSTS=localhost,127.0.0.1
+DATABASE_URL=sqlite:///db.sqlite3
+CLOUDINARY_URL=cloudinary://<api_key>:<api_secret>@<cloud_name>
+STRIPE_PUBLIC_KEY=pk_test_...
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WH_SECRET=whsec_...
+EMAIL_HOST_USER=your_email@example.com
+EMAIL_HOST_PASS=your_email_password
+
+
+
+Apply migrations:
+```
+python manage.py migrate
+```
+
+Create a superuser:
+```
+python manage.py createsuperuser
+```
+
+
+Run the server:
+```
+python manage.py runserver
+```
+
+## Production Deployment to Heroku
+
+The project is deployed at:
+
+https://mollaviart-f52cde6730c6.herokuapp.com/
+
+## Create the Heroku App
+
+Log in:
+```
+heroku login
+```
+
+Create a new application inside the Heroku dashboard.
+
+## Attach Heroku Postgres
+
+Open the Resources tab in Heroku.  
+Search for Heroku Postgres and add the free tier.  
+Heroku automatically sets DATABASE_URL.
+
+## Configure Heroku Environment Variables
+
+In Settings, open Reveal Config Vars and add:
+
+SECRET_KEY=your_production_secret_key
+DEBUG=False
+ALLOWED_HOSTS=mollaviart-f52cde6730c6.herokuapp.com,localhost,127.0.0.1
+CLOUDINARY_URL=cloudinary://<api_key>:<api_secret>@<cloud_name>
+STRIPE_PUBLIC_KEY=pk_live_or_test_key
+STRIPE_SECRET_KEY=sk_live_or_test_key
+STRIPE_WH_SECRET=whsec_from_stripe
+EMAIL_HOST_USER=your_email@example.com
+EMAIL_HOST_PASS=your_email_password
+
+```
+DATABASE_URL is created automatically by the Postgres add-on.
+```
+## Connect Heroku to GitHub
+
+Open the Deploy tab.  
+Choose GitHub as the deployment method.  
+Connect the repository.  
+Enable Manual or Automatic deploys.
+
+## Procfile
+
+Ensure a Procfile exists in the project root:
+```
+web: gunicorn mollavie.wsgi:application
+```
+
+
+## Static and Media Files
+
+Static files are collected using:
+```
+python manage.py collectstatic
+```
+
+Heroku runs collectstatic automatically unless DISABLE_COLLECTSTATIC is set to 1.
+
+Media files use Cloudinary. The CLOUDINARY_URL key must be set.
+
+## First Deploy
+
+In the Deploy tab, choose the branch and click Deploy Branch.  
+After deployment completes, open the app.
+
+## Run Migrations and Create Superuser on Heroku
+
+Open the Heroku console:
+```
+python manage.py migrate
+python manage.py createsuperuser
+```
+
+## Updating the Live Site
+
+Push changes to GitHub:
+
+```
+git add .
+git commit -m "Update"
+git push origin main
+```
+
+Heroku redeploys the update automatically if Automatic Deploys are enabled.  
+If models changed, re-run migrations using the Heroku console.
+
+## Troubleshooting Deployment
+
+Check logs:
+```
+heroku logs --tail
+```
+
+
+Confirm DEBUG is False.  
+Confirm ALLOWED_HOSTS includes the Heroku domain.  
+Confirm all required config vars are correctly set.  
+Confirm migrations are applied.  
+Confirm collectstatic runs without errors.
+
+## Outcome
+
+The deployment guide now covers local development, environment variables, Heroku setup, database, static fi
+
+Install dependencies:
+```
+pip install -r requirements.txt
+```
+
+Create a .env file containing:
+
+SECRET_KEY=your_secret_key
+DEBUG=True
+ALLOWED_HOSTS=localhost,127.0.0.1
+DATABASE_URL=sqlite:///db.sqlite3
+CLOUDINARY_URL=cloudinary://<api_key>:<api_secret>@<cloud_name>
+STRIPE_PUBLIC_KEY=pk_test_...
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WH_SECRET=whsec_...
+EMAIL_HOST_USER=your_email@example.com
+EMAIL_HOST_PASS=your_email_password
+
+
+Apply migrations:
+```
+python manage.py migrate
+```
+
+Create a superuser:
+```
+python manage.py createsuperuser
+```
+
+
+Run the server:
+``` 
+python manage.py runserver
+```
+
+## Production Deployment to Heroku
+
+The project is deployed at:
+
+https://mollaviart-f52cde6730c6.herokuapp.com/
+
+## Create the Heroku App
+
+Log in:
+
+heroku login
+
+sql
+Copy code
+
+Create a new application inside the Heroku dashboard.
+
+## Attach Heroku Postgres
+
+Open the Resources tab in Heroku.  
+Search for Heroku Postgres and add the free tier.  
+Heroku automatically sets DATABASE_URL.
+
+## Configure Heroku Environment Variables
+
+In Settings, open Reveal Config Vars and add:
+
+SECRET_KEY=your_production_secret_key
+DEBUG=False
+ALLOWED_HOSTS=mollaviart-f52cde6730c6.herokuapp.com,localhost,127.0.0.1
+CLOUDINARY_URL=cloudinary://<api_key>:<api_secret>@<cloud_name>
+STRIPE_PUBLIC_KEY=pk_live_or_test_key
+STRIPE_SECRET_KEY=sk_live_or_test_key
+STRIPE_WH_SECRET=whsec_from_stripe
+EMAIL_HOST_USER=your_email@example.com
+EMAIL_HOST_PASS=your_email_password
+
+csharp
+Copy code
+
+DATABASE_URL is created automatically by the Postgres add-on.
+
+## Connect Heroku to GitHub
+
+Open the Deploy tab.  
+Choose GitHub as the deployment method.  
+Connect the repository.  
+Enable Manual or Automatic deploys.
+
+## Procfile
+
+Ensure a Procfile exists in the project root:
+``
+web: gunicorn mollavie.wsgi:application
+```
+
+## Static and Media Files
+
+Static files are collected using:`
+
+``
+python manage.py collectstatic
+```
+
+Heroku runs collectstatic automatically unless DISABLE_COLLECTSTATIC is set to 1.
+
+Media files use Cloudinary. The CLOUDINARY_URL key must be set.
+
+## First Deploy
+
+In the Deploy tab, choose the branch and click Deploy Branch.  
+After deployment completes, open the app.
+
+## Run Migrations and Create Superuser on Heroku
+
+Open the Heroku console:
+
+python manage.py migrate
+python manage.py createsuperuser
+
+shell
+Copy code
+
+## Updating the Live Site
+
+Push changes to GitHub:
+
+git add .
+git commit -m "Update"
+git push origin main
+
+sql
+Copy code
+
+Heroku redeploys the update automatically if Automatic Deploys are enabled.  
+If models changed, re-run migrations using the Heroku console.
+
+## Troubleshooting Deployment
+
+Check logs:
+
+heroku logs --tail
+
+pgsql
+Copy code
+
+Confirm DEBUG is False.  
+Confirm ALLOWED_HOSTS includes the Heroku domain.  
+Confirm all required config vars are correctly set.  
+Confirm migrations are applied.  
+Confirm collectstatic runs without errors.
+
+## Outcome
+
+The deployment guide now covers local development, environment variables, Heroku setup, database, static fi
 
 ## Contributing
 
