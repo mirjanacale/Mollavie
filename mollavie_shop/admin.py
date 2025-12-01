@@ -3,7 +3,7 @@
 from django.contrib import admin
 from .models import Category, Product, CustomerProfile, Order, OrderItem
 from .models import NewsletterSubscriber
-
+from .models import Testimonial
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -27,6 +27,13 @@ class CustomerProfileAdmin(admin.ModelAdmin):
     def get_username(self, obj):
         return obj.user.username if obj.user else "No User"
     get_username.short_description = "Username"
+
+
+@admin.register(Testimonial)
+class TestimonialAdmin(admin.ModelAdmin):
+    list_display = ('name', 'is_visible', 'created_at')
+    list_filter = ('is_visible',)
+    search_fields = ('name', 'quote')
 
 
 admin.site.register(Order)

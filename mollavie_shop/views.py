@@ -19,9 +19,10 @@ from django.contrib.auth.decorators import user_passes_test
 from .forms import ProductForm, CategoryForm
 from .models.category import Category
 from .models.product import Product
-
+from .models.testimonial import Testimonial
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
+
 
 
 def home(request):
@@ -29,10 +30,15 @@ def home(request):
         Product.objects.filter(is_available=True)
         .order_by('-created_at')[:4]
     )
+    testimonials = Testimonial.objects.filter(is_visible=True).order_by('-created_at')[:3]
+
     return render(
         request,
         "shop/index.html",
-        {"featured_products": featured_products}
+        {
+            "featured_products": featured_products,
+            "testimonials": testimonials
+        }
     )
 
 
