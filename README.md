@@ -591,6 +591,119 @@ The project now stores all product images directly in Cloudinary, which provides
    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1764533389/image_ClodinaryField_rpvzmj.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 
+## Testimonial Model Addition (Resubmission Update)
+
+This update documents the addition of a new Testimonial model, implemented to meet assessment requirements for demonstrating database design, model creation, and dynamic content handling within the application.
+
+### Root Cause
+
+The original project did not include a secondary model that supports user-generated or dynamically managed content. The assessment required at least one additional model with clear fields, database integration, and admin management. Without this model, the project did not fully meet the criteria for demonstrating relational data structures and CRUD support.
+
+### Fix Implemented
+
+A new Testimonial model was created with fields for the testimonial author, testimonial text. The model integrates with Django’s ORM and is fully managed through Django Admin.
+
+Before:
+(No testimonial model existed.)
+
+After:
+```python
+class Testimonial(models.Model):
+    author = models.CharField(max_length=100)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.author
+```
+
+The model was registered in the Django Admin to allow staff users to create, view, edit, and delete testimonials.
+
+```python
+from django.contrib import admin
+from .models import Testimonial
+
+admin.site.register(Testimonial)
+```
+
+A new migration was made and applied to include the Testimonial model in the database.
+
+### Testing
+
+The Testimonial model was tested directly through Django Admin. New testimonials were added and confirmed to display correctly. Editing a testimonial updated the database as expected, and deletion removed it without errors. Model fields were validated to ensure input limits and formatting behaved correctly. The data appeared reliably within the admin dashboard.
+
+### Outcome
+
+The application now includes a fully functional Testimonial model that satisfies the assessment requirement for an additional dynamic database model. Testimonials can be created, displayed, and managed through Django Admin, improving both project completeness and data structure quality.
+
+
+ <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1764611010/costumers_think_daufkv.png" alt="statments" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+## Payment Flow Bug – Incorrect “Sold” Status
+
+
+- When a user clicked Buy Now on the artwork detail page, the product was immediately marked as sold even if the Stripe payment was not completed. As a result, the detail page displayed the message:
+```
+This piece has been sold.
+```  
+
+- even though no successful transaction occurred.
+
+### Root Cause
+
+- Inside the create_checkout_session view, the product’s is_available field was set to False before the Stripe payment process began:
+
+```
+artwork.is_available = False
+artwork.save()
+```
+
+- This caused the system to treat the item as sold as soon as the Buy button was pressed, regardless of whether the payment succeeded or was cancelled.
+
+### Fix Implemented
+
+- The early availability update was removed from create_checkout_session.
+The product is now marked as sold only in payment_success, after Stripe confirms a successful payment.
+
+### Before
+```
+artwork.is_available = False
+artwork.save()
+```
+
+### After
+
+ - Removed from create_checkout_session
+ - Product availability now updates only after successful payment
+
+### Testing
+
+- Clicked Buy Now and closed the Stripe popup.
+Result: The product remained available.
+
+- Completed a Stripe test payment.
+Result: The product changed to sold correctly.
+
+- Cancelled a payment.
+Result: The product remained available and no false “sold” message appeared.
+
+### Outcome
+
+- The payment flow now works correctly.
+Products are only marked as sold after Stripe confirms a successful charge, preventing incorrect “sold” messages on the detail page.
+
+
+ <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1764622297/payment_flow_oa8kvi.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+
+
+
+
+
+
+
+
+
 
 
 

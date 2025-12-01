@@ -93,17 +93,18 @@ def artwork_detail_view(request, artwork_id):
 def create_checkout_session(request, artwork_id):
     artwork = get_object_or_404(Product, id=artwork_id)
 
-    #  1) Check availability!
+    # 1) Check availability
     if not artwork.is_available:
         messages.error(request, "Sorry, this artwork has already been sold.")
         return redirect("shop:gallery")
 
     if request.method == "POST":
-        #  2) Lock it immediately
-        artwork.is_available = False
-        artwork.save()
 
-        #  3) Create an Order and OrderItem
+        # REMOVE THIS — it was causing the bug
+        # artwork.is_available = False
+        # artwork.save()
+
+        # 2) Create the order (not yet paid)
         order = Order.objects.create(
             customer=request.user,
             address="Direct purchase - N/A",
@@ -116,7 +117,7 @@ def create_checkout_session(request, artwork_id):
             quantity=1
         )
 
-        #  4) Create the Stripe session
+        # 3) Create the Stripe checkout session
         checkout_session = stripe.checkout.Session.create(
             mode="payment",
             payment_method_types=["card"],
@@ -137,7 +138,6 @@ def create_checkout_session(request, artwork_id):
             ),
         )
 
-        #  5) Store the session ID on your Order
         order.stripe_session_id = checkout_session.id
         order.save()
         request.session["order_id"] = order.id
@@ -145,6 +145,9 @@ def create_checkout_session(request, artwork_id):
         return redirect(checkout_session.url, code=303)
 
     return redirect("shop:artwork_detail", artwork_id=artwork_id)
+
+
+
 
 
 def payment_success(request):
