@@ -695,6 +695,57 @@ Products are only marked as sold after Stripe confirms a successful charge, prev
 
  <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1764622297/payment_flow_oa8kvi.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
+ 
+## Sitemap Fix
+
+- The sitemap previously caused a 500 Internal Server Error during assessment. Django attempted to load URL names that did not exist because the application used namespaced routes. The product sitemap also referenced the wrong field, causing filtering errors. After updating the sitemap classes, the XML renders correctly and the robots.txt file points to the valid sitemap URL.
+
+### Root Cause
+
+- Sitemap classes referenced wrong URL names (home, gallery) instead of namespaced names (shop:home, shop:gallery).
+The product sitemap attempted to filter using the field is_active, which does not exist in the Product model.
+This caused the sitemap generator to fail before rendering.
+
+### Fix Implemented
+
+- Updated static view sitemap to reference correct namespaced URL names.
+
+- Updated product sitemap to filter using the correct field is_available.
+
+- Verified sitemap loads without errors in both local and production environments.
+Before
+### sitemap
+
+````
+return ['home', 'gallery']
+````
+
+### product sitemap
+```
+Product.objects.filter(is_active=True)
+```
+After
+### sitemap
+```
+return ['shop:home', 'shop:gallery']
+```
+### product sitemap
+```
+Product.objects.filter(is_available=True)
+```
+### Testing
+
+Loaded /sitemap.xml locally and confirmed correct XML structure.
+Verified all URLs in sitemap resolve successfully.
+Checked Heroku production sitemap to ensure the generator works without server errors.
+
+### Outcome
+
+The sitemap now renders correctly and is compatible with search engine crawlers.
+This resolves the 500 error reported in assessment.
+
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1764687096/robots_txt_her2v1.png" alt="sitemap" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 
 
@@ -703,10 +754,92 @@ Products are only marked as sold after Stripe confirms a successful charge, prev
 
 
 
+## Cancel Order Feature (Resubmission Update)
+
+- This feature was added to allow users to cancel an order that has not been paid. When an unpaid order is cancelled, the product automatically becomes available again in the store. This ensures correct business logic for single-quantity artwork sales.
+
+### Root Cause
+
+- Originally, the checkout flow marked items as unavailable when added to the cart, but there was no user-facing way to cancel an unpaid order. The only way to reverse the reserved item was through the Django admin panel. This prevented users from managing their own unpaid orders and caused products to remain marked as Sold Out until manually corrected.
+
+## Fix Implemented
+
+- Added a new view payment_cancel to restore product availability and delete the unpaid order.
+
+Before
+
+## No cancel view existed
+
+
+After
+
+```
+def payment_cancel(request):
+    order_id = request.session.get('order_id')
+
+    if order_id:
+        order = get_object_or_404(Order, id=order_id, paid=False)
+        for item in order.items.all():
+            item.product.is_available = True
+            item.product.save()
+        order.delete()
+        del request.session['order_id']
+
+    messages.info(request, "Payment was cancelled. The item is back in the store.")
+    return redirect('shop:cancelled_page')
+```
+
+- Updated template logic to show a Cancel Order button only for unpaid orders.
+
+Before
+
+-  No cancellation option existed for users 
+
+
+After
+```
+{% if not order.paid %}
+    <span class="badge bg-warning text-dark mt-1">Unpaid</span>
+    <form action="{% url 'shop:payment_cancel' %}" method="get" class="mt-2">
+        <button class="btn btn-danger btn-sm">Cancel Order</button>
+    </form>
+{% endif %}
+```
+
+- Added the My Orders page to the navigation bar and ensured it appears only when a user is logged in.
+
+- Connected the cancel button to the /cancel/ route and added a success message page to confirm cancellation.
+
+## Testing
+
+### Tests were performed manually:
+
+- Created an unpaid order by entering checkout but not completing Stripe payment.
+
+- Navigated to My Orders and verified the order appeared with the Unpaid status.
+
+- Clicked Cancel Order.
+
+- Verified redirect to the Payment Cancelled page with confirmation message.
+
+- Verified the product was restored as available.
+
+- Confirmed the order was removed from the user's My Orders page.
+
+- Checked Django admin to ensure the order was deleted and the product status was correct.
+
+### Outcome
+
+- Users can now safely cancel unpaid orders. The system restores product availability automatically and removes abandoned orders from the database. This resolves the earlier issue where items became permanently Sold Out unless manually changed in the Django admin.
 
 
 
 
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1764698502/cansel_payments_hdb5dg.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+
+
+<img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1764698509/cansel_payment_xdkjp0.png" alt="stripe test" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 
 

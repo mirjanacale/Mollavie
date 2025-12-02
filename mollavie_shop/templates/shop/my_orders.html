@@ -4,17 +4,33 @@
 {% block content %}
 <main class="container mt-5" aria-label="My Orders">
     <h1 class="mb-4">My Orders</h1>
+
     {% if orders %}
         <ul class="list-group mt-4">
+
             {% for order in orders %}
                 <li class="list-group-item">
-                    <strong>Order #{{ order.id }}</strong> — {{ order.ordered_at|date:"F j, Y H:i" }}<br>
+                    <strong>Order #{{ order.id }}</strong> —
+                    {{ order.created_at|date:"F j, Y H:i" }}<br>
+
                     {% for item in order.items.all %}
                         {{ item.product.name }} (€{{ item.product.price }})<br>
                     {% endfor %}
-                    <span class="badge bg-success mt-1">Paid</span>
+
+                    {% if order.paid %}
+                        <span class="badge bg-success mt-1">Paid</span>
+                    {% else %}
+                        <span class="badge bg-warning text-dark mt-1">Unpaid</span>
+
+                        <form action="{% url 'shop:payment_cancel' %}" method="get" class="mt-2">
+                            <button class="btn btn-danger btn-sm">
+                                Cancel Order
+                            </button>
+                        </form>
+                    {% endif %}
                 </li>
             {% endfor %}
+
         </ul>
     {% else %}
         <p class="mt-4">You haven't placed any orders yet.</p>
