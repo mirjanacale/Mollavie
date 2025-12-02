@@ -4,6 +4,7 @@ from django.contrib.auth import views as auth_views
 from .views import subscribe
 from . import views
 from django.urls import path
+from django.views.generic import TemplateView
 app_name = 'shop'
 
 urlpatterns = [
@@ -70,5 +71,14 @@ urlpatterns = [
 
     
     
-    path('favorite/<int:artwork_id>/', views.toggle_favorite, name='toggle_favorite')
+    path('favorite/<int:artwork_id>/', views.toggle_favorite, name='toggle_favorite'),
+    path(
+        "robots.txt",
+        TemplateView.as_view(
+            template_name="robots.txt",
+            content_type="text/plain"
+        ),
+        name="robots_txt"
+    ),
+    
 ]
