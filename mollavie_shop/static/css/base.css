@@ -343,8 +343,8 @@ main, header, footer, form {
 
 .section-testimonials {
   background: linear-gradient(
-      rgba(255, 255, 255, 0.9),
-      rgba(255, 255, 255, 0.9)
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
     ),
     url("https://res.cloudinary.com/dyemjyefz/image/upload/v1747743136/6231dd09dcf626bc2f758aa7_Untitled2029_qnugwk.jpg");
   background-size: cover;

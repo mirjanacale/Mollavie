@@ -488,3 +488,5 @@ def toggle_favorite(request, artwork_id):
     else:
         product.favorites.add(request.user)
     return redirect('shop:artwork_detail', artwork_id=product.id)
+
+
