@@ -511,6 +511,54 @@ The admin CRUD system is now complete, functional, and secure. Routes resolve co
    <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1764533373/admin_product_created_hhvdca.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
 
+## Favorites System Testing
+
+The Favorites feature allows logged-in users to toggle an artwork as a favorite.  
+There is **no favorites page**; the system simply updates the database when the button is clicked.
+
+### Test: Add Favorite
+1. Log in and open artwork `/artwork/<id>/`.
+2. Click the “Add to Favorites” button.
+3. Result in terminal:
+   - `POST /favorite/<id>/ 302`
+4. Expected outcome:
+   - Favorite entry is created in the database.
+   - Button changes to “Remove from Favorites.”
+
+### Test: Remove Favorite
+1. With the same artwork already favorited, click the button again.
+2. Result in terminal:
+   - `POST /favorite/<id>/ 302`
+3. Expected outcome:
+   - Favorite entry is removed from the database.
+   - Button changes back to “Add to Favorites.”
+
+### Test: Page Reload
+1. Refresh `/artwork/<id>/`.
+2. Expected:
+   - Button correctly shows the current state based on the database.
+3. Result: ✔️
+
+### Test: Non-Logged-In User
+1. Log out and visit `/artwork/<id>/`.
+2. Expected:
+   - Favorite button is hidden, OR clicking redirects to login.
+3. Result: ✔️
+
+### Evidence From Server Logs
+Example from testing:
+
+ 
+   <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1764950283/favorite_testing_egkqjl.png" alt="favorite" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
+
+
+
+
+
+
+
+
+
 
 ## Cloudinary Image Upload Fix (Resubmission Update)
 
@@ -1053,6 +1101,80 @@ Manual testing was performed for all major user stories to ensure the site works
 All user stories were manually tested and passed as expected. Screenshots and further details are available in the Testing section above.
 
 ---
+
+## Authentication Testing
+
+The authentication system was tested to ensure users can securely register, log in, log out, and only access pages appropriate for their role.
+
+### Registration (Signup)
+| Scenario | Expected Result | Actual Result |
+|----------|----------------|----------------|
+| Valid signup with unique email/username | Account created, redirected, success message displayed | ✔️ |
+| Duplicate email or username | Error shown: “User already exists” | ✔️ |
+| Weak or mismatched passwords | Validation errors displayed | ✔️ |
+| Empty form submission | Required-field errors shown | ✔️ |
+
+### Login
+| Scenario | Expected Result | Actual Result |
+|----------|----------------|----------------|
+| Valid credentials | User logged in, redirected to homepage | ✔️ |
+| Invalid password | Error message displayed | ✔️ |
+| Non-existing user | Login refused | ✔️ |
+
+### Logout
+| Scenario | Expected Result | Actual Result |
+|----------|----------------|----------------|
+| User clicks “Logout” | Session cleared, logout message shown | ✔️ |
+
+### Restricted Page Access
+| Page | User Type | Expected | Actual |
+|------|-----------|----------|--------|
+| /profile/ | Not logged in | Redirect to login | ✔️ |
+| /my-orders/ | Not logged in | Redirect to login | ✔️ |
+| /admin-dashboard/ | Regular user | 403 Forbidden | ✔️ |
+| /admin-dashboard/ | Staff user | Dashboard visible | ✔️ |
+
+
+## Database Integrity Testing
+
+Database relationships were tested to ensure safe deletion, consistent foreign-key behaviour, and accurate data storage.
+
+### User & Profile Deletion
+| Scenario | Expected Result | Actual |
+|----------|----------------|--------|
+| User deletes their own account | User, CustomerProfile, and related Orders removed | ✔️ |
+| Admin deletes a user with orders | No IntegrityError; related data removed | ✔️ |
+| Profile without linked user | CustomerProfile admin page loads safely | ✔️ |
+
+### Order Integrity
+| Scenario | Expected Result | Actual |
+|----------|----------------|--------|
+| Payment completed | Order created with status “Paid” | ✔️ |
+| Payment cancelled | No order saved; product returned to stock | ✔️ |
+| Session lost during checkout | No orphan orders created | ✔️ |
+
+### Newsletter Integrity
+| Scenario | Expected Result | Actual |
+|----------|----------------|--------|
+| Duplicate email submitted | Duplicate prevented by model constraint | ✔️ |
+| New valid email | Added once to database | ✔️ |
+
+### Category → Product Relationship
+| Scenario | Expected Result | Actual |
+|----------|----------------|--------|
+| Delete a category | Products remain safe or reassigned | ✔️ |
+| Product with category displays in gallery | Filter works correctly | ✔️ |
+
+### Favorites System
+| Scenario | Expected Result | Actual |
+|----------|----------------|--------|
+| Add/remove favorite | Entry created or deleted correctly | ✔️ |
+| User deleted | All related favorites removed | ✔️ |
+
+
+
+
+
 
 ##   Testing
 
@@ -1612,71 +1734,199 @@ A toggle button allows users to add or remove any artwork from their personal fa
 
 <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1760620213/Screenshot_2025-10-16_140406_ccqzlw.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
-## Deployment
 
-The site was deployed to Heroku. The steps to deploy are as follows:
+# Deployment
 
-- In the [GitHub repository](https://github.com/mirjanacale/Mollavie.git), navigate to the Settings tab.
-- From the source section drop-down menu in Heroku, connect to your GitHub repository and select the **main** branch.
-- Enable automatic deploys or click "Deploy Branch" to trigger a manual deployment.
-- Ensure your project contains a `Procfile`, `requirements.txt`, and all necessary environment variables in the Heroku dashboard (under Settings > Config Vars).
-- Add the Heroku Postgres add-on from the Resources tab.
+This project uses GitHub for version control and Heroku for hosting the live application. The following sections explain how to deploy the project to GitHub, how to deploy it to Heroku, and how to fork or clone the repository for your own use.
 
-The live link can be found [here](https://mollaviart-f52cde6730c6.herokuapp.com/)
+# Deploying to GitHub
 
-### Local Deployment
+The full project code is stored on GitHub. To deploy your version to GitHub:
 
-This project can be cloned or forked in order to make a local copy on your own system.
+1. Create a new GitHub repository:
+   https://github.com/new
 
-#### Cloning
-
-You can clone the repository by following these steps:
-
-1. Go to the [GitHub repository](https://github.com/mirjanacale/Mollavie.git)
-2. Locate the Code button above the list of files and click it
-3. Select if you prefer to clone using HTTPS, SSH, or GitHub CLI and click the copy button to copy the URL to your clipboard
-4. Open Git Bash or Terminal
-5. Change the current working directory to the one where you want the cloned directory
-6. In your IDE Terminal, type the following command to clone my repository:
-   - `git clone https://github.com/mirjanacale/Mollavie.git`
-7. Press Enter to create your local clone.
-
-#### Forking
-
-By forking the GitHub Repository, we make a copy of the original repository on our GitHub account to view and/or make changes without affecting the original owner's repository.
-You can fork this repository by using the following steps:
-
-1. Log in to GitHub and locate the [GitHub Repository](https://github.com/mirjanacale/Mollavie.git)
-2. At the top of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
-3. Once clicked, you should now have a copy of the original repository in your own GitHub account!
-
-
-
-### Local VS Deployment
-
-There are no major differences between the local   version and the deployed (Heroku) version that I'm aware of.
-
-## Acknowledgements
-
-- Inspired by artists everywhere, especially my daughter for original artworks.
-- Special thanks to Code Institute mentors and the Stack Overflow community.
-
-
-## Deployment
-
-### Overview
-
-Mollavie is a Django e-commerce application. It is developed locally and deployed to Heroku for production. This section explains how to run the project locally, how to deploy it to Heroku, how to configure environment variables, and how static and media files are handled.
-
-## Local Development Setup
-
-Clone the repository:
+2. Open your project folder in a terminal and initialize Git:
 
 ```
-git clone https://github.com/<your-username>/<your-repo-name>.git
+git init
+```
+
+3. Add all project files:
+
+```
+git add .
+git commit -m "Initial commit"
+```
+
+4. Connect to your GitHub repository:
+
+```
+git remote add origin https://github.com/https://github.com/mirjanacale/Mollavie.git/mi.git
+```
+
+5. Push the project:
+
+```
+git push -u origin main
+```
+
+The project is now deployed on GitHub.
+
+# Deploying to Heroku
+
+The live project is hosted here:
+
+https://mollaviart-f52cde6730c6.herokuapp.com/
+
+## Create the Heroku App
+
+Log in:
+
+```
+heroku login
+```
+
+Create a new application here:
+
+https://dashboard.heroku.com/apps
+
+## Add Heroku Postgres
+
+Open the Heroku Dashboard → Resources tab.  
+Search for **Heroku Postgres** and add the free tier.
+
+This automatically sets the `DATABASE_URL` environment variable.
+
+## Configure Environment Variables
+
+In the Heroku Dashboard, open:
+
+Settings → Reveal Config Vars
+
+Add the following:
+
+```
+SECRET_KEY=your_production_secret_key
+DEBUG=False
+ALLOWED_HOSTS=<your-heroku-app>.herokuapp.com,localhost,127.0.0.1
+CLOUDINARY_URL=cloudinary://<api_key>:<api_secret>@<cloud_name>
+STRIPE_PUBLIC_KEY=pk_live_or_test_key
+STRIPE_SECRET_KEY=sk_live_or_test_key
+STRIPE_WH_SECRET=whsec_from_stripe
+EMAIL_HOST_USER=your_email@example.com
+EMAIL_HOST_PASS=your_email_password
+```
+
+Create a Cloudinary account here:  
+https://cloudinary.com/
+
+Stripe API keys are obtained here:  
+https://dashboard.stripe.com/apikeys
+
+## Connect Heroku to GitHub
+
+1. Open the **Deploy** tab in Heroku.
+2. Choose **GitHub** as the deployment method.
+3. Connect your repository.
+4. Enable **Automatic Deploys** or deploy manually.
+
+## Procfile
+
+Ensure a `Procfile` exists in the project root:
+
+```
+web: gunicorn mollavie.wsgi:application
+```
+
+## Static and Media Files
+
+Heroku automatically runs:
+
+```
+python manage.py collectstatic
+```
+
+Static files are handled by Django’s static storage.  
+Media files are stored in Cloudinary and require the `CLOUDINARY_URL` variable.
+
+## First Deploy
+
+In the Deploy tab, select `main` and click **Deploy Branch**.  
+When deployment completes, click **Open App**.
+
+## Run Migrations and Create Superuser on Heroku
+
+Open the Heroku console:
+
+```
+python manage.py migrate
+python manage.py createsuperuser
+```
+
+The application is now live.
+
+# Updating the Live Site
+
+After making changes locally, push them to GitHub:
+
+```
+git add .
+git commit -m "Update project"
+git push origin main
+```
+
+If automatic deploys are enabled, Heroku redeploys immediately.  
+If models changed, run migrations again in the Heroku console:
+
+```
+python manage.py migrate
+```
+
+# Troubleshooting Deployment
+
+To check logs:
+
+```
+heroku logs --tail
+```
+
+Verify the following:
+
+DEBUG is set to False  
+ALLOWED_HOSTS includes the Heroku domain  
+All required config vars are set  
+Migrations applied successfully  
+Static files collected successfully  
+Cloudinary uploads working  
+
+# Forking This Repository
+
+Forking creates your own independent copy of the project.
+
+1. Log into GitHub.
+2. Open the repository:
+  https://github.com/mirjanacale/Mollavie.git
+3. Click **Fork** (top right).
+4. GitHub creates a new copy under your account.
+
+You can now modify or deploy your own version.
+
+# Cloning This Repository
+
+Cloning allows you to run a local copy of the project.
+
+To clone:
+
+```
+git clone https://github.com/mirjanacale/Mollavie.git
+```
+
+Move into the project:
+
+```
 cd <your-repo-name>
 ```
-
 
 Create and activate a virtual environment:
 
@@ -1687,46 +1937,19 @@ source venv/bin/activate
 
 For Windows:
 
+```
 venv\Scripts\activate
 ```
 
-## Deployment
+Install project dependencies:
 
-### Overview
-
-Mollavie is a Django e-commerce application. It is developed locally and deployed to Heroku for production. This section explains how to run the project locally, how to deploy it to Heroku, how to configure environment variables, and how static and media files are handled.
-
-## Local Development Setup
-
-Clone the repository:
-```
-git clone https://github.com/<your-username>/<your-repo-name>.git
-cd <your-repo-name>
-```
-
-Create and activate a virtual environment:
-```
-python -m venv venv
-source venv/bin/activate
-```
-
-
-For Windows:
-
-venv\Scripts\activate
-
-
-
-
-Install dependencies:
 ```
 pip install -r requirements.txt
 ```
 
+Create a `.env` file:
 
-
-Create a .env file containing:
-
+```
 SECRET_KEY=your_secret_key
 DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1
@@ -1737,287 +1960,114 @@ STRIPE_SECRET_KEY=sk_test_...
 STRIPE_WH_SECRET=whsec_...
 EMAIL_HOST_USER=your_email@example.com
 EMAIL_HOST_PASS=your_email_password
-
-
+```
 
 Apply migrations:
+
 ```
 python manage.py migrate
 ```
 
-Create a superuser:
-```
-python manage.py createsuperuser
-```
+Run the local development server:
 
-
-Run the server:
 ```
 python manage.py runserver
 ```
 
-## Production Deployment to Heroku
+Local site will run at:
 
-The project is deployed at:
+http://127.0.0.1:8000/
 
-https://mollaviart-f52cde6730c6.herokuapp.com/
+# Deploying a Fork to Heroku
 
-## Create the Heroku App
+If you fork this project and want to deploy your version:
 
-Log in:
-```
-heroku login
-```
+1. Create a new Heroku app  
+   https://dashboard.heroku.com/apps
 
-Create a new application inside the Heroku dashboard.
+2. Add **Heroku Postgres**.
 
-## Attach Heroku Postgres
-
-Open the Resources tab in Heroku.  
-Search for Heroku Postgres and add the free tier.  
-Heroku automatically sets DATABASE_URL.
-
-## Configure Heroku Environment Variables
-
-In Settings, open Reveal Config Vars and add:
-
-SECRET_KEY=your_production_secret_key
-DEBUG=False
-ALLOWED_HOSTS=mollaviart-f52cde6730c6.herokuapp.com,localhost,127.0.0.1
-CLOUDINARY_URL=cloudinary://<api_key>:<api_secret>@<cloud_name>
-STRIPE_PUBLIC_KEY=pk_live_or_test_key
-STRIPE_SECRET_KEY=sk_live_or_test_key
-STRIPE_WH_SECRET=whsec_from_stripe
-EMAIL_HOST_USER=your_email@example.com
-EMAIL_HOST_PASS=your_email_password
+3. Open Settings → Reveal Config Vars and add:
 
 ```
-DATABASE_URL is created automatically by the Postgres add-on.
-```
-## Connect Heroku to GitHub
-
-Open the Deploy tab.  
-Choose GitHub as the deployment method.  
-Connect the repository.  
-Enable Manual or Automatic deploys.
-
-## Procfile
-
-Ensure a Procfile exists in the project root:
-```
-web: gunicorn mollavie.wsgi:application
-```
-
-
-## Static and Media Files
-
-Static files are collected using:
-```
-python manage.py collectstatic
-```
-
-Heroku runs collectstatic automatically unless DISABLE_COLLECTSTATIC is set to 1.
-
-Media files use Cloudinary. The CLOUDINARY_URL key must be set.
-
-## First Deploy
-
-In the Deploy tab, choose the branch and click Deploy Branch.  
-After deployment completes, open the app.
-
-## Run Migrations and Create Superuser on Heroku
-
-Open the Heroku console:
-```
-python manage.py migrate
-python manage.py createsuperuser
-```
-
-## Updating the Live Site
-
-Push changes to GitHub:
-
-```
-git add .
-git commit -m "Update"
-git push origin main
-```
-
-Heroku redeploys the update automatically if Automatic Deploys are enabled.  
-If models changed, re-run migrations using the Heroku console.
-
-## Troubleshooting Deployment
-
-Check logs:
-```
-heroku logs --tail
-```
-
-
-Confirm DEBUG is False.  
-Confirm ALLOWED_HOSTS includes the Heroku domain.  
-Confirm all required config vars are correctly set.  
-Confirm migrations are applied.  
-Confirm collectstatic runs without errors.
-
-## Outcome
-
-The deployment guide now covers local development, environment variables, Heroku setup, database, static fi
-
-Install dependencies:
-```
-pip install -r requirements.txt
-```
-
-Create a .env file containing:
-
 SECRET_KEY=your_secret_key
-DEBUG=True
-ALLOWED_HOSTS=localhost,127.0.0.1
-DATABASE_URL=sqlite:///db.sqlite3
-CLOUDINARY_URL=cloudinary://<api_key>:<api_secret>@<cloud_name>
-STRIPE_PUBLIC_KEY=pk_test_...
-STRIPE_SECRET_KEY=sk_test_...
-STRIPE_WH_SECRET=whsec_...
-EMAIL_HOST_USER=your_email@example.com
-EMAIL_HOST_PASS=your_email_password
-
-
-Apply migrations:
-```
-python manage.py migrate
-```
-
-Create a superuser:
-```
-python manage.py createsuperuser
-```
-
-
-Run the server:
-``` 
-python manage.py runserver
-```
-
-## Production Deployment to Heroku
-
-The project is deployed at:
-
-https://mollaviart-f52cde6730c6.herokuapp.com/
-
-## Create the Heroku App
-
-Log in:
-
-heroku login
-
-sql
-Copy code
-
-Create a new application inside the Heroku dashboard.
-
-## Attach Heroku Postgres
-
-Open the Resources tab in Heroku.  
-Search for Heroku Postgres and add the free tier.  
-Heroku automatically sets DATABASE_URL.
-
-## Configure Heroku Environment Variables
-
-In Settings, open Reveal Config Vars and add:
-
-SECRET_KEY=your_production_secret_key
 DEBUG=False
-ALLOWED_HOSTS=mollaviart-f52cde6730c6.herokuapp.com,localhost,127.0.0.1
+ALLOWED_HOSTS=<your-app>.herokuapp.com
 CLOUDINARY_URL=cloudinary://<api_key>:<api_secret>@<cloud_name>
-STRIPE_PUBLIC_KEY=pk_live_or_test_key
-STRIPE_SECRET_KEY=sk_live_or_test_key
-STRIPE_WH_SECRET=whsec_from_stripe
-EMAIL_HOST_USER=your_email@example.com
-EMAIL_HOST_PASS=your_email_password
+STRIPE_PUBLIC_KEY=your_key
+STRIPE_SECRET_KEY=your_key
+STRIPE_WH_SECRET=your_key
+EMAIL_HOST_USER=your_email
+EMAIL_HOST_PASS=your_password
+```
 
-csharp
-Copy code
+4. Connect Heroku to your GitHub fork.
+5. Ensure your fork contains a Procfile:
 
-DATABASE_URL is created automatically by the Postgres add-on.
-
-## Connect Heroku to GitHub
-
-Open the Deploy tab.  
-Choose GitHub as the deployment method.  
-Connect the repository.  
-Enable Manual or Automatic deploys.
-
-## Procfile
-
-Ensure a Procfile exists in the project root:
-``
+```
 web: gunicorn mollavie.wsgi:application
 ```
 
-## Static and Media Files
+6. Deploy the main branch.
+7. Run migrations:
 
-Static files are collected using:`
-
-``
-python manage.py collectstatic
 ```
-
-Heroku runs collectstatic automatically unless DISABLE_COLLECTSTATIC is set to 1.
-
-Media files use Cloudinary. The CLOUDINARY_URL key must be set.
-
-## First Deploy
-
-In the Deploy tab, choose the branch and click Deploy Branch.  
-After deployment completes, open the app.
-
-## Run Migrations and Create Superuser on Heroku
-
-Open the Heroku console:
-
 python manage.py migrate
 python manage.py createsuperuser
+```
 
-shell
-Copy code
-
-## Updating the Live Site
-
-Push changes to GitHub:
-
-git add .
-git commit -m "Update"
-git push origin main
-
-sql
-Copy code
-
-Heroku redeploys the update automatically if Automatic Deploys are enabled.  
-If models changed, re-run migrations using the Heroku console.
-
-## Troubleshooting Deployment
-
-Check logs:
-
-heroku logs --tail
-
-pgsql
-Copy code
-
-Confirm DEBUG is False.  
-Confirm ALLOWED_HOSTS includes the Heroku domain.  
-Confirm all required config vars are correctly set.  
-Confirm migrations are applied.  
-Confirm collectstatic runs without errors.
-
-## Outcome
-
-The deployment guide now covers local development, environment variables, Heroku setup, database, static fi
+Your fork is now live on Heroku.
 
 ## Contributing
 
 If you have suggestions for new features or improvements to the site, please feel free to open an issue.
 If you would like to contribute code, please fork the repository and create a pull request.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
