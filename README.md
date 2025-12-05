@@ -92,6 +92,9 @@ Mollavie follows a direct-to-consumer business model built around authenticity a
 - [Design](#design)
 - [Wireframes](#wireframes)
 - [Agile Development Process](#agile-development-process)
+- [CRUD Functionality](#crud-functionality)
+- [User Authentication](#user-authentication)
+- [Digital Marketing](#digital-marketing)
 - [Technologies Used](#technologies-used)
 - [Lighthouse Scores](#lighthouse-scores)
 - [HTML Validation Results](#html-validation-results)
@@ -335,21 +338,6 @@ Both features were implemented, tested, and tracked using the GitHub Project Boa
 - **Read**: Users can view products and their profile information.
 - **Update**: Users can edit their profile and cart.
 - **Delete**: Users can delete their account from the profile page via a “Delete My Account” button.
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
 
 
    
@@ -1725,21 +1713,23 @@ A toggle button allows users to add or remove any artwork from their personal fa
 
 #### Favorite Artwork Testing
 
-| Test Action | Expected Result | Pass |g
-|--------------|----------------|------|
-| Logged-in user clicks "Add to Favorites" | Artwork added to user's favorites | yes |
-| User clicks again "Remove from Favorites" | Artwork removed from favorites | yes |
-| Button text changes correctly | Reflects current favorite state | yes |
-| Non-logged-in user | Button not shown | yes |
+| Test Action                                | Expected Result                       | Pass |
+|---------------------------------------------|----------------------------------------|------|
+| Logged-in user clicks **"Add to Favorites"**    | Artwork is added to user's favorites   | Yes  |
+| Logged-in user clicks **"Remove from Favorites"** | Artwork is removed from favorites      | Yes  |
+| Button text updates                         | Button reflects the correct state      | Yes  |
+| Non-logged-in user views page               | Favorites button is **not** shown      | Yes  |
+
 
 <img src="https://res.cloudinary.com/dyemjyefz/image/upload/v1760620213/Screenshot_2025-10-16_140406_ccqzlw.png" alt="urls.pyshop" width="350" style="border-radius:8px; box-shadow:0 2px 8px #ccc; margin-bottom:8px;" />
 
+---
 
 # Deployment
 
 This project uses GitHub for version control and Heroku for hosting the live application. The following sections explain how to deploy the project to GitHub, how to deploy it to Heroku, and how to fork or clone the repository for your own use.
 
-# Deploying to GitHub
+## Deploying to GitHub
 
 The full project code is stored on GitHub. To deploy your version to GitHub:
 
